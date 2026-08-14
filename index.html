@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prospero's Dream — Campaign Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0a0a0a; --panel:#131313; --panel-raised:#181818; --white:#f5f5f2;
+    --dim:#9a9a94; --faint:#5c5c58; --line:#282826; --pink:#ff2d78;
+  }
+  *{box-sizing:border-box;} html,body{margin:0;padding:0;}
+  body{background:var(--black);color:var(--white);font-family:'Archivo',sans-serif;line-height:1.5;}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px 90px;}
+
+  header{padding:64px 24px 40px;border-bottom:6px solid var(--pink);text-align:center;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.22em;color:var(--pink);text-transform:uppercase;margin:0 0 16px;}
+  h1{font-family:'Archivo Black',sans-serif;font-weight:400;font-size:clamp(38px,7vw,64px);text-transform:uppercase;letter-spacing:-0.01em;margin:0;line-height:0.98;}
+  .tagline{font-size:15px;color:var(--dim);max-width:480px;margin:16px auto 0;}
+
+  section{padding:48px 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .kicker{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--pink);margin:0 0 8px;}
+  h2{font-family:'Archivo Black',sans-serif;font-weight:400;font-size:24px;text-transform:uppercase;letter-spacing:-0.01em;margin:0 0 6px;}
+  .section-sub{font-size:13.5px;color:var(--dim);margin:0 0 20px;}
+
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px;background:var(--line);}
+  a.card{
+    background:var(--panel);
+    border-left:4px solid var(--pink);
+    padding:20px 22px;
+    text-decoration:none;
+    color:var(--white);
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    transition:background 0.15s;
+  }
+  a.card:hover{background:var(--panel-raised);}
+  .card-title{font-family:'Archivo',sans-serif;font-weight:700;font-size:17px;color:var(--white);}
+  .card-desc{font-size:13px;color:var(--dim);}
+  .card-arrow{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--pink);margin-top:auto;letter-spacing:0.04em;}
+
+  footer{text-align:center;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--faint);padding:40px 24px 0;}
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Campaign Hub — Bookmark This Page</p>
+  <h1>Prospero's<br>Dream</h1>
+  <p class="tagline">Every reference tool, player handout, and session document for the campaign, in one place.</p>
+</header>
+
+<div class="wrap">
+
+<section>
+  <p class="kicker">For Players</p>
+  <h2>Start Here</h2>
+  <p class="section-sub">Spoiler-safe. Share these before session zero.</p>
+  <div class="card-grid">
+    <a class="card" href="Prosperos_Dream_Player_Pitch.html">
+      <span class="card-title">Crew Wanted</span>
+      <span class="card-desc">The pitch — what the campaign is, what kind of game this is, and how to build a character.</span>
+      <span class="card-arrow">OPEN →</span>
+    </a>
+    <a class="card" href="Prosperos_Dream_Dockside_Directory.html">
+      <span class="card-title">Dockside Directory</span>
+      <span class="card-desc">In-world orientation handout — districts, the Metro, faction etiquette, safe contacts.</span>
+      <span class="card-arrow">OPEN →</span>
+    </a>
+  </div>
+</section>
+
+<section>
+  <p class="kicker">Session Prep</p>
+  <h2>Getting to the Table</h2>
+  <p class="section-sub">Warden-facing. Run these in order.</p>
+  <div class="card-grid">
+    <a class="card" href="Prosperos_Dream_Session_Zero.html">
+      <span class="card-title">Session Zero</span>
+      <span class="card-desc">Campaign frame, table expectations, safety tools, and collaborative crew-building.</span>
+      <span class="card-arrow">OPEN →</span>
+    </a>
+    <a class="card" href="Prosperos_Dream_Session_1.html">
+      <span class="card-title">Session 1: Welcome to the Dream</span>
+      <span class="card-desc">The opening session — cold open, Angus, and the three A Pound of Flesh storyline branches.</span>
+      <span class="card-arrow">OPEN →</span>
+    </a>
+  </div>
+</section>
+
+<section>
+  <p class="kicker">Warden Reference</p>
+  <h2>Running the Dream</h2>
+  <p class="section-sub">Keep these open during play.</p>
+  <div class="card-grid">
+    <a class="card" href="Prosperos_Dream_NPC_Database.html">
+      <span class="card-title">Personnel File</span>
+      <span class="card-desc">Searchable database of every verified named NPC on Prospero's Dream, by faction.</span>
+      <span class="card-arrow">OPEN →</span>
+    </a>
+  </div>
+</section>
+
+<section>
+  <p class="kicker">Interactive Boards</p>
+  <h2>Work for the Crew</h2>
+  <p class="section-sub">Live, stateful tools — taken jobs and Reputation persist in your browser between sessions.</p>
+  <div class="card-grid">
+    <a class="card" href="Prosperos_Dream_Job_Board.html">
+      <span class="card-title">Job Board</span>
+      <span class="card-desc">Quick jobs and full-module hooks, with real WOM pay math.</span>
+      <span class="card-arrow">OPEN →</span>
+    </a>
+    <a class="card" href="Prosperos_Dream_Bounty_Board.html">
+      <span class="card-title">Bounty Board</span>
+      <span class="card-desc">88 real bounties from Wages of Sin, generate-by-Level supported.</span>
+      <span class="card-arrow">OPEN →</span>
+    </a>
+    <a class="card" href="Prosperos_Dream_Trucking_Contracts.html">
+      <span class="card-title">Trucking Contracts</span>
+      <span class="card-desc">Corpo, HLU, and ORRO faction work, salvage runs, and Sector 1365 hauls — built on Not Enough Scoundrels' Reputation system.</span>
+      <span class="card-arrow">OPEN →</span>
+    </a>
+  </div>
+</section>
+
+</div>
+
+<footer>Prospero's Dream campaign — built on the fully-verified Mothership 1E source spine.</footer>
+
+</body>
+</html>
