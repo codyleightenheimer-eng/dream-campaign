@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prospero's Dream — Vendors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0a0a0a; --panel:#131313; --panel-raised:#181818; --white:#f5f5f2;
+    --dim:#9a9a94; --faint:#5c5c58; --line:#282826; --pink:#ff2d78; --green:#4ade80; --amber:#e6b34d;
+  }
+  *{box-sizing:border-box;} html,body{margin:0;padding:0;}
+  body{background:var(--black);color:var(--white);font-family:'Archivo',sans-serif;line-height:1.5;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px 90px;}
+  header{padding:48px 24px 32px;border-bottom:6px solid var(--pink);text-align:center;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.2em;color:var(--pink);text-transform:uppercase;margin:0 0 14px;}
+  h1{font-family:'Archivo Black',sans-serif;font-weight:400;font-size:clamp(30px,6vw,52px);text-transform:uppercase;letter-spacing:-0.01em;margin:0;}
+  .subhead{font-size:14px;color:var(--dim);max-width:520px;margin:14px auto 0;}
+
+  section{padding:44px 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .kicker{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--pink);margin:0 0 8px;}
+  h2{font-family:'Archivo Black',sans-serif;font-weight:400;font-size:24px;text-transform:uppercase;letter-spacing:-0.01em;margin:0 0 6px;}
+  .section-sub{font-size:13.5px;color:var(--dim);margin:0 0 20px;}
+  p{font-size:14px;color:var(--dim);margin:0 0 12px;}
+  strong{color:var(--white);}
+
+  .shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px;background:var(--line);}
+  .shop-card{background:var(--panel);border-left:4px solid var(--pink);padding:20px 22px;display:flex;flex-direction:column;gap:8px;}
+  .shop-name{font-family:'Archivo',sans-serif;font-weight:700;font-size:18px;color:var(--white);margin:0;}
+  .shop-keeper{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--pink);text-transform:uppercase;letter-spacing:0.04em;}
+  .shop-desc{font-size:13.5px;color:var(--dim);margin:0;}
+  .shop-meta{font-size:12.5px;color:var(--faint);border-top:1px solid var(--line);padding-top:10px;margin-top:4px;}
+  .shop-meta b{color:var(--white);display:block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:2px;}
+
+  .tab-row{display:flex;gap:2px;flex-wrap:wrap;margin-bottom:2px;background:var(--line);}
+  .tab-btn{flex:1;min-width:140px;background:var(--panel);color:var(--dim);border:none;padding:14px 10px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.03em;text-transform:uppercase;cursor:pointer;transition:background 0.15s,color 0.15s;}
+  .tab-btn:hover{background:var(--panel-raised);color:var(--white);}
+  .tab-btn.active{background:var(--pink);color:var(--black);}
+  .tab-panel{display:none;background:var(--panel);padding:24px;}
+  .tab-panel.active{display:block;}
+
+  button.action{font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;padding:11px 20px;border:none;cursor:pointer;background:var(--pink);color:var(--black);transition:opacity 0.15s;}
+  button.action:hover{opacity:0.85;}
+  button.action.secondary{background:var(--black);color:var(--white);border:1px solid var(--line);}
+
+  .item-card{background:var(--panel-raised);border-left:3px solid var(--pink);padding:16px 18px;margin-top:14px;}
+  .item-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+  .item-name{font-family:'Archivo',sans-serif;font-weight:700;font-size:15.5px;color:var(--white);margin:0;}
+  .item-price{font-family:'Archivo Black',sans-serif;font-size:15px;color:var(--pink);white-space:nowrap;}
+  .item-desc{font-size:13px;color:var(--dim);margin:8px 0 0;}
+  .item-tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;border:1px solid var(--line);color:var(--faint);padding:2px 7px;margin-top:8px;}
+
+  table.catalog{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px;}
+  table.catalog th{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--pink);text-align:left;padding:0 10px 8px 0;border-bottom:1px solid var(--line);}
+  table.catalog td{padding:9px 10px 9px 0;border-bottom:1px solid var(--line);color:var(--dim);}
+  table.catalog td:first-child{color:var(--white);font-weight:700;}
+
+  .select-row{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0;align-items:center;}
+  select{background:var(--black);color:var(--white);border:1px solid var(--line);padding:9px 12px;font-family:'IBM Plex Mono',monospace;font-size:12px;}
+  .empty-note{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--faint);margin-top:14px;}
+
+  .note-box{background:var(--black);border:1px solid var(--line);padding:14px 16px;font-size:12.5px;color:var(--dim);margin-top:16px;}
+  .note-box b{color:var(--white);}
+
+  footer{text-align:center;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--faint);padding:40px 24px 0;}
+  .home-link{
+    position:fixed;
+    top:16px;
+    left:16px;
+    background:var(--black);
+    color:var(--pink);
+    border:1px solid var(--pink);
+    padding:8px 14px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    text-decoration:none;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    z-index:1000;
+    transition:background 0.15s,color 0.15s;
+  }
+  .home-link:hover{background:var(--pink);color:var(--black);}
+</style>
+</head>
+<body>
+<a href="index.html" class="home-link">&larr; Hub</a>
+
+
+<header>
+  <p class="eyebrow">Prospero's Dream — Commerce Directory</p>
+  <h1>Vendors</h1>
+</header>
+
+<div class="wrap">
+
+<section>
+  <p class="kicker">Directory</p>
+  <h2>Twelve Shops, Twelve Ways to Lose Money</h2>
+  <div class="shop-grid">
+    <div class="shop-card">
+      <p class="shop-name">Ephemera4Cheap</p>
+      <p class="shop-keeper">DuBose — Doptown alley pawn shop</p>
+      <p class="shop-desc">A gaudy neon sign down an unmarked alley, welded to the bulkhead. Buys anything, no questions asked, at half its worth. Sells whatever his contractors pulled off the dead this week — weapons, gear, and a whole lot of junk nobody needed.</p>
+      <p class="shop-meta"><b>Won't touch</b>Cybermods. Won't say why unless you buy him a drink first.</p>
+    </div>
+    <div class="shop-card">
+      <p class="shop-name">Attica Destinations</p>
+      <p class="shop-keeper">The Exemplar — Coreworld tourism office</p>
+      <p class="shop-desc">A clean, glossy office selling something stranger than gear: your own body, leased out by the hour to a rich stranger from the Core. Sells insurance and Coreworld-grade cyberware most Rim shops can't touch.</p>
+    </div>
+    <div class="shop-card">
+      <p class="shop-name">TITAN Interstellar Aftermarket</p>
+      <p class="shop-keeper">Halia Clarke — Repossessed ship auctions</p>
+      <p class="shop-desc">Built on the bones of an abandoned dry dock. Every week, two repossessed vessels go up for blind auction — nobody knows what's aboard until the bidding's done. Also moves Class-0 dropships and escape pods outright, no auction needed.</p>
+    </div>
+    <div class="shop-card">
+      <p class="shop-name">The Craftsmen's Play</p>
+      <p class="shop-keeper">Dr. Theseus — Hidden slickworld skill market</p>
+      <p class="shop-desc">Reached only by ten modified lifts hijacking the station's own transit tunnels. Inside: a slickworld built from impossible stone and gold, where Theseus and his Students refine stolen memories into installable Skillslicks.</p>
+    </div>
+    <div class="shop-card">
+      <p class="shop-name">Krosus Menagerie</p>
+      <p class="shop-keeper">Krosus'del — Doptown exotic pet dealer</p>
+      <p class="shop-desc">A ritual site carved into the bones of a forgotten Doptown ruin. Krosus trains and sells creatures most stations would classify as existential threats. Getting there alive is the first test. Owning what you buy is the second.</p>
+    </div>
+    <div class="shop-card">
+      <p class="shop-name">The Chop Shop</p>
+      <p class="shop-keeper">The Babushka — Cybersurgeon, off the Choke</p>
+      <p class="shop-desc">Overflowing with trash and grime, barely kept up by its hoarder proprietor. Every cybermod in the catalog, installed by a legendary, intensely private surgeon who lets her AI child Zhenya do all the talking.</p>
+    </div>
+    <div class="shop-card">
+      <p class="shop-name">The Stellar Burn / The Ecstasy</p>
+      <p class="shop-keeper">Sem &amp; Indyl — Bar, club, and lower-level companionship</p>
+      <p class="shop-desc">Dark, smoky, strobing lights. Sem's Bar handles drinks and rumors up top; a locked lift below leads to Indyl's exclusive domain, where companionship is bought at a 100cr door fee. Novo Droog leadership keeps a penthouse above the club.</p>
+    </div>
+    <div class="shop-card">
+      <p class="shop-name">Canyonheavy.market</p>
+      <p class="shop-keeper">Angus — Hacking collective &amp; info brokerage</p>
+      <p class="shop-desc">Access starts with a private booth at the Stellar Burn. Past the checkpoint: the Battlestations (a zero-g hacker floor thick with Daytona smoke) and Angus's own cramped office, where he brokers equipment, talent, and rumors nobody else can get.</p>
+    </div>
+    <div class="shop-card">
+      <p class="shop-name">d0c's Cyberclinic</p>
+      <p class="shop-keeper">doc &amp; Essie Barrington — Neutral-ground public clinic</p>
+      <p class="shop-desc">Nestled among the cramped apartments of Block (04,20), staffed by "the Clinicians" — Dreamers pulled from every faction, sworn to keep the clinic neutral ground. Emergency care, cyberware installs, tattoos, and quiet drug procurement, no faction card required.</p>
+    </div>
+    <div class="shop-card">
+      <p class="shop-name">Xiao! Long! Bao!</p>
+      <p class="shop-keeper">Uncle Bao — Trendy new dim sum spot</p>
+      <p class="shop-desc">Best soup dumplings this side of the Milky Way, according to everyone who's tried them. Half price if you shout your order. A rival restaurant is quietly offering 15kcr for the secret recipe.</p>
+    </div>
+    <div class="shop-card">
+      <p class="shop-name">Prospero's Trust</p>
+      <p class="shop-keeper">Jules — Modular bank &amp; day spa</p>
+      <p class="shop-desc">An opulent, gold-plated bank that detaches from its port and drifts between stations. Open an account, build reputation with the CEO, treat yourself at the spa, or gamble on a Dream Crate.</p>
+    </div>
+    <div class="shop-card">
+      <p class="shop-name">The Ice Box</p>
+      <p class="shop-keeper">Highly illegal Synthetic Sleeving Facility &amp; Slickbay</p>
+      <p class="shop-desc">The Dream's slang term for its resleeving and Slickbay venue. Hundreds of Slickbay pods host virtual worlds for education, escape, and pleasure. A separate wing grows sleeves from scratch — vat-grown synthetic bodies your memories can be uploaded into.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="kicker">Interactive</p>
+  <h2>Shop the Dream</h2>
+  <p class="section-sub">Pick a vendor below. Prices and items are pulled straight from each shop's real inventory.</p>
+
+  <div class="tab-row">
+    <button class="tab-btn active" data-tab="ephemera">Ephemera4Cheap</button>
+    <button class="tab-btn" data-tab="attica">Attica</button>
+    <button class="tab-btn" data-tab="titan">TITAN Aftermarket</button>
+    <button class="tab-btn" data-tab="craftsmen">Craftsmen's Play</button>
+    <button class="tab-btn" data-tab="krosus">Krosus Menagerie</button>
+    <button class="tab-btn" data-tab="chopshop">The Chop Shop</button>
+    <button class="tab-btn" data-tab="stellarburn">Stellar Burn / Ecstasy</button>
+    <button class="tab-btn" data-tab="canyonheavy">Canyonheavy.market</button>
+    <button class="tab-btn" data-tab="clinic">d0c's Clinic</button>
+    <button class="tab-btn" data-tab="xlb">Xiao! Long! Bao!</button>
+    <button class="tab-btn" data-tab="trust">Prospero's Trust</button>
+    <button class="tab-btn" data-tab="icebox">The Ice Box</button>
+  </div>
+
+  <div class="tab-panel active" id="panel-ephemera">
+    <p>DuBose restocks constantly — every hour spent browsing, roll twice on his shelves. Condition is random; the price never changes regardless.</p>
+    <button class="action" id="rollEphemera">Search the Shelves</button>
+    <button class="action secondary" id="clearEphemera">Clear</button>
+    <div id="ephemeraResults"></div>
+  </div>
+
+  <div class="tab-panel" id="panel-attica">
+    <p>Attica doesn't restock at random — this is a fixed corporate catalog. Cyberware won't interface with Rimworlder tech unless jailbroken first.</p>
+    <table class="catalog">
+      <tr><th>Product</th><th>Cost</th><th>Slots</th><th>Description</th></tr>
+      <tr><td>Attica Periapt</td><td>100kcr</td><td>3</td><td>Enables eidetic memory transfer via remote servers. Backs up every 8 hours.</td></tr>
+      <tr><td>Attica Oracle</td><td>52kcr</td><td>1</td><td>Cybernetic eyes with integrated HUD.</td></tr>
+      <tr><td>Attica Pocket</td><td>12kcr</td><td>1</td><td>Surgically hidden storage, undetectable by thermal, x-ray, or metal scans. Handgun-sized or smaller.</td></tr>
+      <tr><td>Attica Apollo</td><td>200kcr</td><td>1</td><td>Branded sleeve with integrated Periapt. 35 in all stats.</td></tr>
+      <tr><td>Attica Ares</td><td>750kcr</td><td>2</td><td>Apollo sleeve with tactical neurochem training. 40 Strength/Combat, 35 Intellect/Speed.</td></tr>
+      <tr><td>Attica Aura</td><td>14kcr</td><td>—</td><td>Coreworld attire. Reactive nano armor, emergency O2. AP 7, 1hr of oxygen.</td></tr>
+    </table>
+    <p style="margin-top:16px;"><strong>Insurance tiers (per lease):</strong> No Coverage (free — engram trapped on servers if you die) · Silver (5kcr — resleeve at your expense) · Gold (15kcr — financial coverage on Intellect Check, complimentary resleeve) · Platinum (25kcr — full coverage, no check required, free Apollo sleeve on death).</p>
+  </div>
+
+  <div class="tab-panel" id="panel-titan">
+    <p>This week's blind auction. Class and price are real — the specific alterations aboard are part of the mystery until you win.</p>
+    <button class="action" id="rollTitan">Check This Week's Auction</button>
+    <button class="action secondary" id="clearTitan">Clear</button>
+    <div id="titanResults"></div>
+    <div class="note-box"><b>Winning bid:</b> take a Bankruptcy Save of (100 − winning bid, minimum 10) and become an owner-operator, or buy outright at a discount equal to your bid — most crews can't afford the latter.</div>
+  </div>
+
+  <div class="tab-panel" id="panel-craftsmen">
+    <p>Pick a skill tier, then choose how refined you want it. Cheaper means more quirks — and quirks are permanent behavioral baggage from whoever the memory came from.</p>
+    <div class="select-row">
+      <select id="skillTier">
+        <option value="Trained">Trained — 25kcr base</option>
+        <option value="Expert">Expert — 250kcr base</option>
+        <option value="Master">Master — 500kcr base</option>
+      </select>
+      <select id="refinement">
+        <option value="full">Full Price — Perfect, no quirks</option>
+        <option value="well">Well Refined — 1 quirk</option>
+        <option value="poorly">Poorly Refined — 2 quirks</option>
+        <option value="barely">Barely Refined — 3 quirks</option>
+      </select>
+    </div>
+    <button class="action" id="rollSkillslick">Request a Skillslick</button>
+    <button class="action secondary" id="clearSkillslick">Clear</button>
+    <div id="skillslickResults"></div>
+  </div>
+
+  <div class="tab-panel" id="panel-krosus">
+    <p>Krosus doesn't restock — she has what she has, and what she has changes rarely. This is her signature stock.</p>
+    <div class="item-card">
+      <div class="item-top">
+        <p class="item-name">Druven Marrowhound</p>
+        <span class="item-price">150kcr</span>
+      </div>
+      <p class="item-desc">C:60 · 3d10 DMG bite · I:45 · W:2(15) · L:30. A domesticated six-legged predator averaging two hundred pounds, killing with a four-pronged jaw and a long spearing tail. Bred three centuries ago for hunting colonial fugitives. Can follow the scent of blood over a decade old — fresh blood whips it into a frenzy.</p>
+      <p class="item-desc"><strong>Motive:</strong> picks and hunts prey until its flesh is consumed, always prioritizing the oldest scent trail it can sense.</p>
+      <span class="item-tag">Requires a Loyalty Save (PSG pg.40) whenever its life is at risk</span>
+    </div>
+    <div class="item-card">
+      <div class="item-top">
+        <p class="item-name">Neurochem Synthsteak (×1)</p>
+        <span class="item-price">5kcr</span>
+      </div>
+      <p class="item-desc">Feed to a Marrowhound for [+] on Loyalty Saves for the next 10 days.</p>
+    </div>
+    <div class="item-card">
+      <div class="item-top">
+        <p class="item-name">Olfactory Muzzle</p>
+        <span class="item-price">9.5kcr</span>
+      </div>
+      <p class="item-desc">Dulls a Marrowhound's sense of smell — no more frenzying at fresh blood, but [-] on all other Loyalty Saves.</p>
+    </div>
+    <div class="note-box"><b>Pricing shifts:</b> two or more crew with Corewise pay +100% market price. A crew collectively holding Rimwise, Wilderness Survival, and Exobiology pay −50%.</div>
+  </div>
+
+  <div class="tab-panel" id="panel-chopshop">
+    <p>The Chop Shop installs anything — cyberware or slickware — for anyone the Babushka has vetted. Installation itself carries real risk: a failed Body Save means the mod goes in anyway, but you take Xd10 damage (X = slots installed) and gain a Malfunction. Critical Failure means outright rejection — roll for a Mutation and a Panic Check both.</p>
+    <div class="item-card">
+      <div class="item-top"><p class="item-name">Standard Installation</p><span class="item-price">List price</span></div>
+      <p class="item-desc">2d10 of every cybermod in the standard catalog kept in stock at all times, plus anything else the Warden requires.</p>
+      <span class="item-tag">Body Save [+] to install cleanly</span>
+    </div>
+    <div class="item-card">
+      <div class="item-top"><p class="item-name">Reaper Fence Service</p><span class="item-price">25% of list price</span></div>
+      <p class="item-desc">The Babushka buys reaped (stolen/harvested) cybermods through a private tunnel entrance connecting directly to the Choke — no questions asked.</p>
+    </div>
+    <div class="item-card">
+      <div class="item-top"><p class="item-name">Recovery Room</p><span class="item-price">100cr/day</span></div>
+      <p class="item-desc">Six dingy bunks for post-augmentation recovery. Usually occupied — something's been infecting cybermods on the Dream lately.</p>
+    </div>
+    <p style="margin-top:16px;"><strong>Full cyberware catalog (APOF pg.18):</strong></p>
+    <table class="catalog">
+      <tr><th>Cyberware</th><th>Cost</th><th>Slots</th><th>Description</th></tr>
+      <tr><td>Big Switch</td><td>18kcr</td><td>1</td><td>Change primary sexual characteristics. Takes 1 hour and a mental trigger.</td></tr>
+      <tr><td>Black Box</td><td>200kcr</td><td>1</td><td>Eidetic memory backup, watchable with an OGRE or Holoprojector. Only saves complete memories from install onward; also stores uploaded data/slickware.</td></tr>
+      <tr><td>Cloakskin</td><td>200kcr</td><td>1</td><td>Near-invisibility for 5 minutes once/day. 30% cumulative chance a Wound taken during use becomes permanent.</td></tr>
+      <tr><td>Deadswitch</td><td>5kcr</td><td>1</td><td>Feigns death for 2 weeks. Requires Black Box. 5% cumulative chance the condition becomes permanent per use.</td></tr>
+      <tr><td>Fangs</td><td>2kcr</td><td>0</td><td>Hollow cybernetic fangs, 2d10 DMG. Stores up to 3 doses of poison, medicine, or any drug.</td></tr>
+      <tr><td>Handcannon</td><td>6kcr+ (weapon)</td><td>Varies</td><td>Conceals a weapon inside a prosthetic limb. Slots/cost based on the weapon used.</td></tr>
+      <tr><td>Holoprojector</td><td>750cr</td><td>1</td><td>Holographically projects stored data (via OGRE, Body Cam, Black Box, Slicksocket, etc.).</td></tr>
+      <tr><td>Hotswap</td><td>5kcr</td><td>0</td><td>Allows a 1-turn change of cyberware.</td></tr>
+      <tr><td>Huntershot</td><td>4.5kcr</td><td>1</td><td>Requires OGRE. Holds 1 dart, fired on command, upon death, or unconsciousness. 2d10 DMG.</td></tr>
+      <tr><td>Little Switch</td><td>8kcr</td><td>0</td><td>Smooth or roughen your appearance. Takes 1 day and a mental trigger.</td></tr>
+      <tr><td>Loudmouth</td><td>500cr</td><td>0</td><td>Records and plays back audio. Max volume equivalent to a flashbang.</td></tr>
+      <tr><td>Lumatat</td><td>200cr+</td><td>0</td><td>Cosmetic, color-changing, animated, or luminescent tattoos.</td></tr>
+      <tr><td>OGRE</td><td>24kcr</td><td>1</td><td>Ocular Graphic Rendering Engine — HUD implanted in the optical nerve, projects into the field of vision.</td></tr>
+      <tr><td>Panic Button</td><td>10kcr</td><td>1</td><td>Triggered on purpose or upon death, detonates hidden explosives. Close range: Body Save or 3d10 DMG. 5% chance of automatic trigger if knocked unconscious.</td></tr>
+      <tr><td>Panzerfist</td><td>5mcr</td><td>3</td><td>Requires Prosthetic. Miniaturized missile launcher, Extreme range, 2d10×10 DMG, 2 shots, Fire/Explosion [+] wound. Reload takes a round; without a Spinal Rig, Body Save [-] or flung backwards. Takes 2 rounds to fire.</td></tr>
+      <tr><td>Prosthetic</td><td>2kcr</td><td>0</td><td>Artificial hand, foot, arm, or leg. Prosthetic organs replace damaged organs at 10x cost.</td></tr>
+      <tr><td>Remote Uplink</td><td>2mcr</td><td>1</td><td>Requires Black Box. Once/day sends an encrypted broadcast of Black Box data to a secure backup site.</td></tr>
+      <tr><td>Retractable Nanoblade</td><td>80kcr</td><td>1</td><td>9" retractable blade, cuts through almost anything, 2d10 DMG.</td></tr>
+      <tr><td>Revenant Protocol</td><td>20kcr</td><td>1</td><td>Triggered within 2 rounds of death, keeps the user fighting for 2d10 rounds after death.</td></tr>
+      <tr><td>Scapegoat System</td><td>10kcr</td><td>1</td><td>Gains 1 Charge per 10 DMG taken (holds 3). Release via touch for 2d10 DMG.</td></tr>
+      <tr><td>Slicksocket</td><td>500cr</td><td>1</td><td>Cranial input jack allowing slickware installation.</td></tr>
+      <tr><td>Sockpuppet</td><td>1mcr+ (weapon)</td><td>1</td><td>Requires Spinal Rig. Installs a weapon that fires on its own once/round using the user's Combat stat.</td></tr>
+      <tr><td>Spider Mount</td><td>250kcr</td><td>0</td><td>Requires Spinal Rig. Grants +1 slot. Installable once.</td></tr>
+      <tr><td>Spinal Rig</td><td>150kcr</td><td>1</td><td>Assisted heavy-lifting rig. +10 Strength (and 1 slot). Installable once.</td></tr>
+      <tr><td>Subdermal Armor</td><td>5mcr</td><td>1</td><td>Rechargeable armor layer beneath the skin (5 AP). Takes 2 weeks to regrow if used.</td></tr>
+      <tr><td>Tattletale</td><td>2kcr</td><td>0</td><td>Detachable audio surveillance bug, traceable up to 100km to within a 100m area.</td></tr>
+      <tr><td>Terminal Jack</td><td>750cr</td><td>1</td><td>Interfaces with terminals, smartlink weapons, and vehicles. Downloads linked-system data or uploads Black Box data.</td></tr>
+      <tr><td>Whiplash Injector</td><td>4mcr</td><td>1</td><td>Single use. Automatically restores 1 Wound upon death. Reduces Body Save by 1d10 [-] after use.</td></tr>
+    </table>
+    <p class="section-sub" style="margin-top:8px;">Weapon slots: handguns 1, rifles 2, larger than a rifle 3+. Weapon cost runs 10× the item's normal price.</p>
+    <p style="margin-top:16px;"><strong>Jobs the Babushka is currently offering:</strong></p>
+    <table class="catalog">
+      <tr><th>Job</th><th>Pay</th></tr>
+      <tr><td>Bring 1d5 infected corpses for study</td><td>2kcr each</td></tr>
+      <tr><td>Sycorax pickup from the Farm (talk to Ukko/Ukka only)</td><td>3kcr</td></tr>
+      <tr><td>House call — mutated patient found dead, collect evidence</td><td>15kcr</td></tr>
+      <tr><td>Track down Dr. Bancali in the Choke, ask about the outbreak</td><td>Free cybermod</td></tr>
+      <tr><td>Provide protection while Yandee meets with the Babushka</td><td>40kcr</td></tr>
+    </table>
+  </div>
+
+  <div class="tab-panel" id="panel-stellarburn">
+    <p>Sem runs the bar; Indyl runs the Ecstasy below. Different services, different rooms, same building.</p>
+    <div class="item-card">
+      <div class="item-top"><p class="item-name">A Rumor from Sem</p><span class="item-price">Price of a drink</span></div>
+      <p class="item-desc">Buy something at the bar and Sem will trade you a piece of current station gossip. Whether it's true is your problem.</p>
+    </div>
+    <div class="item-card">
+      <div class="item-top"><p class="item-name">The Ecstasy — Door Fee</p><span class="item-price">100cr entry</span></div>
+      <p class="item-desc">Indyl's exclusive lower-level domain. Companionship is bought here; specifics are between you and Indyl.</p>
+    </div>
+    <div class="item-card">
+      <div class="item-top"><p class="item-name">Seraphs of Virtue (contract killing)</p><span class="item-price">2mcr/target</span></div>
+      <p class="item-desc">Indyl's personal bodyguards, highly skilled assassins with an 85% clearance rate. Available for hire, at a price that makes clear this isn't a casual service.</p>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="panel-canyonheavy">
+    <p>Access requires a private booth introduction at the Stellar Burn first. Angus personally handles all purchasing of equipment and talent.</p>
+    <table class="catalog">
+      <tr><th>Item</th><th>Cost</th><th>Description</th></tr>
+      <tr><td>TrashKid</td><td>5kcr</td><td>Portable device preconfigured to generate believable iconography and attack patterns for a fictitious cyber-gang — leads investigators astray.</td></tr>
+      <tr><td>Splintermask</td><td>3kcr</td><td>Transparent, flexible balaclava. Outer surface transmits harsh jagged noise-patterns, defeating conventional and IR cameras. Stressful to Androids/AI systems nearby.</td></tr>
+      <tr><td>Racketball</td><td>4.5kcr</td><td>Bundle of transmitters, speakers, and cabling that aggressively outputs noise on all spectrums — destroys delicate sensors within 30m, stuns standard sensors for 1d10 minutes.</td></tr>
+      <tr><td>Office Assistant</td><td>55kcr</td><td>A large suitcase or backpack holding blank android personality storage and several I/O cables. A willing android can download a copy of their personality into it; connected to an unwilling android (Sanity Save to resist), it takes over the new body and locks the original personality out.</td></tr>
+      <tr><td>Moebius Strip</td><td>3.5kcr</td><td>Connected to a camera, endlessly replays 30 seconds of selected footage while advancing the timestamp accordingly.</td></tr>
+      <tr><td>Doorstop</td><td>500cr</td><td>Small siphon-circuit that traps any open/close signal from a door — no notification of door operation is reported to the network.</td></tr>
+      <tr><td>Remote Autohacker</td><td>250kcr</td><td>Radio-operated, preprogrammable output device enabling a remote Hacking Check at Long range.</td></tr>
+      <tr><td>Slaveshot</td><td>15kcr</td><td>Close-range dart gun. On hit, injects malicious code into a cybermod, granting remote access within Long range (Body Save to resist).</td></tr>
+      <tr><td>Socketsnake</td><td>750cr</td><td>An inert bundle of cables with adaptors. Once connected, any further input causes it to thrash wildly, dealing 2d10 DMG to the user.</td></tr>
+      <tr><td>Mommybird</td><td>75kcr</td><td>Heavy black cylinder packed with capacitors. When connected, siphons power in, then discharges it all back into the device — takes 60 seconds.</td></tr>
+    </table>
+    <p style="margin-top:16px;"><strong>Angus always pays for:</strong> good information, rumors, and data that can't be obtained through purely digital means — 3d10kcr per tip, more for anything tied to an active job.</p>
+  </div>
+
+  <div class="tab-panel" id="panel-clinic">
+    <p>A neutral-ground public clinic in Block (04,20), run by a faction-mixed collective calling themselves the Clinicians. Standard long-term recovery plans and cyberware/slickware installs are available at normal rates — these items are add-ons and specialty stock.</p>
+    <table class="catalog">
+      <tr><th>Item</th><th>Cost</th><th>Description</th></tr>
+      <tr><td>Armaderm Tattoo</td><td>30kcr</td><td>Cybernetically enhanced tattoo with subdermal armor ink. Grants -1 AP when activated, recharges after 2 weeks. Limbs only.</td></tr>
+      <tr><td>Bedside Manners</td><td>150cr</td><td>Add-on. Clinicians are more pleasant during the procedure. Blood Donations pay 1kcr per point of damage.</td></tr>
+      <tr><td>Caffeinated Clinicians</td><td>1.5kcr</td><td>Add-on. On a failed cyberware installation, subtract 50 from the Malfunction roll.</td></tr>
+      <tr><td>EMP Pen</td><td>3kcr</td><td>Weapon. 2ft localized EMP blast, disables motors/servos/power for 1d5 hours. Body Save or 1 DMG unless in a Haz/Vac Suit.</td></tr>
+      <tr><td>Ocular Vision Implants</td><td>2kcr</td><td>Cyberware, 0 slots. Low-light vision up to 20m.</td></tr>
+      <tr><td>Pseudoflesh Muffin</td><td>10cr</td><td>100% artificial, extra protein. 5% chance of becoming hostile.</td></tr>
+      <tr><td>Respiratory Reserve System</td><td>50kcr</td><td>Cyberware, 1 slot. Reserve O2 tank in the lungs, holds 5 hours of air. Refillable via O2 tank or 24 hours of disuse.</td></tr>
+      <tr><td>Spit Weapon System</td><td>6kcr</td><td>Cyberware, 1 slot. Fires a chemical agent at close range. 1d10 DMG, [-] to Body Saves.</td></tr>
+    </table>
+    <p style="margin-top:16px;"><strong>Clinic staff you might meet:</strong> doc (Bratva, co-founder), Essie Barrington (Teamster, co-founder, tattoo artist), ChatAGT (Bratva, gender services), SPLINE/BX47 (Solarian, slickware specialist), A. Mouse MD (Tempest Co., combat medic), The Hat Witch (Bratva, tarot readings), User Null (CANYONHEAVY, tech support), and a dozen more rotating through the roster.</p>
+    <div class="note-box"><b>The Clinicians take on missions</b> to keep the lights on — 2d100 days of O2 tax relief per completed task. Ten standing requests rotate through the board, from a coffee run to tracking down a possible Reaping victim to defending the clinic outright when things go bad.</div>
+  </div>
+
+  <div class="tab-panel" id="panel-xlb">
+    <p>A trendy new dim sum spot. Everything on the menu comes in baskets of three, served with complimentary tea. Eat-in only — no doggy bags, and there's a very good reason for that rule.</p>
+    <table class="catalog">
+      <tr><th>Dish</th><th>Cost</th><th>Description</th></tr>
+      <tr><td>Veg Special</td><td>45cr</td><td>Deep-fried potsticker filled with narcotic herbs. Body Save [+] or hallucinate.</td></tr>
+      <tr><td>Carc' Roll</td><td>20cr</td><td>Crab-like meat in soft egg rolls. Can cause minor cuts.</td></tr>
+      <tr><td>Moon-Taro Cake</td><td>20cr</td><td>Fried meat "cake" made with bright blue tubers. Strangely addictive.</td></tr>
+      <tr><td>Cus-Star Tart</td><td>30cr</td><td>Sweet tart with gooey custard-like filling. Turns bodily fluids yellow.</td></tr>
+      <tr><td>Xiao! Long! Bao!</td><td>100cr</td><td>Impossibly perfect soup dumplings. Half off if you shout your order.</td></tr>
+    </table>
+    <p style="margin-top:12px;"><strong>Standing job:</strong> a rival restaurant, Auntie Winnie's Tofu House, is quietly offering 15kcr for Uncle Bao's "secret recipe." They don't much care how it's acquired.</p>
+  </div>
+
+  <div class="tab-panel" id="panel-trust">
+    <p>A modular, gold-plated bank that detaches from its port and drifts between stations.</p>
+    <table class="catalog">
+      <tr><th>Service</th><th>Cost</th><th>Description</th></tr>
+      <tr><td>Open an Account</td><td>1kcr minimum</td><td>Lets a character write a will, so a future character can access the account after death.</td></tr>
+      <tr><td>Facial</td><td>5kcr</td><td>Immediately clear 1d5 Stress.</td></tr>
+      <tr><td>Full Body Massage</td><td>10kcr</td><td>Ignore a Critical Failure on your next Save.</td></tr>
+      <tr><td>Hot Stone Massage</td><td>25kcr</td><td>Automatically convert 1d5 Stress to Saves.</td></tr>
+    </table>
+    <p style="margin-top:14px;"><strong>Reputation with Jules, the CEO:</strong> every 10kcr cumulatively deposited raises the party's standing by 1 (starts at 0). Good standing has its privileges.</p>
+    <button class="action" id="rollCrate">Open a Dream Crate (1kcr)</button>
+    <button class="action secondary" id="clearCrate">Clear</button>
+    <div id="crateResults"></div>
+  </div>
+
+  <div class="tab-panel" id="panel-icebox">
+    <p>Access requires an appointment, arranged through Angus or the Babushka. Installing slickware requires a Sanity Save [+] — failure means the mod goes in anyway, but you gain Stress equal to the slots installed. Critical Failure means your brain won't mesh with the software: lose Sanity equal to the slots, roll for a Malfunction, and make a Panic Check.</p>
+    <p style="margin-top:14px;"><strong>Full slickware catalog:</strong></p>
+    <table class="catalog">
+      <tr><th>Slickware</th><th>Cost</th><th>Slots</th><th>Description</th></tr>
+      <tr><td>God Mode</td><td>10kcr</td><td>1</td><td>Requires Slicksocket, Terminal Jack. [+] on Hacking Checks when jacked into a terminal. On failure: gain 2 Stress.</td></tr>
+      <tr><td>Espernetic Feedback Loop</td><td>36kcr</td><td>1</td><td>Requires Slicksocket. Psionic attack overloading targeted electronics (incl. androids/cybernetics). Sanity Save [+]: success deals damage equal to the roll; failure takes 1 DMG and gains 1 Stress.</td></tr>
+      <tr><td>Holopet</td><td>24kcr</td><td>0</td><td>Requires Slicksocket. Projects a medium holographic AI pet within Close range. Resting relieves +1 Stress. Panic Check [-] if destroyed.</td></tr>
+      <tr><td>Looky-loo</td><td>550cr</td><td>0</td><td>Requires Slicksocket. Picks up transmissions on all non-encrypted bands.</td></tr>
+      <tr><td>Machine Code</td><td>350kcr</td><td>4</td><td>Requires Slicksocket, Black Box, Terminal Jack. Converse with powerful AI. Sanity Save: success gains 1 Stress/hour conversing; failure gains 1/minute.</td></tr>
+      <tr><td>Sentinel System</td><td>120kcr</td><td>2</td><td>Requires Slicksocket. Doubles effectiveness of stimpaks, Rest, and Medical Treatment.</td></tr>
+      <tr><td>Skillslick (Trained)</td><td>50kcr</td><td>1</td><td>Requires Slicksocket. Grants the purchased skill for as long as installed. Selection is limited and closely guarded.</td></tr>
+      <tr><td>Skillslick (Expert)</td><td>500kcr</td><td>2</td><td>As above, Expert tier.</td></tr>
+      <tr><td>Skillslick (Master)</td><td>1mcr</td><td>3</td><td>As above, Master tier.</td></tr>
+      <tr><td>Twitch Booster</td><td>4kcr</td><td>1</td><td>Requires Slicksocket. When activated: [+] on Speed Checks for 3 rounds, take 1 DMG as nerve endings burn.</td></tr>
+      <tr><td>Vox Box</td><td>24kcr</td><td>1</td><td>Requires Loudmouth. Perfectly mimics any voice after 10 minutes of listening. Stores up to 3 voices.</td></tr>
+    </table>
+    <p style="margin-top:16px;"><strong>Sleeving &amp; storage services:</strong></p>
+    <table class="catalog">
+      <tr><th>Service</th><th>Cost</th><th>Description</th></tr>
+      <tr><td>Reclamation Sleeve</td><td>300kcr</td><td>Built by memory-wiping prisoners. Reroll stats. 10% chance of learning a random skill; 10% chance of gaining someone else's memories.</td></tr>
+      <tr><td>Model-A Series Sleeve</td><td>500kcr</td><td>Bulk issue, ten physical models (A1-A10). Reduce all Stats and Saves by 5. Heavily discriminated against.</td></tr>
+      <tr><td>Atlas X Premium Sleeve</td><td>3mcr</td><td>Custom designed. +5 Strength, Speed, and Body. Recovery only takes 48 hours.</td></tr>
+      <tr><td>Narcissus-1 Sleeve</td><td>50mcr</td><td>Luxury designed. All-new stats — 240 points to split between Strength, Intellect, Combat, and Speed. Recovery only takes 12 hours.</td></tr>
+      <tr><td>Sleeve Backup</td><td>50kcr</td><td>Download memories via the NeMo Machine. Takes 24 hours. Sanity Save or forget the last 1d10 days; Critical Failure means a Panic Check and total amnesia.</td></tr>
+      <tr><td>Sleeve Storage</td><td>500cr/month</td><td>Monthly storage fee for a sleeve in cryostorage.</td></tr>
+      <tr><td>Slickbay (1hr)</td><td>5cr/hr</td><td>Enough time to install a Slick.</td></tr>
+    </table>
+    <div class="note-box"><b>The Runway:</b> a minimalist, surgically-lit space where sleeves are paraded and inspected before purchase. Appointment only — ask Angus or the Babushka for an invite.</div>
+  </div>
+</section>
+
+<section>
+  <p class="kicker">Bonus Reference</p>
+  <h2>Station Services</h2>
+  <table class="catalog">
+    <tr><th>Establishment</th><th>Price &amp; Notes</th></tr>
+    <tr><td>Ramen House</td><td>2cr/bowl. Open 24hrs.</td></tr>
+    <tr><td>Auntie Winnie's Tofu House</td><td>Solid, unpretentious fare. Rumored to be paying well for a rival dumpling shop's recipe.</td></tr>
+    <tr><td>Teamster Bar</td><td>1cr draft beer. Must present Union Card.</td></tr>
+    <tr><td>Cabaret</td><td>200cr cover + drinks. Shows run 1-2 hours.</td></tr>
+    <tr><td>Slickbooth</td><td>10cr/minute, 50cr/hour. Install Slicks, visit Slickworlds.</td></tr>
+    <tr><td>Street Surgeon</td><td>[+] on Rest Saves; failure causes 2d10 DMG.</td></tr>
+    <tr><td>Mod Repair</td><td>Minor repair = 10% of list price. Major = 25%.</td></tr>
+    <tr><td>Plastic Surgeon</td><td>Most surgeries 5kcr. Body Save or 1d5 Stress.</td></tr>
+    <tr><td>Reaper Fence</td><td>Buys reaped mods for 25% of list price.</td></tr>
+    <tr><td>Sleeve Storage</td><td>500cr/month. 5% chance of Infection Check when sleeved.</td></tr>
+    <tr><td>Pawn Shop</td><td>Buys items at 1d5×10% of list price.</td></tr>
+    <tr><td>Lumatat Shop</td><td>500cr/hr. Spot tattoo: 1d10hrs. Full sleeve: 50hrs.</td></tr>
+    <tr><td>Bathhouse</td><td>100cr/month. Reduces 1d5 Stress (max 1/month).</td></tr>
+    <tr><td>Opium Den</td><td>1kcr/hit. Reduces 1d10 Stress (max 1/month). Highly addictive.</td></tr>
+    <tr><td>Fight Club</td><td>10cr cover, 200cr/month. Must fight your first night — Body Save or 2d10 DMG.</td></tr>
+    <tr><td>Shooting Range</td><td>200cr/month. Success grants [+] on 1d5 future Combat Checks.</td></tr>
+    <tr><td>Teamster Certification</td><td>6 months on Union Jobs, 2kcr/month salary, earns a Union card.</td></tr>
+    <tr><td>Shinken-Ri Dojo</td><td>6 years training, 250kcr materials — earns the Master Skill "God Fist."</td></tr>
+    <tr><td>Tempest Outpost</td><td>1d10 Tempest recruits, training under a Squad Leader and a Probie.</td></tr>
+    <tr><td>Shuttle Dock</td><td>50cr for a ride across the station.</td></tr>
+  </table>
+  <div class="note-box" style="margin-top:16px;"><b>The Cage, at The Court:</b> Stadium Seating — 25cr/ticket. Floor Seating — 500cr/ticket. Boxed Seats — 15kcr/box (holds 20). Trials are held several times daily, and gambling on the outcome is common — the odds are posted on The Docket.</div>
+</section>
+
+</div>
+
+<footer>Prospero's Dream campaign — Vendors. Built on Grim Merchants v1.2 (Joshua Kramer &amp; Michael Kramer). Pairs with the Personnel File, Job Board, Bounty Board, and Trucking Contracts.</footer>
+
+<script>
+const EPHEMERA_ITEMS = [
+  {name:"Derringer", price:"400cr", desc:"Adjacent range, 1d10+1 DMG, 2 shots, Gunshot wound. [-] to be seen, [+] to conceal.", tag:"Weapon"},
+  {name:"Hatch-Cutter", price:"500cr", desc:"Adjacent, 4d10 DMG, Bleeding/Gore wound. Strength Check to dislodge once embedded.", tag:"Weapon"},
+  {name:"Scrap Shotgun", price:"100cr", desc:"Close range, 5d10 DMG, 1 shot, Gunshot/Gore. Load it with anything. Explodes if it deals 40+ DMG.", tag:"Weapon"},
+  {name:"Compound Bow", price:"350cr", desc:"Long range, 1d5+5 DMG, [+] to hit, silent.", tag:"Weapon"},
+  {name:"Monogun", price:"5.5kcr", desc:"Extreme range, 2d10 DMG, 5 shots, no recoil, few moving parts. Always in Good condition.", tag:"Weapon"},
+  {name:"Mall Sword", price:"1.2kcr", desc:"Adjacent, 2d5 DMG, Bleeding. Rarely allowed through security seriously.", tag:"Weapon"},
+  {name:"Claymore Mine", price:"450cr", desc:"As a Frag Grenade, directed 180° blast, triggered by laser tripwire.", tag:"Curiosity"},
+  {name:"Ultralight Armor", price:"10kcr", desc:"AP 6, hides under clothing.", tag:"Curiosity"},
+  {name:"Bag of Logic Cores (x1d5)", price:"8kcr", desc:"Remnants of the androids who built the Old City of Prospero's Dream.", tag:"Curiosity"},
+  {name:"Cyberware Cataloguing Chip", price:"400cr", desc:"Plugs into a HUD. Scans and identifies visible cyberware on a target, plus unprotected metadata.", tag:"Curiosity"},
+  {name:"Briefcase (locked)", price:"300cr", desc:"Blood-stained, monogrammed, full of corporate documents nobody's supposed to see. Whoever this belonged to had a very bad day.", tag:"Curiosity"},
+  {name:"Firewall Ammo (1 magazine)", price:"1.2kcr", desc:"Targets with cyberware must Body Save or lose control of their cybermods for 1d5 turns.", tag:"Curiosity"},
+  {name:"Pocket Rebreather", price:"800cr", desc:"30 minutes of O2.", tag:"Curiosity"},
+  {name:"Closed Glass Ecosystem", price:"700cr", desc:"A hefty living terrarium of alien flora and fauna. Nothing dangerous inside, probably.", tag:"Curiosity"},
+  {name:"Modified Visor & Magboots", price:"1.5kcr", desc:"HUD and magboots with seismic scanners that map the structure below you as you walk. 1hr per 40ft of depth.", tag:"Curiosity"},
+  {name:"Remote Override Device", price:"650cr", desc:"Component A attaches to a switch, lever, or button. Component B triggers it wirelessly from anywhere.", tag:"Curiosity"},
+  {name:"Planetologist's Kit", price:"2.5kcr", desc:"Depth scanner, rad-shielded tent, portable air filter (8 hrs safe air).", tag:"Curiosity"},
+  {name:"Radio Scramblers (one per PC)", price:"900cr", desc:"Private military grade. Securely encrypts all short-range comms.", tag:"Curiosity"},
+  {name:"The Amazing Quantum Tool", price:"950cr", desc:"It's a caliper. It's a wrench. It's a nail gun. Intellect Check to read your mind and become what you need.", tag:"Curiosity"},
+  {name:"Cockroach v3.1", price:"1kcr", desc:"Hacking software on disk. Scrapes and transmits data at set intervals over single-use encrypted channels. Nigh-impossible to destroy once rooted.", tag:"Curiosity"},
+  {name:"Zmeys-Creech Advanced Portable Healing Device", price:"8kcr", desc:"Emits an eerie alien signal, healing Adjacent creatures 1 damage/minute (cannot heal Wounds). Each full heal costs 1 Sanity.", tag:"Curiosity"},
+  {name:"LIDAR Scanner", price:"2kcr", desc:"Real-time environment mapping, low-fidelity night vision, reveals invisible entities, clarifies hallucinations from real objects.", tag:"Curiosity"},
+  {name:"HullBond Adhesive Roll", price:"50cr", desc:"Flexible industrial tape — hardens into rigid reinforced metal over 30 minutes.", tag:"Curiosity"},
+  {name:"Bio-Battery Starter Unit", price:"650cr", desc:"Wrist-mounted, painful when worn. Charges a battery cell in a day. [-] on physical tasks and Rest Saves while charging.", tag:"Curiosity"},
+  {name:"Rabbithole.exe", price:"90cr", desc:"Slicksim recreating Prospero's Dream. The simulation unravels as the station's orbit decays. Escape by solving the crisis, dying, or entering a copy of itself.", tag:"Curiosity"},
+  {name:"Modified Crew Attire", price:"100cr", desc:"Extremely comfortable. -1 Minimum Stress while worn.", tag:"Curiosity"},
+  {name:"Tempest Co. Riot Shield", price:"900cr", desc:"AP:5, reinforced viewing port, provides cover for self and adjacent ally.", tag:"Curiosity"},
+  {name:"Executive Lockbox", price:"1.5kcr", desc:"Biometric, retinal, and cybernetic diagnostic locks. Four failed verifications incinerate the contents.", tag:"Curiosity"},
+  {name:"Universal Gravity Shunt", price:"11kcr", desc:"Spider-like metal disc. Reduces the weight of whatever it's attached to by 75% for 1 hour.", tag:"Curiosity"},
+  {name:"Jailbroken O2 Credstick", price:"5kcr", desc:"A new identity. With Hacking: backdoor access to the slickworld lattice connecting all other credsticks.", tag:"Curiosity"},
+  {name:"Necrobotic Crown (DUPE)", price:"6.5kcr", desc:"Attach to a corpse dead less than 48 hours. Reanimates the body for 1d5 hours by electrifying the brain. Brain disintegrates by the end.", tag:"Rare"},
+  {name:"Dimensional Umbilical Emergency Fob (DUPE)", price:"10cr", desc:"Hold the button for a 10-second countdown. Manifests a coffin-lander sized doorway to safety — where exactly, that's anyone's guess.", tag:"Rare"}
+];
+
+const TITAN_TYPES = [
+  {roll:[0,19], class:"I", model:"AAVA Industrial S5 Raider", price:"750kcr"},
+  {roll:[20,39], class:"I", model:"Sato G5 Grail VI Executive Transport", price:"3.5mcr"},
+  {roll:[40,59], class:"II", model:"Sebaco RAS-62 Salvage Cutter", price:"2mcr"},
+  {roll:[60,74], class:"II", model:"Valecore T9LC Platypus Freighter", price:"2.5mcr"},
+  {roll:[75,89], class:"II", model:"ARMA Type-19 Patrol Craft", price:"6mcr"},
+  {roll:[90,92], class:"III", model:"BAS-Lehmann Contessa Jumpliner", price:"4.25mcr"},
+  {roll:[93,95], class:"IV", model:"Gauss FAC-Grendel Corvette", price:"8mcr"},
+  {roll:[96,97], class:"V", model:"NorthStar Paragon Exploration Vessel", price:"7.5mcr"},
+  {roll:[98,99], class:"V", model:"Tannhauser Hosho Troopship", price:"25mcr"}
+];
+const TITAN_NAMES = ["Letter of Intent","Runaway Inheritor","Hangman's Haste","Ascendant Ego","Reasonable Offer","Cosmopolitan","Unending Orbit","Least Worthy","Fairweather","Desperado","Crown of Yore","Cacophony in Avon","Romantic Autocrat","Final Verse","Greengill","Sir John Franklin","Margin Call","Lonely Roadshow","Costaguana","Death of Tatius","Frontman","Beneficient Broker","Chief Executive Officer","Moray","Many Friends Amidst","O'Bannon","Macready","Penny-farthing","Survivalist","Zodiac Sunrise","Million-Metre Sprint","Redemptive Crux","Stained in Crimson","Alcubierre's Cudgel","Refractive Index","Ambitious Godwit","Appearance of Impropriety","Spearhead","Stellar Atlantis","Centennial Sky","Azure Rampart","Incrementalist Vision","Immense Wealth Foretold","Space Whale","Sverdrup","Silver Lining","Duplicitous Creditor","Cooper's Legacy","Monygham","Disciple of Orion"];
+
+function rollD100(){ return Math.floor(Math.random()*100); }
+function pickTitanShip(){
+  const r = rollD100();
+  const entry = TITAN_TYPES.find(t=>r>=t.roll[0] && r<=t.roll[1]);
+  const name = TITAN_NAMES[Math.floor(Math.random()*TITAN_NAMES.length)];
+  return {...entry, name};
+}
+
+document.getElementById('rollEphemera').addEventListener('click', ()=>{
+  const container = document.getElementById('ephemeraResults');
+  const rolls = [EPHEMERA_ITEMS[Math.floor(Math.random()*EPHEMERA_ITEMS.length)], EPHEMERA_ITEMS[Math.floor(Math.random()*EPHEMERA_ITEMS.length)]];
+  const conditions = ["Terrible — destroyed after one use","Poor — breaks on a crit fail","Poor — breaks on a crit fail","Poor — breaks on a crit fail","Poor — breaks on a crit fail","Okay — malfunctions on a crit fail","Okay — malfunctions on a crit fail","Okay — malfunctions on a crit fail","Okay — malfunctions on a crit fail","Good — no issues"];
+  rolls.forEach(item=>{
+    const cond = conditions[Math.floor(Math.random()*conditions.length)];
+    const div = document.createElement('div');
+    div.className = 'item-card';
+    div.innerHTML = `<div class="item-top"><p class="item-name">${item.name}</p><span class="item-price">${item.price}</span></div><p class="item-desc">${item.desc}</p><span class="item-tag">${item.tag} · Condition: ${cond}</span>`;
+    container.appendChild(div);
+  });
+});
+document.getElementById('clearEphemera').addEventListener('click', ()=>{ document.getElementById('ephemeraResults').innerHTML=''; });
+
+document.getElementById('rollTitan').addEventListener('click', ()=>{
+  const container = document.getElementById('titanResults');
+  container.innerHTML = '';
+  const ships = [pickTitanShip(), pickTitanShip()];
+  ships.forEach(s=>{
+    const div = document.createElement('div');
+    div.className = 'item-card';
+    div.innerHTML = `<div class="item-top"><p class="item-name">The ${s.name}</p><span class="item-price">${s.price}</span></div><p class="item-desc">${s.model}</p><span class="item-tag">Class ${s.class} · Blind auction, starts at 10 chits</span>`;
+    container.appendChild(div);
+  });
+});
+document.getElementById('clearTitan').addEventListener('click', ()=>{ document.getElementById('titanResults').innerHTML=''; });
+
+const TIER_BASE = {Trained:25000, Expert:250000, Master:500000};
+const QUIRKS = ["State-Dependent Memory — usable only in zero-g or underwater","Play-By-Play — you narrate everything out loud while using it","Burnout — usable only while intoxicated, but [+] if you are","Obsessive — must keep trying until you succeed (Sanity Save to stop)","Perfectionist — Panic Check on any failed check with this skill","Narcissist — if you can use it, you must; you're certain you're the best","Mercenary — won't work for free, must be paid at least 5cr/hr","Insecure — [-] unless someone reassures you first","Forbidden Knowledge — -10 Sanity, +20 Intellect, permanently","Aquaphobia — [-] near any visible water source","Automatonophobia — [-] on Fear Saves near crewmates while using it","Erasophobia — Minimum Stress doubled in Slickworlds","Malware — all faces replaced with cartoon mascot ads, permanently","Bloatware — takes 1 additional slot to host","Surgeon — gain Surgery whenever you've taken a Wound","Grunt — gain Military Training whenever you're being shot at"];
+
+function fmtPrice(n){ return n>=1000000 ? (n/1000000)+'mcr' : n>=1000 ? (n/1000)+'kcr' : n+'cr'; }
+
+document.getElementById('rollSkillslick').addEventListener('click', ()=>{
+  const container = document.getElementById('skillslickResults');
+  container.innerHTML = '';
+  const tier = document.getElementById('skillTier').value;
+  const refinement = document.getElementById('refinement').value;
+  const base = TIER_BASE[tier];
+  const refMap = {full:{n:0,label:'Perfect — full price'}, well:{n:1,label:'Well Refined'}, poorly:{n:2,label:'Poorly Refined'}, barely:{n:3,label:'Barely Refined'}};
+  const {n, label} = refMap[refinement];
+  let discountPct = 0;
+  const rolledQuirks = [];
+  for(let i=0;i<n;i++){
+    const q = QUIRKS[Math.floor(Math.random()*QUIRKS.length)];
+    rolledQuirks.push(q);
+    discountPct += 10 + Math.floor(Math.random()*3)*10;
+  }
+  discountPct = Math.min(discountPct, 90);
+  const finalPrice = Math.round(base * (1 - discountPct/100));
+  const div = document.createElement('div');
+  div.className = 'item-card';
+  div.innerHTML = `<div class="item-top"><p class="item-name">${tier} Skillslick — ${label}</p><span class="item-price">${fmtPrice(finalPrice)}</span></div>
+    ${rolledQuirks.length ? '<p class="item-desc"><strong>Quirks:</strong> ' + rolledQuirks.join(' · ') + '</p>' : '<p class="item-desc">No quirks — clean install, no side effects.</p>'}
+    <span class="item-tag">Base ${fmtPrice(base)} · ${discountPct}% off</span>`;
+  container.appendChild(div);
+});
+document.getElementById('clearSkillslick').addEventListener('click', ()=>{ document.getElementById('skillslickResults').innerHTML=''; });
+
+const CRATE_TABLE = [
+  {roll:0, result:"5kcr deposited into your account"},
+  {roll:1, result:"2kcr deposited into your account"},
+  {roll:2, result:"20% Spa discount, next visit"},
+  {roll:3, result:"Standard Battle Dress"},
+  {roll:4, result:"Laser Cutter"},
+  {roll:5, result:"500cr deposited into your account"},
+  {roll:6, result:"5% Spa discount, next visit"},
+  {roll:7, result:"Sub Machine Gun"},
+  {roll:8, result:"1 round of Ammo"},
+  {roll:9, result:"A bucket of water is thrown at you"}
+];
+
+document.getElementById('rollCrate').addEventListener('click', ()=>{
+  const container = document.getElementById('crateResults');
+  const roll = Math.floor(Math.random()*10);
+  const entry = CRATE_TABLE.find(c=>c.roll===roll);
+  const div = document.createElement('div');
+  div.className = 'item-card';
+  div.innerHTML = `<div class="item-top"><p class="item-name">Dream Crate — Roll ${roll}</p><span class="item-price">1kcr spent</span></div><p class="item-desc">${entry.result}</p>`;
+  container.appendChild(div);
+});
+document.getElementById('clearCrate').addEventListener('click', ()=>{ document.getElementById('crateResults').innerHTML=''; });
+
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
