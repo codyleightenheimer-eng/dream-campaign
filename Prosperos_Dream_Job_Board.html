@@ -269,6 +269,9 @@
   <div class="controls">
     <button class="btn-primary" id="refreshBtn">Refresh Postings</button>
     <button class="btn-secondary" id="resetBtn">Clear Board (New Campaign)</button>
+    <button class="btn-secondary" id="exportBtn">Export Backup</button>
+    <button class="btn-secondary" id="importBtn">Import Backup</button>
+    <input type="file" id="importFile" accept="application/json" style="display:none;">
   </div>
   <div class="controls" style="margin-top:10px;">
     <button class="btn-secondary filter-btn active" data-filter="all">All</button>
@@ -526,6 +529,49 @@ document.getElementById('resetBtn').addEventListener('click', (e)=>{
   saveBoard();
   saveLog();
   render();
+});
+
+document.getElementById('exportBtn').addEventListener('click', ()=>{
+  const backup = { source:'prosperos-dream-job-board', exportedAt: new Date().toISOString(), board, log };
+  const blob = new Blob([JSON.stringify(backup, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const stamp = new Date().toISOString().slice(0,10);
+  a.href = url;
+  a.download = `prosperos-dream-job-board-backup-${stamp}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+
+document.getElementById('importBtn').addEventListener('click', ()=>{
+  document.getElementById('importFile').click();
+});
+
+document.getElementById('importFile').addEventListener('change', (e)=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev)=>{
+    try{
+      const data = JSON.parse(ev.target.result);
+      if(data.source !== 'prosperos-dream-job-board'){
+        alert('This file doesn\'t look like a Job Board backup.');
+        return;
+      }
+      board = Array.isArray(data.board) ? data.board : [];
+      log = Array.isArray(data.log) ? data.log : [];
+      saveBoard();
+      saveLog();
+      render();
+      alert('Backup restored — postings and job log loaded from ' + (data.exportedAt ? data.exportedAt.slice(0,10) : 'file') + '.');
+    }catch(err){
+      alert('Could not read that file. Make sure it\'s a Job Board backup .json exported from this page.');
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
 });
 
 loadState();

@@ -93,6 +93,9 @@
   <div class="controls">
     <button class="btn-primary" id="refreshBtn">Pull New Contracts</button>
     <button class="btn-secondary" id="resetBtn">Clear Board (New Campaign)</button>
+    <button class="btn-secondary" id="exportBtn">Export Backup</button>
+    <button class="btn-secondary" id="importBtn">Import Backup</button>
+    <input type="file" id="importFile" accept="application/json" style="display:none;">
   </div>
   <div class="controls" style="margin-top:10px;">
     <button class="btn-secondary filter-btn active" data-filter="all">All</button>
@@ -436,6 +439,52 @@ document.getElementById('resetBtn').addEventListener('click', (e)=>{
   btn.textContent='Clear Board (New Campaign)'; btn.style.background=''; btn.style.color=''; btn.style.borderColor='';
   board = drawBoard(); log = []; rep = {corpo:0,hlu:0,orro:0};
   saveBoard(); saveLog(); saveRep(); renderRep(); render();
+});
+
+document.getElementById('exportBtn').addEventListener('click', ()=>{
+  const backup = { source:'prosperos-dream-trucking-contracts', exportedAt: new Date().toISOString(), board, log, rep };
+  const blob = new Blob([JSON.stringify(backup, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const stamp = new Date().toISOString().slice(0,10);
+  a.href = url;
+  a.download = `prosperos-dream-trucking-contracts-backup-${stamp}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+
+document.getElementById('importBtn').addEventListener('click', ()=>{
+  document.getElementById('importFile').click();
+});
+
+document.getElementById('importFile').addEventListener('change', (e)=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev)=>{
+    try{
+      const data = JSON.parse(ev.target.result);
+      if(data.source !== 'prosperos-dream-trucking-contracts'){
+        alert('This file doesn\'t look like a Trucking Contracts backup.');
+        return;
+      }
+      board = Array.isArray(data.board) ? data.board : [];
+      log = Array.isArray(data.log) ? data.log : [];
+      rep = data.rep && typeof data.rep === 'object' ? data.rep : {corpo:0,hlu:0,orro:0};
+      saveBoard();
+      saveLog();
+      saveRep();
+      renderRep();
+      render();
+      alert('Backup restored — contracts, log, and Reputation loaded from ' + (data.exportedAt ? data.exportedAt.slice(0,10) : 'file') + '.');
+    }catch(err){
+      alert('Could not read that file. Make sure it\'s a Trucking Contracts backup .json exported from this page.');
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
 });
 
 loadState();
