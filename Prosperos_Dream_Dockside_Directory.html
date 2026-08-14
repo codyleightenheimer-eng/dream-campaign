@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prospero's Dream — New Arrival's Dockside Directory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0a0a0a;
+    --panel:#131313;
+    --white:#f5f5f2;
+    --dim:#9a9a94;
+    --faint:#5c5c58;
+    --line:#282826;
+    --pink:#ff2d78;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--black);
+    color:var(--white);
+    font-family:'Archivo',sans-serif;
+    line-height:1.6;
+  }
+  .wrap{max-width:820px;margin:0 auto;padding:0 28px 90px;}
+
+  header{
+    padding:48px 28px 36px;
+    border-bottom:6px solid var(--pink);
+    text-align:center;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--pink);
+    margin:0 0 16px;
+  }
+  h1{
+    font-family:'Archivo Black',sans-serif;
+    font-weight:400;
+    font-size:clamp(30px,6vw,52px);
+    text-transform:uppercase;
+    letter-spacing:-0.01em;
+    margin:0;
+    line-height:1.05;
+  }
+  .subhead{
+    font-size:15px;
+    color:var(--dim);
+    max-width:480px;
+    margin:14px auto 0;
+    font-style:italic;
+  }
+
+  .stat-strip{
+    display:flex;
+    justify-content:center;
+    gap:0;
+    margin-top:26px;
+    flex-wrap:wrap;
+    background:var(--line);
+    max-width:600px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .stat-strip div{
+    background:var(--black);
+    padding:12px 18px;
+    text-align:center;
+    flex:1;
+    min-width:110px;
+  }
+  .stat-strip b{
+    display:block;
+    font-family:'Archivo',sans-serif;
+    font-weight:700;
+    font-size:17px;
+    color:var(--white);
+  }
+  .stat-strip span{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:9px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--faint);
+  }
+
+  section{padding:44px 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .kicker{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--pink);
+    margin:0 0 8px;
+  }
+  h2{
+    font-family:'Archivo Black',sans-serif;
+    font-weight:400;
+    font-size:26px;
+    text-transform:uppercase;
+    letter-spacing:-0.01em;
+    margin:0 0 14px;
+  }
+  p{font-size:15px;color:var(--dim);margin:0 0 13px;}
+  p.lead{font-size:16px;color:var(--white);}
+  strong{color:var(--white);font-weight:700;}
+  em{color:var(--white);font-style:italic;}
+
+  .quote-box{
+    background:var(--panel);
+    border-left:4px solid var(--pink);
+    padding:16px 20px;
+    margin:16px 0;
+    font-style:italic;
+    color:var(--white);
+    font-size:14px;
+  }
+
+  .figure-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:2px;
+    margin-top:14px;
+    background:var(--line);
+  }
+  .figure-card{
+    background:var(--panel);
+    padding:18px 19px;
+  }
+  .figure-card .role{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:9.5px;
+    font-weight:600;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--pink);
+    margin-bottom:4px;
+  }
+  .figure-card h3{
+    font-family:'Archivo',sans-serif;
+    font-weight:700;
+    font-size:17px;
+    margin:0 0 8px;
+    color:var(--white);
+  }
+  .figure-card p{font-size:13px;margin:0;}
+
+  .district-list{list-style:none;margin:14px 0 0;padding:0;}
+  .district-list li{
+    padding:14px 0;
+    border-top:1px solid var(--line);
+  }
+  .district-list li:first-child{border-top:none;}
+  .district-list b{
+    display:block;
+    color:var(--white);
+    font-family:'Archivo',sans-serif;
+    font-weight:700;
+    font-size:15px;
+    margin-bottom:3px;
+  }
+  .district-list p{margin:0;font-size:14px;}
+  .caution{
+    display:inline-block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    background:var(--pink);
+    color:var(--black);
+    padding:2px 8px;
+    margin-left:8px;
+    vertical-align:middle;
+  }
+
+  table.faction-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:14px;
+    font-size:13.5px;
+  }
+  table.faction-table th{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--pink);
+    text-align:left;
+    padding:0 10px 10px 0;
+    border-bottom:1px solid var(--line);
+  }
+  table.faction-table td{
+    padding:12px 10px 12px 0;
+    border-bottom:1px solid var(--line);
+    color:var(--dim);
+    vertical-align:top;
+  }
+  table.faction-table td:first-child{color:var(--white);font-weight:700;white-space:nowrap;}
+
+  .tip-list{list-style:none;margin:14px 0 0;padding:0;counter-reset:tip;}
+  .tip-list li{
+    display:flex;
+    gap:14px;
+    padding:12px 0;
+    border-top:1px solid var(--line);
+    font-size:14px;
+    color:var(--dim);
+  }
+  .tip-list li:first-child{border-top:none;}
+  .tip-list li::before{
+    counter-increment:tip;
+    content:counter(tip);
+    flex-shrink:0;
+    font-family:'Archivo Black',sans-serif;
+    font-size:20px;
+    color:var(--pink);
+    line-height:1;
+    min-width:24px;
+  }
+
+  .contact-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:18px 20px;
+    margin:12px 0;
+  }
+  .contact-card h3{
+    font-family:'Archivo',sans-serif;
+    font-weight:700;
+    font-size:16px;
+    color:var(--pink);
+    margin:0 0 6px;
+  }
+  .contact-card p{margin:0;font-size:14px;}
+
+  .etiquette-list{list-style:none;margin:14px 0 0;padding:0;}
+  .etiquette-list li{
+    padding:14px 0;
+    border-top:1px solid var(--line);
+  }
+  .etiquette-list li:first-child{border-top:none;}
+  .etiquette-list b{
+    display:block;
+    color:var(--pink);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    margin-bottom:4px;
+  }
+  .etiquette-list p{margin:0;font-size:14px;}
+
+  .tearoff{
+    background:var(--pink);
+    padding:22px 24px;
+    margin:16px 0;
+    position:relative;
+  }
+  .tearoff::before{
+    content:"✂ — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —";
+    display:block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--black);
+    opacity:0.5;
+    margin-bottom:14px;
+    letter-spacing:-0.02em;
+    overflow:hidden;
+    white-space:nowrap;
+  }
+  .tearoff .kicker{color:var(--black);opacity:0.7;}
+  .tearoff h3{
+    font-family:'Archivo Black',sans-serif;
+    font-weight:400;
+    font-size:20px;
+    text-transform:uppercase;
+    color:var(--black);
+    margin:0 0 8px;
+  }
+  .tearoff p{color:var(--black);font-weight:500;margin:0 0 8px;font-size:14px;}
+  .tearoff p:last-child{margin-bottom:0;}
+
+  footer{
+    text-align:center;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10px;
+    color:var(--faint);
+    padding:40px 28px 0;
+    line-height:1.8;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Complimentary — Please Take One</p>
+  <h1>New Arrival's<br>Dockside Directory</h1>
+  <p class="subhead">"Everything a newcomer needs to know about Prospero's Dream — and everything we're legally obligated to warn you about." Handed out free at every dock gate. Update frequency: whenever somebody remembers to.</p>
+  <div class="stat-strip">
+    <div><b>~8.7M</b><span>Residents</span></div>
+    <div><b>X-Class</b><span>Port Rating</span></div>
+    <div><b>24/7</b><span>Everything, Technically</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <p class="kicker">Welcome Aboard</p>
+  <h2>You Made It</h2>
+  <p class="lead">Whatever brought you here — work, debt, a bad decision, a good one — the Dream doesn't ask questions at the door. It also doesn't answer many. This directory is the closest thing to an orientation you're going to get, so read it once and keep it somewhere.</p>
+  <p>Eight million people live on a structure that was, at some point in its history, rated for a fraction of that many. Nobody's quite sure when that stopped mattering. The lights mostly work. The air mostly doesn't run out. Past that, you're on your own — which, depending on who you ask, is either the best or worst thing about the place.</p>
+</section>
+
+<section>
+  <p class="kicker">Who Actually Runs This Place</p>
+  <h2>The Five You'll Hear About</h2>
+  <p>Nobody elected anybody. Nobody voted on anything. But five names come up often enough, in enough different mouths, that you should probably know them before someone assumes you already do.</p>
+  <div class="figure-grid">
+    <div class="figure-card">
+      <p class="role">Golyanovo II Bratva</p>
+      <h3>Yandee</h3>
+      <p>Runs the biggest piece of the Dream's underworld economy, by most accounts. Nobody's ever seen her outside of rumor and reputation, which is exactly how she likes it. People lower their voices when they say her name. Take the hint.</p>
+    </div>
+    <div class="figure-card">
+      <p class="role">Teamsters Local 32819L</p>
+      <h3>Reidmar</h3>
+      <p>Union rep, legendary pilot, permanently out of patience. If you need something moved — cargo, people, problems — his union probably has an opinion about it, and probably a price.</p>
+    </div>
+    <div class="figure-card">
+      <p class="role">Tempest Mercenary Company</p>
+      <h3>"Cutter"</h3>
+      <p>Commands the Dream's largest private military contract. Widely feared, professionally polite. If you see Tempest colors, you're either protected or in trouble — sometimes it's hard to tell which until later.</p>
+    </div>
+    <div class="figure-card">
+      <p class="role">Solarian Church</p>
+      <h3>The High Gardener</h3>
+      <p>Leads the Church that keeps a good chunk of the lower blocks breathing, literally — they're generous with oxygen donations to the Choke. Also runs one of the more visible religious institutions on-station. Draw your own conclusions about the overlap.</p>
+    </div>
+    <div class="figure-card">
+      <p class="role">The Court of Prospero</p>
+      <h3>The Chief Adjudicator</h3>
+      <p>If you end up on trial for something — and on the Dream, that's a real possibility — this is whose courtroom you're in. Reputation: fair to the connected, brutal to everyone else.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="kicker">Getting Your Bearings</p>
+  <h2>Where Not to Get Lost</h2>
+  <ul class="district-list">
+    <li>
+      <b>The Docks</b>
+      <p>Where you probably are right now. Reasonably policed, reasonably honest, reasonably priced. Everything gets worse the further you walk from here.</p>
+    </li>
+    <li>
+      <b>The Choke<span class="caution">Caution</span></b>
+      <p>Lower blocks, thin air, real oxygen scarcity. People live here because they have to, not because they want to. Tensions run high and have a habit of boiling over. Don't go in without a reason, and don't go in without knowing your way back out.</p>
+    </li>
+    <li>
+      <b>Doptown<span class="caution">Caution</span></b>
+      <p>Black market central. You can buy almost anything here if you know who to ask, and almost anything can happen to you if you ask the wrong person. Cash only. No refunds, obviously.</p>
+    </li>
+    <li>
+      <b>The Old Drydock District</b>
+      <p>Half-abandoned industrial sprawl on the outer ring. Cheap rent, cheaper company. A lot of businesses out here don't officially exist. Best not to ask too many questions about the ones that don't.</p>
+    </li>
+    <li>
+      <b>San Cade<span class="caution">Caution</span></b>
+      <p>Newer habitation block, built up around — and directly on top of — one of the station's biggest processing operations. Waterless in parts, a 24-hour market in others, and a whole lot of below-deck machinery most residents try not to think about too hard. Word is the local monastery's been busier than usual lately. Make of that what you will.</p>
+    </li>
+    <li>
+      <b>Egress Suites & Upper Decks</b>
+      <p>If you've got money, this is where you spend it. Actual sunlight simulators. Actual security that shows up when called.</p>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <p class="kicker">Getting Around</p>
+  <h2>The Metro</h2>
+  <p class="lead">The Prospero Metro runs the length of the station, connecting every major district to every other one — in theory. In practice, expect delays, expect crowding, and expect at least one car on every line that everybody quietly avoids.</p>
+  <p>Fares are cheap and rarely enforced past the first checkpoint. A transit map is posted at every station platform, updated whenever someone remembers to. If you're new, the safest rule is simple: stay on through the Choke stops unless you have a specific reason to get off. Most people don't.</p>
+</section>
+
+<section id="hiring">
+  <div class="tearoff">
+    <p class="kicker">✂ Tear Along Line</p>
+    <h3>Where to Find Work</h3>
+    <p>Job postings rotate at every dock gate, updated daily. Legitimate contracts, questionable contracts, and everything in between — the board doesn't discriminate, and neither does whoever's paying.</p>
+    <p>Check the boards near the arrivals gate, or ask around. Somebody's always hiring for something. Whether you'll want the job once you hear what it actually involves is your problem, not theirs.</p>
+  </div>
+</section>
+
+<section>
+  <p class="kicker">Faction Cheat Sheet</p>
+  <h2>Who's Who, Briefly</h2>
+  <table class="faction-table">
+    <tr><th>Faction</th><th>What People Say About Them</th></tr>
+    <tr><td>Golyanovo II Bratva</td><td>Runs a huge share of the Dream's black market. Everyone knows they're here. Nobody talks about them loudly.</td></tr>
+    <tr><td>Stratemeyer Syndicate</td><td>Corespace money, rarely seen in person. Rumored to be quietly working against the Bratva's grip out here. Take it as you will.</td></tr>
+    <tr><td>Teamsters Local 32819L</td><td>The union that actually keeps cargo, people, and favors moving. Strong-willed, occasionally on strike.</td></tr>
+    <tr><td>Solarian Church</td><td>The Dream's dominant religious institution. Generous with charity, insistent about attendance.</td></tr>
+    <tr><td>Tempest Mercenary Company</td><td>Private security-for-hire, mostly contracted by whoever pays best. Don't assume they're on your side just because they're not shooting at you yet.</td></tr>
+    <tr><td>Canyonheavy Collective</td><td>Hackers, data brokers, and information-for-hire. If something's been leaked, breached, or "acquired," it probably passed through here first.</td></tr>
+    <tr><td>The Hunglungs</td><td>Choke residents organizing against how the rest of the station treats them. Growing more organized by the year, depending on who you ask.</td></tr>
+  </table>
+</section>
+
+<section>
+  <p class="kicker">If You Meet Them</p>
+  <h2>A Few Notes on Etiquette</h2>
+  <ul class="etiquette-list">
+    <li><b>Bratva colors</b><p>If someone's got wolf ink on their cheek and a friend with them, that's not a fashion choice. Be polite, be brief, and don't ask questions you don't need answered.</p></li>
+    <li><b>Solarian clergy</b><p>A nod and a moment of quiet is always appreciated, even if you don't share the faith. Refusing a blessing outright is considered rude. Accepting one obligates you to nothing.</p></li>
+    <li><b>Tempest Co. patrols</b><p>They're not looking for trouble with bystanders. Stay visible, keep your hands where they can see them, and let them finish whatever they're doing. Don't linger to watch.</p></li>
+    <li><b>Canyonheavy contacts</b><p>If somebody offers you information you didn't ask for, they already know something about you. Act accordingly.</p></li>
+    <li><b>Teamster union reps</b><p>Straightforward people, mostly. They respect a direct question and a fair offer. They do not respect being lowballed.</p></li>
+  </ul>
+</section>
+
+<section>
+  <p class="kicker">Practical Advice</p>
+  <h2>Ten Things Every Tourist Learns the Hard Way</h2>
+  <ol class="tip-list">
+    <li>Don't flash credits anywhere past the Docks. You will be noticed, and not by the people you want noticing you.</li>
+    <li>The air is metered. Check your allotment before you go anywhere for an extended stay.</li>
+    <li>If someone offers to "fix" your paperwork, they can. Ask what it costs first — always.</li>
+    <li>Nobody enforces "no weapons" signs. That's not a suggestion to bring one, it's a warning that everyone else already has.</li>
+    <li>The Court doesn't do public defenders. If you can't afford an advocate, don't get arrested.</li>
+    <li>Tipping is not customary. Owing a favor instead of paying cash, however, is extremely customary — and often more expensive in the long run.</li>
+    <li>If a deal seems too easy, it's not the deal you think it is.</li>
+    <li>Everyone on this station knows somebody. Assume whoever you're talking to does too.</li>
+    <li>The Choke's reputation is not exaggerated. If anything, it's polite.</li>
+    <li>When in doubt, ask a Dockmaster. They know everything, they've seen everything, and they'll usually tell you for free — once.</li>
+  </ol>
+</section>
+
+<section>
+  <p class="kicker">Need Something?</p>
+  <h2>People Worth Knowing</h2>
+  <div class="contact-card">
+    <h3>Angus</h3>
+    <p>Runs an information and favors network out of Canyonheavy.market. If you need to know something, find something, or get somewhere fast, he's the first name most newcomers hear — usually within an hour of docking. Friendly, well-connected, and never quite tells you the whole story. Standard rate: a favor, redeemable later, on his terms.</p>
+  </div>
+  <div class="contact-card">
+    <h3>Loshe, Dockmaster</h3>
+    <p>Personally oversees traffic through the main dry dock. If it happened on this station in the last week, there's a decent chance he's already heard about it.</p>
+  </div>
+  <div class="contact-card">
+    <h3>Sem, The Stellar Burn</h3>
+    <p>Runs the bar on the club level. A drink buys a rumor, no questions asked. Whether the rumor's true is your problem.</p>
+  </div>
+  <div class="contact-card">
+    <h3>Local 32819L Union Hall</h3>
+    <p>Posts standing work for anyone willing to move cargo, fix ships, or lend a hand on short notice. No membership required for one-off jobs. Pay is fair. Nobody there will tell you what's really going on with the union lately, but everybody's clearly thinking about it.</p>
+  </div>
+  <div class="contact-card">
+    <h3>Choke Outreach Kiosk</h3>
+    <p>A folding table near the lift down, staffed by whoever's got the shift. Mostly aid distribution and rumor exchange. If you're heading down into the Choke for any reason, stop here first — they'll tell you what's actually true this week, which is more than most sources offer.</p>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  This directory is provided free of charge and free of liability. Prospero's Dream Station Authority (or whatever's left of it) assumes no responsibility for outdated information, missing persons, or decisions made based on the above.<br>
+  Distributed at dock gates across all X-Class arrival points.
+</footer>
+
+</body>
+</html>
