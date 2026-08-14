@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prospero's Dream — Bounty Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0a0a0a; --panel:#131313; --panel-raised:#181818; --white:#f5f5f2;
+    --dim:#9a9a94; --faint:#5c5c58; --line:#282826; --pink:#ff2d78; --green:#4ade80;
+  }
+  *{box-sizing:border-box;} html,body{margin:0;padding:0;}
+  body{background:var(--black);color:var(--white);font-family:'Archivo',sans-serif;line-height:1.5;}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px 80px;}
+  header{padding:36px 24px 24px;border-bottom:6px solid var(--pink);text-align:center;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.2em;color:var(--pink);text-transform:uppercase;margin:0 0 12px;}
+  h1{font-family:'Archivo Black',sans-serif;font-weight:400;font-size:clamp(28px,5vw,46px);text-transform:uppercase;letter-spacing:-0.01em;margin:0;}
+  .subhead{font-size:14px;color:var(--dim);max-width:520px;margin:12px auto 0;}
+  .controls{display:flex;justify-content:center;gap:10px;margin:24px auto 0;flex-wrap:wrap;max-width:600px;}
+  button{font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;padding:11px 20px;border:none;cursor:pointer;transition:opacity 0.15s;}
+  button:hover{opacity:0.85;}
+  .btn-primary{background:var(--pink);color:var(--black);}
+  .btn-secondary{background:var(--panel);color:var(--white);border:1px solid var(--line) !important;}
+  .wrap-inner{max-width:1000px;margin:0 auto;padding:0 24px;}
+  section{padding:36px 0;}
+  .bl-btn{padding:8px 12px;font-size:10.5px;}
+  .bl-btn.active{background:var(--pink);color:var(--black);}
+  .kicker{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--pink);margin:0 0 8px;}
+  h2{font-family:'Archivo Black',sans-serif;font-weight:400;font-size:22px;text-transform:uppercase;letter-spacing:-0.01em;margin:0;}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:10px;margin-bottom:16px;border-bottom:1px solid var(--line);padding-bottom:14px;}
+  .count-tag{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint);}
+  p{font-size:14px;color:var(--dim);margin:0 0 12px;}
+  .board-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:2px;background:var(--line);}
+  .bounty-card{background:var(--panel);border-left:4px solid var(--pink);padding:18px 19px;display:flex;flex-direction:column;gap:9px;}
+  .bounty-card.taken{border-left-color:var(--faint);opacity:0.45;}
+  .bounty-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+  .bounty-name{font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:var(--white);margin:0;}
+  .bounty-reward{font-family:'Archivo Black',sans-serif;font-size:16px;color:var(--pink);white-space:nowrap;flex-shrink:0;}
+  .bounty-meta{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--faint);text-transform:uppercase;letter-spacing:0.03em;}
+  .bounty-desc{font-size:13.5px;color:var(--dim);margin:0;}
+  .bounty-tags{display:flex;gap:6px;flex-wrap:wrap;}
+  .tag{font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--line);color:var(--dim);}
+  .bounty-actions{display:flex;gap:8px;margin-top:4px;}
+  .bounty-actions button{flex:1;padding:8px 10px;font-size:10px;}
+  .log-list{list-style:none;margin:0;padding:0;}
+  .log-list li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:13px;color:var(--dim);}
+  .log-list li:first-child{border-top:none;}
+  .log-list b{color:var(--white);}
+  .log-status{font-family:'IBM Plex Mono',monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:0.05em;padding:2px 8px;flex-shrink:0;height:fit-content;}
+  .status-taken{background:var(--panel-raised);color:var(--pink);border:1px solid var(--pink);}
+  .status-done{background:var(--green);color:var(--black);}
+  .empty-note{text-align:center;padding:30px;color:var(--faint);font-family:'IBM Plex Mono',monospace;font-size:12px;}
+  table.bl-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13.5px;}
+  table.bl-table th{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--pink);text-align:left;padding:0 10px 10px 0;border-bottom:1px solid var(--line);}
+  table.bl-table td{padding:10px 10px 10px 0;border-bottom:1px solid var(--line);color:var(--dim);}
+  table.bl-table td:first-child{color:var(--white);font-weight:700;}
+  table.bl-table tr.uncertain td{color:var(--faint);font-style:italic;}
+  .note-box{background:var(--panel);border:1px solid var(--line);padding:14px 16px;font-size:12.5px;color:var(--dim);margin-top:14px;}
+  .note-box b{color:var(--white);}
+  footer{text-align:center;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--faint);padding:30px 24px 0;}
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Bounty Board — Public Terminal</p>
+  <h1>Wanted, Dead or Alive</h1>
+  <p class="subhead">All 100 of Wages of Sin's bounties are loaded, each tagged with its real book index number. Names, crimes, clients, and rewards pulled verbatim from the source.</p>
+  <div class="controls">
+    <button class="btn-primary" id="refreshBtn">Pull New Bounties</button>
+    <button class="btn-secondary" id="resetBtn">Clear Board (New Campaign)</button>
+  </div>
+  <div class="controls" style="margin-top:10px;">
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint);align-self:center;">Generate by Level:</span>
+    <button class="btn-secondary bl-btn" data-bl="1">BL1</button>
+    <button class="btn-secondary bl-btn" data-bl="2">BL2</button>
+    <button class="btn-secondary bl-btn" data-bl="3">BL3</button>
+    <button class="btn-secondary bl-btn" data-bl="4">BL4</button>
+    <button class="btn-secondary bl-btn" data-bl="5">BL5</button>
+    <button class="btn-secondary bl-btn" data-bl="6">BL6</button>
+    <button class="btn-secondary bl-btn" data-bl="7">BL7</button>
+    <button class="btn-secondary bl-btn" data-bl="8">BL8</button>
+    <button class="btn-secondary bl-btn" data-bl="9">BL9</button>
+  </div>
+</header>
+
+<div class="wrap-inner">
+
+<section>
+  <div class="section-head"><h2>Active Bounties</h2><span class="count-tag" id="boardCount"></span></div>
+  <div class="board-grid" id="board"></div>
+  <p class="empty-note" id="emptyNote" style="display:none;">Board's empty — hit Pull New Bounties.</p>
+</section>
+
+<section>
+  <div class="section-head"><h2>Bounty Log</h2><span class="count-tag" id="logCount"></span></div>
+  <ul class="log-list" id="jobLog"></ul>
+  <p class="empty-note" id="logEmpty">No bounties claimed yet.</p>
+</section>
+
+<section>
+  <p class="kicker">Reference</p>
+  <h2>Bounty Level Table (Wages of Sin, verbatim)</h2>
+  <table class="bl-table">
+    <tr><th>Level</th><th>Type</th><th>Payscale</th></tr>
+    <tr><td>BL 1</td><td>Minor Bounties</td><td>1d10 kcr</td></tr>
+    <tr><td>BL 2</td><td>Lesser Bounties</td><td>1d5 × 10 kcr</td></tr>
+    <tr><td>BL 3</td><td>Serious Bounties</td><td>1d10 × 10 kcr</td></tr>
+    <tr><td>BL 4</td><td>Dangerous Bounties</td><td>1d5 × 100 kcr</td></tr>
+    <tr><td>BL 5</td><td>Major Bounties</td><td>1d10 × 100 kcr</td></tr>
+    <tr><td>BL 6</td><td>Operational Bounties</td><td>1d5 Mcr</td></tr>
+    <tr><td>BL 7</td><td>Strategic Bounties</td><td>1d10 Mcr</td></tr>
+    <tr><td>BL 8</td><td>Legendary Bounties</td><td>2d10 Mcr</td></tr>
+    <tr><td>BL 9</td><td>Apocalyptic Bounties</td><td>1d100 Mcr</td></tr>
+  </table>
+  <div class="note-box">"These are a rough measuring tool, not a formula to be followed!" — Wages of Sin. Every posting below uses its <b>actual stated reward</b> from the source rather than a rolled value, since these are real bounties with real client-set prices, not generic procedural generation.</div>
+  <div class="note-box"><b>Coverage: 100 of 100 bounties loaded — complete.</b> Every bounty in Wages of Sin is now on this board, verified against the actual source text, including a full re-check of the 51–89 range after an earlier automated pass mis-numbered several entries.</div>
+  <div class="note-box"><b>BL distribution:</b> BL1: 5 · BL2: 9 · BL3: 19 · BL4: 25 · BL5: 17 · BL6: 12 · BL7: 6 · BL8: 5 · BL9: 2. Every level is well represented, including both BL9 apocalyptic-tier bounties (Etemenanki and The Counterfeiters).</div>
+</section>
+
+</div>
+
+<footer>Prospero's Dream campaign — Bounty Board. Every posting sourced from Wages of Sin (Tuesday Knight Games, MRPG-M6). State persists locally per campaign. Pairs with the Trucking Contracts board and Personnel File.</footer>
+
+<script>
+const BOUNTY_POOL = [
+  {num:1, name:"Ianeria Grimm", crime:"Failure to Pay Debt", level:1, reward:"1kcr", bonus:"None", client:"Brandr Mulder", wanted:"Alive, debt paid", associates:"Vermin Patrol Members"},
+  {num:86, name:"Reidar Beech, Crabber", crime:"Withholding Child Support Payments", level:1, reward:"5kcr", bonus:"None", client:"Alicia Wolff", wanted:"Alive", associates:"Patrons of 'Old Raindrop', fellow crabbers"},
+  {num:2, name:"General Cadoc Geisler", crime:"AWOL", level:8, reward:"19mcr", bonus:"Those assisting in military operations paid as salaried combatants of high rank", client:"Albion Pacification Group", wanted:"Alive", associates:"APG High Command"},
+  {num:3, name:"Markos Petraitiene", crime:"Theft", level:1, reward:"2kcr", bonus:"None", client:"MegaYUM Supermarket", wanted:"Alive", associates:"Unknown"},
+  {num:4, name:"Lt. Odovacer Vergoossen", crime:"Accepting Bribes, Endangering the Public", level:3, reward:"30kcr", bonus:"An additional 30kcr if made to disappear rather than turning up dead", client:"Milovan Josephs", wanted:"Dead", associates:"The Ada Boys, Anvollapolis PD Bowling League"},
+  {num:5, name:"ASSET_37", crime:"False Testimony", level:3, reward:"12kcr", bonus:"None", client:"Yolotl Keifer", wanted:"Alive", associates:"Weigand Jewellers, Anvollapolis Krastev cartel"},
+  {num:6, name:"Steffen Butkus, Bombmaker", crime:"Creation and Distribution of Explosive Devices", level:4, reward:"600kcr", bonus:"250kcr for recovered customer records", client:"Anvollapolis Serious Crimes Unit", wanted:"Alive", associates:"Hou Firm, The XX, ALF Anvolla Cell"},
+  {num:7, name:"Members of the ALF Control Structure", crime:"Organization of Terror Campaigns", level:8, reward:"10mcr", bonus:"200kcr per lower-cell member captured or identified", client:"Anti-Terror Union", wanted:"Dead or Alive", associates:"Lower cells within the ALF"},
+  {num:8, name:"Pilot Abiolu Opeyemi", crime:"Manslaughter, Oathbreaking", level:3, reward:"55kcr", bonus:"None", client:"Council of the Free Moons", wanted:"Alive", associates:"Free Moon Pilot Society"},
+  {num:9, name:"Yamis Robertson", crime:"Missing", level:2, reward:"10kcr", bonus:"None", client:"Ismail & Orsolya Robertson", wanted:"Alive", associates:"Downport City FGC Club"},
+  {num:10, name:"Dr. Raffael Ebner", crime:"Unethical Animal Modification", level:4, reward:"200kcr", bonus:"Capture one of his experiments for a bonus of 75kcr", client:"Theodor Grant", wanted:"Dead or Alive", associates:"None known"},
+  {num:11, name:"Bahdan Eros", crime:"Failure to Purchase License", level:4, reward:"150kcr", bonus:"None", client:"Free Transport Bureau", wanted:"Alive, with package", associates:"Unknown"},
+  {num:12, name:"Slickware Killers", crime:"Abduction, Murder, Torture", level:5, reward:"75kcr per member of the gang", bonus:"None", client:"Balonov Security Authority", wanted:"Dead or Alive", associates:"None known"},
+  {num:13, name:"Sample #78", crime:"Escaping Containment", level:7, reward:"2mcr", bonus:"None", client:"Nuanix Biolabs", wanted:"Alive", associates:"N/A"},
+  {num:14, name:"Odran Perrin", crime:"Banditry, Murder", level:3, reward:"50kcr", bonus:"7.5kcr per follower captured or killed", client:"Ealdormen of Traverso, Hippolyte and Harriman's Stop", wanted:"Dead or Alive", associates:"The Perrin Gang"},
+  {num:15, name:"Aile Kyler", crime:"Failure to Render Services Paid For", level:3, reward:"20kcr", bonus:"None", client:"Jonah Dane", wanted:"Alive", associates:"Grain alcohol"},
+  {num:16, name:"Nazar Balog", crime:"Smuggling", level:5, reward:"800kcr", bonus:"None", client:"Anti-Piracy Task Force", wanted:"Alive", associates:"Crew of the Impenetrable Skunk"},
+  {num:17, name:"Milosh Yaromil", crime:"Claim Jumping", level:3, reward:"50kcr", bonus:"None", client:"Concerned Miners of the Borvil Ring", wanted:"Dead", associates:"Crew of the Caviar Attitude"},
+  {num:18, name:"Srv. Szofia Woodhams", crime:"Withholding Information, Disposal of Evidence", level:2, reward:"15kcr", bonus:"Convince her to come willingly for double pay", client:"Butune Station Bombing Truth Council", wanted:"Alive", associates:"Butune Bombing Taskforce"},
+  {num:19, name:"Isador Hornik", crime:"Exploitation", level:5, reward:"520kcr", bonus:"80kcr per additional officer or executive", client:"Chiamia Revolutionary Council", wanted:"Alive", associates:"Crew of the Thorn of Gold"},
+  {num:20, name:"Amaruq Borges", crime:"Murder, Corpse Desecration", level:3, reward:"20kcr", bonus:"None", client:"Allie Winchester", wanted:"Dead", associates:"None"},
+  {num:21, name:"Noe Moore", crime:"Enabling Smuggling", level:4, reward:"200kcr", bonus:"Extract without major incident for an additional 100kcr", client:"BriStar Security Services", wanted:"Alive", associates:"Ashton & Escheverria Naval Architects"},
+  {num:22, name:"Eamon McGuinness", crime:"Plunder", level:4, reward:"100kcr", bonus:"25kcr per other member involved", client:"Far Dawn Biomed Solutions", wanted:"Alive", associates:"Big Meine, Adam's Refurb & Supply"},
+  {num:23, name:"Laxmi Riggi", crime:"Disruption of Traffic", level:4, reward:"100kcr", bonus:"None", client:"Citov Police", wanted:"Alive", associates:"Citov Worker's League"},
+  {num:24, name:"Josue Georgiu", crime:"Selling Faulty Goods", level:3, reward:"80kcr", bonus:"None", client:"Transit Control Authority", wanted:"Alive", associates:"Known in salvager circles around Citov Station"},
+  {num:25, name:"Waldek McCune", crime:"Withholding Testimony", level:3, reward:"50kcr", bonus:"None", client:"Last Word Insurance", wanted:"Alive", associates:"None"},
+  {num:26, name:"Arjun Barber", crime:"Practicing Medicine Without a License, Mutilation", level:3, reward:"45kcr", bonus:"None", client:"Dalia Security Commission", wanted:"Alive", associates:"Unknown"},
+  {num:27, name:"Natalia Ivanova", crime:"Unlicensed Religion Operation", level:4, reward:"200kcr", bonus:"None", client:"Dalia Security Commission", wanted:"Alive", associates:"Heirs of Tionje Movement"},
+  {num:28, name:"Akoni Lafrenz", crime:"Illegal AI Research", level:7, reward:"5mcr", bonus:"None", client:"Inter-Corporate Intelligence Bureau", wanted:"Dead or Alive", associates:"None known"},
+  {num:29, name:"Magda Cuesta", crime:"Possession and Distribution of Illicit Substances", level:2, reward:"15kcr", bonus:"None", client:"Doenides Police Department", wanted:"Alive", associates:"Harlow FC Youth Team"},
+  {num:30, name:"Cnaeus Baar", crime:"Withholding Goods", level:4, reward:"250kcr", bonus:"Recover stolen merchandise for a bonus of 250kcr", client:"Harlow Syndicate", wanted:"Dead", associates:"Extended Baar family"},
+  {num:31, name:"Anish Vlahov", crime:"Possession and Distribution of Illicit Substances", level:4, reward:"200kcr", bonus:"Location of stash paid 35kcr", client:"Doenides Police Department", wanted:"Alive", associates:"Vlahov & Co. Logistics Employees"},
+  {num:32, name:"Helpful Sarah", crime:"Murder", level:4, reward:"150kcr", bonus:"None", client:"Doenides Police Department", wanted:"Active or Inactive", associates:"Employees of Quintana Payroll & Expense"},
+  {num:33, name:"Lt. Ksenija Lope Gallo", crime:"Inciting Revolt", level:5, reward:"500kcr", bonus:"Capture any leadership alive: +250kcr. Dismantle the guerrilla structure: +250kcr.", client:"Voyerian Constitutional Committee", wanted:"Dead or Alive", associates:"Voyerian People's Militia"},
+  {num:34, name:"Roach, Cook", crime:"Manufacture of Illicit Substances", level:6, reward:"2mcr", bonus:"An additional 1mcr if retrieved alive", client:"Doenides Police Department", wanted:"Dead or Alive, Operation Destroyed", associates:"Unknown"},
+  {num:35, name:"Hamilcar Borgi", crime:"Sale of Weapons", level:4, reward:"400kcr", bonus:"Find the stash for a bonus of 200kcr", client:"Veles McTaggart", wanted:"Dead or Alive", associates:"Drihatume Militia"},
+  {num:36, name:"Rade Furnadjiev", crime:"Hosting Untested Cyberware", level:6, reward:"1mcr", bonus:"If brought in alive, 500kcr additional pay", client:"HuPo Technologies", wanted:"Dead or Alive", associates:"In-Mil Medical Solutions Doctors"},
+  {num:37, name:"Dzintra Favreau", crime:"Industrial Espionage", level:5, reward:"300kcr", bonus:"50kcr if returned alive", client:"Das-Fejes Computation", wanted:"Dead or Alive", associates:"N/A"},
+  {num:38, name:"Iago Faelan", crime:"AWOL", level:6, reward:"2mcr", bonus:"8mcr if alive", client:"Vinograd Measures & Implements", wanted:"Dead or Alive", associates:"Vinograd M&I Executive Board"},
+  {num:39, name:"Esmaeil Kuipers", crime:"Theft of Funds", level:6, reward:"2mcr", bonus:"None", client:"Shriakawa Foundry", wanted:"Alive, with the money", associates:"None known"},
+  {num:40, name:"Agostan Estrada", crime:"Failure of Duties, Suspicion of Murder", level:6, reward:"1mcr", bonus:"None", client:"The Hildegaard Estate", wanted:"Alive", associates:"Balonov Shelters Charitable Works"},
+  {num:41, name:"Etemenanki", crime:"Abuse of Patent Law", level:9, reward:"30mcr", bonus:"None", client:"G³ Conglomerate", wanted:"Alive", associates:"N/A"},
+  {num:42, name:"Psionic Death Warriors", crime:"Computer Misuse and Extortion", level:5, reward:"200kcr", bonus:"None", client:"SolidState Banking, Inrupa Branch", wanted:"Alive", associates:"Unknown"},
+  {num:43, name:"Generous Dividend", crime:"Stealing Property", level:7, reward:"5mcr", bonus:"500kcr for capture of the thieves", client:"Dr. Izak Corti", wanted:"Alive", associates:"N/A"},
+  {num:44, name:"Raina Fannon", crime:"Failure to Answer Summons", level:1, reward:"10kcr", bonus:"None", client:"The Executor of Ivano Adams", wanted:"Alive", associates:"Unknown"},
+  {num:45, name:"Dragica Ismat", crime:"Theft", level:4, reward:"200kcr", bonus:"800kcr additional for the statue", client:"Lonoe Cultural Authority", wanted:"Alive", associates:"Unknown"},
+  {num:46, name:"Akos Bristol", crime:"Failure to Complete Contract", level:8, reward:"15mcr", bonus:"None", client:"Gorpus Syndicate", wanted:"Dead", associates:"Fellow Residents of Cactus Bloom, Lonoe"},
+  {num:47, name:"Liam Napoli", crime:"Blackmail", level:3, reward:"20kcr", bonus:"None", client:"Schlosser-Patel Logistics", wanted:"Alive", associates:"Maonus political staff"},
+  {num:48, name:"Jhon Rudowski", crime:"Destruction of Property", level:5, reward:"650kcr", bonus:"None", client:"Ahlstrom Family", wanted:"Dead or Alive", associates:"Unknown"},
+  {num:49, name:"Yann Giraud", crime:"Illegitimate Inheritor", level:7, reward:"10mcr", bonus:"None", client:"Geovana Giraud", wanted:"Dead", associates:"Unknown"},
+  {num:50, name:"zPotato, Hacker", crime:"Computer misuse, digital vandalism, wire fraud", level:8, reward:"15mcr", bonus:"None", client:"CompuSec High-Interest Capture Fund", wanted:"Dead or Alive", associates:"Unknown"},
+  {num:51, name:"The Thieves", crime:"Theft, Manslaughter, Sale of Stolen Goods", level:5, reward:"500kcr", bonus:"None", client:"Musade Colonial Authority", wanted:"Dead or Alive, with remaining medicine", associates:"Unknown"},
+  {num:53, name:"Anu Maas", crime:"Disturbance of the Peace", level:4, reward:"250kcr", bonus:"None", client:"Prosperity Party", wanted:"Dead", associates:"Reform Party"},
+  {num:52, name:"Ramesh Singh", crime:"Unlicensed Radio Transmission", level:2, reward:"35kcr", bonus:"None", client:"Nidi Orbital Authority", wanted:"Alive", associates:"Unknown"},
+  {num:54, name:"Jasmin Rutkousha", crime:"Corruption", level:2, reward:"6kcr cash", bonus:"None", client:"'Mr. Simon'", wanted:"Dead", associates:"Unknown"},
+  {num:55, name:"Sabellius Skjeggestad", crime:"Moral Absolutism", level:3, reward:"2kcr, hard cash", bonus:"An additional 2kcr if it looks like an accident", client:"Arewel Ennis", wanted:"Dead", associates:"None. Disliked amongst the COs"},
+  {num:56, name:"Arewel Ennis", crime:"Corruption, Smuggling, Conspiracy", level:6, reward:"2mcr", bonus:"50kcr per corrupt head removed", client:"Cleaner Future Incarceration Services", wanted:"Alive", associates:"Prison gang and staff protection"},
+  {num:57, name:"Lera Zima", crime:"Harassment, False Reporting", level:2, reward:"50kcr", bonus:"20kcr if convinced to retract false stories", client:"The Spiritual Garden Society", wanted:"Dead or Alive", associates:"Staff of the Ogroitum Inquest"},
+  {num:58, name:"Melia Umarov", crime:"Security Risk", level:2, reward:"50kcr", bonus:"50kcr more if no questions asked about her death", client:"Golyonova Il Bratva", wanted:"Dead", associates:"Ogroitum Furnace crew, husband Vĳaya"},
+  {num:59, name:"Loke Affini", crime:"Piracy", level:3, reward:"40kcr", bonus:"None", client:"Anti-Piracy Task Force", wanted:"Alive", associates:"Crew of the Widowmaker"},
+  {num:60, name:"Rhys Rhodes", crime:"Absconding", level:3, reward:"30kcr", bonus:"15kcr if no deaths in extraction", client:"Mr. and Mrs. Rhodes", wanted:"Alive", associates:"The Spiritual Garden Society"},
+  {num:61, name:"Cevdet Koziel", crime:"Embracery", level:4, reward:"150kcr", bonus:"Doubled if evidence links perpetrator to the case", client:"Ogroitum Prosecution Service", wanted:"Alive", associates:"Unknown"},
+  {num:62, name:"Hektor Koenigsmann", crime:"Data Smuggling", level:5, reward:"300kcr", bonus:"100kcr for doing it quietly", client:"Otabek Mivra", wanted:"Alive", associates:"Unknown"},
+  {num:63, name:"Julius Radclyffe", crime:"Breaking Quarantine", level:6, reward:"1mcr", bonus:"None", client:"Raerinda Quarantine Authority", wanted:"Alive, with full listing of places visited", associates:"N/A"},
+  {num:64, name:"Dr. Giselle Reyer", crime:"Breach of Employment Contract", level:5, reward:"750kcr", bonus:"Assistance at the digsite paid 20kcr/week", client:"D-Crypt Encodings", wanted:"Alive", associates:"Unknown"},
+  {num:65, name:"Ctibor Vavra", crime:"Piracy", level:3, reward:"80kcr", bonus:"None", client:"Reliri Miners Group", wanted:"Dead or Alive", associates:"Crew of Xianglu"},
+  {num:66, name:"Alma Finch", crime:"Blackmail", level:3, reward:"50kcr", bonus:"35kcr for destroying blackmail material", client:"Peacekeeping Solutions", wanted:"Dead", associates:"Unknown"},
+  {num:67, name:"Erasmus Extbaria", crime:"Snitching", level:4, reward:"225kcr", bonus:"175kcr for a messy public execution", client:"La Palabra del Estibador", wanted:"Very Dead", associates:"Unknown"},
+  {num:68, name:"Haraldr Kurzmann", crime:"Corruption, Organized Criminal Activity", level:6, reward:"5mcr", bonus:"None", client:"Ruliv Concerned Citizens Society", wanted:"Dead", associates:"La Palabra del Estibador"},
+  {num:69, name:"Klavis Yoshioka", crime:"Negligence, Manslaughter", level:2, reward:"30kcr", bonus:"None", client:"Starship Engineering & Maintenance Standards Authority (SEMSA)", wanted:"Alive", associates:"Fellow regulars at Aphus 'Olde Time' Bar"},
+  {num:70, name:"Otilia Golub", crime:"Deceptive Accounting Practices", level:5, reward:"1mcr", bonus:"None", client:"The Havelkas", wanted:"Alive", associates:"Remnants of the Cosic Family"},
+  {num:71, name:"Darragh Havelkas", crime:"Murder, Extortion, Racketeering", level:5, reward:"600kcr", bonus:"None", client:"Sileais Public Safety Bureau", wanted:"Alive", associates:"The Havelkas crime family"},
+  {num:72, name:"The Kidnappers", crime:"Kidnapping", level:4, reward:"100kcr", bonus:"None", client:"Edith Li", wanted:"Dead or Alive, victims returned", associates:"N/A"},
+  {num:73, name:"Miltiades Buono", crime:"Industrial Sabotage", level:4, reward:"200kcr", bonus:"100kcr for determining his employer", client:"Breathe EZ Solutions", wanted:"Alive", associates:"Unknown"},
+  {num:74, name:"Taline Kistner", crime:"Spreading Misinformation", level:4, reward:"150kcr", bonus:"100kcr for acquiring all materials", client:"Public Safety Inc., Disinfo Bureau", wanted:"Alive", associates:"Unknown"},
+  {num:75, name:"Andras, Leraje, and Malthus", crime:"Fugitive", level:7, reward:"2mcr", bonus:"None", client:"StratCom Solutions", wanted:"Alive", associates:"Unknown"},
+  {num:76, name:"Crew of the Camel Sized Needle", crime:"Piracy", level:5, reward:"800kcr", bonus:"None", client:"Yan-Smith Heavy Industries", wanted:"Dead or Alive, with stolen supplies", associates:"Unknown"},
+  {num:77, name:"Sgt. Duygu Bourdillion", crime:"Killing, Extortion of Civilians", level:1, reward:"10kcr", bonus:"None", client:"DefenTEC PMS", wanted:"Alive", associates:"Subordinate squad members"},
+  {num:78, name:"Colonel Marlen Sakurada", crime:"Acts of War", level:3, reward:"100kcr", bonus:"Destroying the troopship treated as though enemies were children", client:"Mendiko Lehoiak Command", wanted:"Dead", associates:"DefenTEC C-Suite Member, Narendra Marlowe"},
+  {num:79, name:"Lt. McGill", crime:"Misuse of Supplies", level:4, reward:"175kcr", bonus:"None", client:"DefenTEC Private Military Solutions", wanted:"Alive", associates:"Unknown"},
+  {num:80, name:"Slavica Ruane", crime:"Terrorism", level:6, reward:"1mcr", bonus:"None", client:"Thinoruy Development Fund", wanted:"Alive", associates:"Unknown"},
+  {num:81, name:"Gibbon Moon, Waning", crime:"Crossing the Picket Line", level:3, reward:"70kcr", bonus:"Additional 50kcr for a total lack of violence", client:"United Miners of Ualif", wanted:"Alive", associates:"N/A"},
+  {num:82, name:"Strike Organizers", crime:"Unlawful & Malicious Withholding of Labor, Conspiracy", level:4, reward:"200kcr", bonus:"100kcr if all deaths have plausible deniability", client:"Ualif Mining Corporation", wanted:"Dead", associates:"Striking workers of Ualif Mine"},
+  {num:83, name:"Shoshana Berahthran", crime:"Hostis Humani Generis", level:8, reward:"20mcr", bonus:"2mcr per additional captain captured or killed", client:"Anti-Piracy Task Force", wanted:"Dead or Alive", associates:"The Utpalan Pirate Fraternity"},
+  {num:84, name:"Borisov Kyung-Hee", crime:"Murder", level:3, reward:"30kcr", bonus:"None", client:"Uyema Militia", wanted:"Alive", associates:"Many other farmers in Nievialikaja Haspadarka"},
+  {num:85, name:"Dr. Sabien Lowe", crime:"Plagiarism (Cover)", level:6, reward:"1mcr", bonus:"None", client:"Xenological Institute", wanted:"Alive, with offending materials", associates:"Xenological Institute staff"},
+  {num:87, name:"Dr. Surya Hersch", crime:"Failure to Report In, Insufficient Gratitude", level:5, reward:"445kcr", bonus:"None", client:"Byron Hersch", wanted:"Alive", associates:"N/A"},
+  {num:88, name:"Lars Laendros", crime:"IP Theft", level:5, reward:"500kcr", bonus:"Doubled pay if returned alive", client:"InsightLabs", wanted:"Dead or Alive", associates:"Human Potential Lab colleagues, husband, Go Club"},
+  {num:89, name:"Margarita Eriksson", crime:"Loan Delinquency", level:2, reward:"35kcr", bonus:"None", client:"MediDebt Collections", wanted:"Dead or Alive", associates:"Crew of the Lucky Koi"},
+  {num:90, name:"George Ware & Douglas Fir Coat", crime:"Failure to Pay Mortgage", level:4, reward:"500kcr", bonus:"None", client:"Rifflis Naval Bank", wanted:"Dead or Alive, with the Douglas Fir Coat", associates:"Crew of the Douglas Fir Coat"},
+  {num:91, name:"Varpu Marudoch", crime:"Match Fixing", level:4, reward:"500kcr", bonus:"10% of any recovered money", client:"Bookmakers Guild", wanted:"Alive", associates:"Tiyamike Adel, Gundi Fulcher, and Cystennin Natan"},
+  {num:92, name:"Recover the Iron Budai", crime:"Theft", level:4, reward:"100kcr", bonus:"None", client:"Ogroitum Temple", wanted:"N/A", associates:"N/A"},
+  {num:93, name:"The Akesson Sisters", crime:"Smuggling", level:4, reward:"250kcr", bonus:"None", client:"Cpt. Llewlyn Dirchx", wanted:"Alive", associates:"Unknown"},
+  {num:94, name:"Simona Morton", crime:"Child Abduction", level:4, reward:"500kcr", bonus:"None", client:"Reginald Morton", wanted:"Alive, with the children", associates:"N/A"},
+  {num:95, name:"The Mutineers", crime:"Mutiny", level:5, reward:"300kcr", bonus:"200kcr if the ship is undamaged", client:"Shipsafe Lanes", wanted:"Dead or Alive", associates:"N/A"},
+  {num:96, name:"Dr. Edu Cleary", crime:"Ecological Destruction", level:5, reward:"650kcr", bonus:"None", client:"Securing the Future Initiative", wanted:"Alive", associates:"MegaYUM Food Product, Pelican Agricultural & Ornamental"},
+  {num:97, name:"Aias Joshi, StarFucker CEO", crime:"Sale of Another's Image without Consent nor License", level:6, reward:"2mcr", bonus:"Destroy the facility for an additional 2mcr", client:"HYPE INC Image Management", wanted:"Alive", associates:"Unknown"},
+  {num:98, name:"Palle Gatsby", crime:"Hĳacking, Hostage Taking", level:6, reward:"1mcr", bonus:"None", client:"Jasper Mine", wanted:"Dead or Alive", associates:"N/A"},
+  {num:99, name:"Florette Watts", crime:"Unsatisfactory Performance", level:7, reward:"1.5mcr", bonus:"Deductions per security death (20kcr) and C-Suite injury (100kcr)", client:"Pelican Agricultural & Ornamental Stakeholders", wanted:"Dead", associates:"Pelican Agricultural & Ornamental Board"},
+  {num:100, name:"The Counterfeiters", crime:"Creation and Distribution of False Currency", level:9, reward:"60mcr", bonus:"None", client:"Credit Issuing Authority", wanted:"Dead or Alive, with the CAD captured or destroyed", associates:"Unknown"}
+
+];
+
+
+let board = [], log = [], boardKey = 'bountyboard-wos-v8', logKey = 'bountyboard-wos-log-v8';
+
+function loadState(){
+  try{ const b = localStorage.getItem(boardKey); board = b ? JSON.parse(b) : null; }catch(e){ board = null; }
+  try{ const l = localStorage.getItem(logKey); log = l ? JSON.parse(l) : []; }catch(e){ log = []; }
+  if(!board){ board = drawBoard(); }
+  saveBoard();
+  render();
+}
+function saveBoard(){ try{ localStorage.setItem(boardKey, JSON.stringify(board)); }catch(e){} }
+function saveLog(){ try{ localStorage.setItem(logKey, JSON.stringify(log)); }catch(e){} }
+
+function drawBoard(){
+  const shuffled = [...BOUNTY_POOL].sort(()=>Math.random()-0.5).slice(0,5);
+  return shuffled.map((b,i)=>({...b, id: Date.now()+'-'+i+'-'+Math.random().toString(36).slice(2,7), status:'open'}));
+}
+function fmt(n){ return n.toLocaleString(); }
+
+function render(){
+  const boardEl = document.getElementById('board');
+  boardEl.innerHTML = '';
+  const openJobs = board.filter(j=>j.status!=='removed');
+  document.getElementById('boardCount').textContent = board.filter(j=>j.status==='open').length + ' open';
+  document.getElementById('emptyNote').style.display = openJobs.length===0 ? 'block' : 'none';
+
+  openJobs.forEach(b=>{
+    const card = document.createElement('div');
+    card.className = 'bounty-card' + (b.status==='taken' ? ' taken' : '');
+    card.innerHTML = `
+      <div class="bounty-top"><p class="bounty-name">${b.name}</p><span class="bounty-reward">${b.reward}</span></div>
+      <p class="bounty-meta">Wanted for: ${b.crime} · Wanted: ${b.wanted}</p>
+      <p class="bounty-desc">Client: ${b.client}${b.bonus!=='None' ? ' · Bonus: '+b.bonus : ''}</p>
+      <p class="bounty-meta">Known associates: ${b.associates}</p>
+      <div class="bounty-tags"><span class="tag">BL ${b.level}</span><span class="tag">No. ${b.num}</span></div>
+      <div class="bounty-actions">
+        ${b.status==='open' ? `<button class="btn-primary" data-action="take" data-id="${b.id}">Mark Taken</button>` : `<button class="btn-secondary" data-action="complete" data-id="${b.id}">Mark Claimed</button>`}
+        <button class="btn-secondary" data-action="remove" data-id="${b.id}">Remove</button>
+      </div>
+    `;
+    boardEl.appendChild(card);
+  });
+
+  const logEl = document.getElementById('jobLog');
+  logEl.innerHTML = '';
+  document.getElementById('logCount').textContent = log.length + ' entries';
+  document.getElementById('logEmpty').style.display = log.length===0 ? 'block' : 'none';
+  [...log].reverse().forEach(entry=>{
+    const li = document.createElement('li');
+    li.innerHTML = `<span><b>No. ${entry.num} — ${entry.name}</b> — ${entry.reward}</span><span class="log-status ${entry.status==='done'?'status-done':'status-taken'}">${entry.status}</span>`;
+    logEl.appendChild(li);
+  });
+  boardEl.querySelectorAll('button').forEach(btn=>btn.addEventListener('click', handleAction));
+}
+
+function handleAction(e){
+  const action = e.target.dataset.action, id = e.target.dataset.id;
+  const b = board.find(j=>j.id===id);
+  if(!b) return;
+  if(action==='take'){ b.status='taken'; log.push({name:b.name, num:b.num, reward:b.reward, status:'taken'}); }
+  else if(action==='complete'){ b.status='removed'; const entry=log.find(l=>l.name===b.name && l.status==='taken'); if(entry) entry.status='done'; }
+  else if(action==='remove'){ b.status='removed'; }
+  saveBoard(); saveLog(); render();
+}
+
+document.querySelectorAll('.bl-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const level = parseInt(btn.dataset.bl);
+    const matches = BOUNTY_POOL.filter(b=>b.level===level);
+    if(matches.length===0){
+      btn.textContent = 'None loaded';
+      setTimeout(()=>{ btn.textContent = 'BL'+level; }, 1500);
+      return;
+    }
+    const pick = matches[Math.floor(Math.random()*matches.length)];
+    const newEntry = {...pick, id: Date.now()+'-'+Math.random().toString(36).slice(2,7), status:'open'};
+    board = [...board.filter(j=>j.status!=='removed'), newEntry];
+    saveBoard(); render();
+  });
+});
+
+document.getElementById('refreshBtn').addEventListener('click', ()=>{
+  const newBounties = drawBoard().slice(0,3);
+  board = [...board.filter(j=>j.status!=='removed'), ...newBounties];
+  saveBoard(); render();
+});
+
+document.getElementById('resetBtn').addEventListener('click', (e)=>{
+  const btn = e.target;
+  if(!btn.dataset.armed){
+    btn.dataset.armed = 'true'; const original = btn.textContent;
+    btn.textContent = 'Click Again to Confirm';
+    btn.style.background='var(--pink)'; btn.style.color='var(--black)'; btn.style.borderColor='var(--pink)';
+    clearTimeout(btn._armTimer);
+    btn._armTimer = setTimeout(()=>{ delete btn.dataset.armed; btn.textContent=original; btn.style.background=''; btn.style.color=''; btn.style.borderColor=''; }, 3000);
+    return;
+  }
+  clearTimeout(btn._armTimer); delete btn.dataset.armed;
+  btn.textContent='Clear Board (New Campaign)'; btn.style.background=''; btn.style.color=''; btn.style.borderColor='';
+  board = drawBoard(); log = [];
+  saveBoard(); saveLog(); render();
+});
+
+loadState();
+</script>
+</body>
+</html>

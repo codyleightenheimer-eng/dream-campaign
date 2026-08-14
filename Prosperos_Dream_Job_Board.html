@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prospero's Dream — Dockside Job Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0a0a0a;
+    --panel:#131313;
+    --panel-raised:#181818;
+    --white:#f5f5f2;
+    --dim:#9a9a94;
+    --faint:#5c5c58;
+    --line:#282826;
+    --pink:#ff2d78;
+    --green:#4ade80;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--black);
+    color:var(--white);
+    font-family:'Archivo',sans-serif;
+    line-height:1.5;
+  }
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px 80px;}
+
+  header{
+    padding:36px 24px 24px;
+    border-bottom:6px solid var(--pink);
+    text-align:center;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.2em;
+    color:var(--pink);
+    text-transform:uppercase;
+    margin:0 0 12px;
+  }
+  h1{
+    font-family:'Archivo Black',sans-serif;
+    font-weight:400;
+    font-size:clamp(28px,5vw,46px);
+    text-transform:uppercase;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .subhead{
+    font-size:14px;
+    color:var(--dim);
+    max-width:480px;
+    margin:12px auto 0;
+  }
+
+  .controls{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin:24px auto 0;
+    flex-wrap:wrap;
+    max-width:600px;
+  }
+  button{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    font-weight:600;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    padding:11px 20px;
+    border:none;
+    cursor:pointer;
+    transition:opacity 0.15s;
+  }
+  button:hover{opacity:0.85;}
+  button:active{opacity:0.7;}
+  .btn-primary{background:var(--pink);color:var(--black);}
+  .btn-secondary{background:var(--panel);color:var(--white);border:1px solid var(--line) !important;}
+  .filter-btn.active{background:var(--pink);color:var(--black);border-color:var(--pink) !important;}
+
+  .wrap-inner{max-width:1000px;margin:0 auto;padding:0 24px;}
+
+  section{padding:36px 0;}
+  .kicker{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--pink);
+    margin:0 0 8px;
+  }
+  h2{
+    font-family:'Archivo Black',sans-serif;
+    font-weight:400;
+    font-size:22px;
+    text-transform:uppercase;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:16px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:14px;
+  }
+  .count-tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--faint);
+  }
+
+  .board-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:2px;
+    background:var(--line);
+  }
+  .job-card{
+    background:var(--panel);
+    border-left:4px solid var(--pink);
+    padding:18px 19px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .job-card.taken{
+    border-left-color:var(--faint);
+    opacity:0.45;
+  }
+  .job-card.module{
+    border-left-color:var(--green);
+  }
+  .module-badge{
+    display:inline-block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    background:var(--green);
+    color:var(--black);
+    padding:2px 7px;
+    margin-bottom:6px;
+  }
+  .job-source{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10px;
+    color:var(--green);
+    font-style:italic;
+  }
+  .job-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
+  }
+  .job-title{
+    font-family:'Archivo',sans-serif;
+    font-weight:700;
+    font-size:16px;
+    color:var(--white);
+    margin:0;
+    line-height:1.3;
+  }
+  .job-pay{
+    font-family:'Archivo Black',sans-serif;
+    font-size:18px;
+    color:var(--pink);
+    white-space:nowrap;
+    flex-shrink:0;
+  }
+  .job-employer{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    color:var(--faint);
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+  }
+  .job-desc{
+    font-size:13.5px;
+    color:var(--dim);
+    margin:0;
+  }
+  .job-math{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10px;
+    color:var(--faint);
+    border-top:1px solid var(--line);
+    padding-top:8px;
+    margin-top:2px;
+  }
+  .job-actions{
+    display:flex;
+    gap:8px;
+    margin-top:4px;
+  }
+  .job-actions button{
+    flex:1;
+    padding:8px 10px;
+    font-size:10px;
+  }
+
+  .log-list{list-style:none;margin:0;padding:0;}
+  .log-list li{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    padding:10px 0;
+    border-top:1px solid var(--line);
+    font-size:13px;
+    color:var(--dim);
+  }
+  .log-list li:first-child{border-top:none;}
+  .log-list b{color:var(--white);}
+  .log-status{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:9.5px;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    padding:2px 8px;
+    flex-shrink:0;
+    height:fit-content;
+  }
+  .status-taken{background:var(--panel-raised);color:var(--pink);border:1px solid var(--pink);}
+  .status-done{background:var(--green);color:var(--black);}
+
+  .empty-note{
+    text-align:center;
+    padding:30px;
+    color:var(--faint);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+  }
+
+  .rules-box{
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:18px 20px;
+    font-size:13px;
+    color:var(--dim);
+  }
+  .rules-box b{color:var(--white);}
+
+  footer{
+    text-align:center;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10px;
+    color:var(--faint);
+    padding:30px 24px 0;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Dockside Terminal — Public Access</p>
+  <h1>Job Board</h1>
+  <p class="subhead">Postings refresh whenever somebody bothers to update the terminal. Pay is calculated per Warden's Operations Manual — Salary by skill tier, times Hazard, plus Expenses. Negotiate at your own risk.</p>
+  <div class="controls">
+    <button class="btn-primary" id="refreshBtn">Refresh Postings</button>
+    <button class="btn-secondary" id="resetBtn">Clear Board (New Campaign)</button>
+  </div>
+  <div class="controls" style="margin-top:10px;">
+    <button class="btn-secondary filter-btn active" data-filter="all">All</button>
+    <button class="btn-secondary filter-btn" data-filter="quick">Quick Jobs</button>
+    <button class="btn-secondary filter-btn" data-filter="module">Full Modules</button>
+  </div>
+</header>
+
+<div class="wrap-inner">
+
+<section>
+  <div class="section-head">
+    <h2>Current Postings</h2>
+    <span class="count-tag" id="boardCount"></span>
+  </div>
+  <div class="board-grid" id="board"></div>
+  <p class="empty-note" id="emptyNote" style="display:none;">No postings match — hit Refresh to pull new ones.</p>
+</section>
+
+<section>
+  <div class="section-head">
+    <h2>Job Log</h2>
+    <span class="count-tag" id="logCount"></span>
+  </div>
+  <ul class="log-list" id="jobLog"></ul>
+  <p class="empty-note" id="logEmpty">Nothing taken yet.</p>
+</section>
+
+<section>
+  <p class="kicker">Reference</p>
+  <h2>Pay Math</h2>
+  <div class="rules-box">
+    <p><b>Salary</b> — set by the skill tier the job calls for: 500cr for Trained, 1,000cr for Expert, 2,000cr for Master.</p>
+    <p><b>Hazard Pay</b> — multiplies Salary by ×1 to ×5 depending on how dangerous the job actually is (the board rarely tells you which end you're getting until you're already in it).</p>
+    <p><b>Expenses</b> — flat costs the job covers on top: travel, materials, jump fuel if it's off-station. Doesn't count against your cut.</p>
+    <p style="margin-bottom:0;"><b>Negotiating</b> — per WOM, each leveraged factor (connections, reputation, information the client wants kept quiet) shifts the final offer roughly ±10%. Use it.</p>
+  </div>
+</section>
+
+</div>
+
+<footer>Prospero's Dream campaign — Dockside Job Board. State persists locally per campaign. Pairs with the Dockside Directory, Personnel File, and Session materials.</footer>
+
+<script>
+const JOB_POOL = [
+  {title:"Cargo Run, Straightforward", employer:"Local 32819L", tier:"Trained", hazard:1, expenses:200, desc:"Move three crates from the drydock to a Choke-adjacent warehouse. Nobody's told you what's in them, and Local 32819L would prefer to keep it that way."},
+  {title:"Salvage Retrieval, Choke Perimeter", employer:"Independent Contractor", tier:"Trained", hazard:2, expenses:400, desc:"A derelict cargo pod's been sitting unclaimed near the Choke boundary for two weeks. Whoever gets there first keeps whatever's inside — assuming anyone else hasn't already."},
+  {title:"Metro Line Escort", employer:"Prospero Metro Authority", tier:"Trained", hazard:2, expenses:300, desc:"Ride along with a maintenance crew doing an off-hours repair on a stretch of line that's had 'incidents.' Nobody will define 'incidents.'"},
+  {title:"Quiet Delivery", employer:"Angus", tier:"Trained", hazard:2, expenses:150, desc:"A sealed package, a specific person, no questions in either direction. Standard rate, or a favor instead if you'd rather bank it."},
+  {title:"Data Recovery", employer:"Canyonheavy Contact", tier:"Expert", hazard:3, expenses:500, desc:"Something got hacked, something got lost, and somebody wants it back before the wrong people notice it's gone."},
+  {title:"San Cade Market Security", employer:"Local Merchants' Co-op", tier:"Trained", hazard:2, expenses:250, desc:"Stand around looking capable at a 24-hour market stall for a full shift. Pay's decent for how boring it sounds. It is not always this boring."},
+  {title:"Solarian Charity Run", employer:"Solarian Church", tier:"Trained", hazard:2, expenses:200, desc:"Escort an oxygen shipment down into the Choke. The Church insists it's routine. The Church always insists that."},
+  {title:"Discreet Bodyguard Work", employer:"Undisclosed Client", tier:"Expert", hazard:3, expenses:600, desc:"Someone needs protecting and doesn't want it advertised. Client briefing happens in person, after you've already agreed."},
+  {title:"Debt Collection, Polite Version", employer:"Local 32819L", tier:"Trained", hazard:2, expenses:150, desc:"Somebody owes the union money. Go remind them, firmly but without incident. Emphasis on without incident."},
+  {title:"Debt Collection, Less Polite Version", employer:"Undisclosed Client", tier:"Expert", hazard:3, expenses:300, desc:"Same job, different client, considerably less patience. They didn't say 'incident' was off the table this time."},
+  {title:"Rolling Stock Repair", employer:"Prospero Metro Authority", tier:"Trained", hazard:1, expenses:250, desc:"Routine maintenance contract on three transit cars. Bring your own tools if you've got Mechanical Repair — theirs are worse than yours."},
+  {title:"VIP Escort, Doptown", employer:"Undisclosed Client", tier:"Expert", hazard:3, expenses:450, desc:"Walk someone important through a district where being important is usually a liability. They'll explain why once you're already committed."},
+  {title:"Recover a 'Misdirected' Shipment", employer:"Tempest Mercenary Co.", tier:"Expert", hazard:3, expenses:500, desc:"A Tempest shipment ended up somewhere it shouldn't have. They'd like it back quietly, and they're not fussy about how."},
+  {title:"Information Verification", employer:"Angus", tier:"Trained", hazard:1, expenses:100, desc:"Confirm whether a rumor Angus heard is actually true. Pays light, but he remembers who does good work."},
+  {title:"Sanitation Contract, Industrial", employer:"San Cade Facility Management", tier:"Trained", hazard:2, expenses:300, desc:"Deep clean of an industrial processing site, off-hours. The posting is oddly specific about which sections to avoid."},
+  {title:"Sealed Courier Run", employer:"Undisclosed Client", tier:"Trained", hazard:1, expenses:150, desc:"Carry a sealed case across the station. Don't open it. They'll know."},
+  {title:"Missing Persons Inquiry", employer:"Worried Family Member", tier:"Trained", hazard:2, expenses:200, desc:"Someone's relative hasn't checked in for a week. Modest pay, but they're clearly desperate and clearly out of other options."},
+  {title:"Negotiation Muscle", employer:"Union Representative", tier:"Expert", hazard:2, expenses:250, desc:"Stand behind a negotiator and look like the reason the other side should be reasonable. Try not to make it necessary."},
+  {title:"Deep Data Pull", employer:"Canyonheavy Contact", tier:"Expert", hazard:3, expenses:550, desc:"Not a simple hack — something buried, something someone worked hard to bury. Pay reflects the effort involved."},
+  {title:"Pest Control, Industrial Scale", employer:"San Cade Facility Management", tier:"Trained", hazard:2, expenses:250, desc:"Standard extermination contract at a processing facility. 'Standard' is doing a lot of work in that sentence, given the pay."},
+  {title:"Charitable Escort, Return Trip", employer:"Solarian Church", tier:"Trained", hazard:2, expenses:200, desc:"Same as the outbound run, but coming back with different cargo the Church is notably vaguer about."},
+  {title:"Recover a Family Heirloom", employer:"Anonymous Client", tier:"Trained", hazard:2, expenses:200, desc:"Something sentimental ended up somewhere it shouldn't have. Client is paying well above what the object is actually worth."},
+  {title:"Testify, or Don't", employer:"The Court of Prospero", tier:"Expert", hazard:1, expenses:100, desc:"You witnessed something. The Court would like your account. So, apparently, would several people who'd rather you didn't give it."},
+  {title:"Unspecified Favor", employer:"Angus", tier:"Master", hazard:4, expenses:800, desc:"Angus doesn't usually ask for this much upfront trust. Whatever this is, it matters to him — which should tell you something either way."}
+];
+
+const MODULE_JOBS = [
+  {title:"Temporary Maintenance Crew Needed", employer:"Jensen-Hung", tier:"Expert", hazard:3, expenses:600, desc:"Jensen-Hung needs a 'temporary maintenance crew' for a black-site cleanup. Pay is generous. Survival rate historically isn't.", source:"Piece by Piece"},
+  {title:"Research Post Gone Dark", employer:"Jensen-Hung", tier:"Expert", hazard:3, expenses:600, desc:"A Jensen-Hung research post has gone dark. They'd like someone to check on it who isn't already on their payroll.", source:"Chromatic Transference"},
+  {title:"Refinery Station, Silent", employer:"Salvage Rights Auction", tier:"Trained", hazard:3, expenses:400, desc:"A refinery station stopped answering hails three days ago. Salvage rights go to whoever gets there first — assuming there's anything left to salvage.", source:"The Burning of Carbex"},
+  {title:"Ocean-Floor Facility, Two Missed Check-Ins", employer:"Dyson Phytology", tier:"Expert", hazard:4, expenses:700, desc:"An ocean-floor research facility missed its last two check-ins. Dyson Phytology is offering a premium for anyone willing to dive down and find out why.", source:"BLOOM"},
+  {title:"Silent Research Vessel", employer:"Aurora Logistics", tier:"Expert", hazard:3, expenses:500, desc:"A research vessel's gone silent mid-transit. Aurora Logistics wants their cargo back. They're being vague about what that cargo actually is.", source:"Rogue Brood"},
+  {title:"Temporarily Accessible Vault", employer:"Unnamed Broker", tier:"Master", hazard:4, expenses:900, desc:"A Company vault is rumored to be temporarily... accessible. Word is it won't stay that way long.", source:"Fire Sale"},
+  {title:"Manor, Body Count, Confused Android", employer:"Anonymous Client", tier:"Trained", hazard:3, expenses:350, desc:"An old manor on the outer ring has a body count and a very confused local android. Somebody wants both explained.", source:"A Mansion Most Vile"},
+  {title:"Bounty: Sidney Shipgraver", employer:"Bounty Board", tier:"Expert", hazard:3, expenses:400, desc:"Dead or alive. Sidney's been dodging Company collectors for months — whoever brings them in gets a serious payday.", source:"Sidney Shipgraver"},
+  {title:"Gravitational Anomaly, Charted", employer:"Multiple Interested Parties", tier:"Expert", hazard:3, expenses:600, desc:"A gravitational anomaly's been charted nearby. Three separate factions want eyes on it before the others get there.", source:"Unfathomable"},
+  {title:"Maximum-Security Facility, Dark Under the Ice", employer:"Unnamed Client", tier:"Expert", hazard:4, expenses:750, desc:"A maximum-security facility's gone dark under the ice. High risk, higher pay, and someone very badly wants in.", source:"Crush Depth"},
+  {title:"Excavation, Contain Not Investigate", employer:"Excavation Company", tier:"Trained", hazard:3, expenses:450, desc:"An archaeological dig went quiet after uncovering something under the surface. The company wants it contained, not investigated. Do with that what you will.", source:"Seven Stars Remembered"},
+  {title:"Hatchery Contract Gone Wrong", employer:"Nakatomi Solutions", tier:"Expert", hazard:4, expenses:650, desc:"A hatchery contract gone wrong. Nakatomi Solutions is offering hazard pay well above standard rate to anyone willing to go find out why.", source:"The Horror on Tau Sigma 7"},
+  {title:"Distress Call, Doesn't Sound Right", employer:"Salvage Contract", tier:"Trained", hazard:3, expenses:400, desc:"A ship's put out a distress call that doesn't quite sound right. Something about the signal has people talking.", source:"Akigara"},
+  {title:"Workers Acting Wrong", employer:"Mining Operation Management", tier:"Trained", hazard:2, expenses:300, desc:"Workers at a mining operation have started acting like themselves, but wrong. Management wants it quietly resolved before it reaches the shareholders.", source:"What Reflects From Within"},
+  {title:"Suspected Corporate Spy", employer:"Station Administration", tier:"Expert", hazard:2, expenses:350, desc:"A freespace station suspects it has a corporate spy in its ranks. They're paying well for someone with no obvious loyalties to sort it out.", source:"The Mole on PIRAD ONE"},
+  {title:"Structurally Failing Outpost", employer:"Salvage Contract", tier:"Trained", hazard:3, expenses:400, desc:"An outpost is structurally failing and still has valuables inside. Whoever gets in and out fastest keeps the difference — a rival crew's already en route.", source:"Reclaimer"},
+  {title:"PMC Contract, Striking Workers", employer:"Flak Group Holdings", tier:"Expert", hazard:3, expenses:500, desc:"A PMC contract's gone sideways against striking metro workers. Pay is good. So is the chance you end up on the wrong side of it.", source:"Weapons & Tactics of the Metro-12 Uprising"},
+  {title:"Adrift Cargo Vessel, Illness Aboard", employer:"Salvage & Rescue Contract", tier:"Expert", hazard:3, expenses:550, desc:"A cargo vessel's adrift with an unexplained gravitational anomaly, plus a separate illness spreading through what's left of the crew. Salvage and search-and-rescue rolled into one ugly job.", source:"Dead Weight"},
+  {title:"Repeating Distress Signal, Dead Channel", employer:"Curious Client", tier:"Trained", hazard:3, expenses:400, desc:"An automated distress signal keeps repeating on a dead channel. Whatever's transmitting it has been running out of power for a very long time.", source:"The Plea"},
+  {title:"Colonization Tech Malfunction", employer:"Anarene's Folly Station", tier:"Expert", hazard:3, expenses:500, desc:"A station's experimental colonization tech is reportedly malfunctioning. They need quiet, competent help before it becomes loud, public help.", source:"Terminal Delays"},
+  {title:"Research Outpost, Increasingly Unstable", employer:"Outpost Administration", tier:"Trained", hazard:3, expenses:450, desc:"A research outpost's gone increasingly unstable after a meteor strike. Something about a 'Blue Meteor' keeps coming up in the reports, right before the reports stop.", source:"Moonbase Blues"},
+  {title:"Mining Colony, Strike & Body Count", employer:"PURE Refinement, Inc.", tier:"Trained", hazard:3, expenses:450, desc:"A mining colony's in the middle of a labor strike and a body count nobody can explain. Pay reflects the mess.", source:"Picket Line Tango"},
+  {title:"Theme Park Pyrotechnics Malfunction", employer:"SynGen", tier:"Trained", hazard:3, expenses:400, desc:"A dinosaur theme park's pyrotechnics malfunctioned mid-show. SynGen wants a rescue-and-recovery crew before the story gets out.", source:"Dinoplex: Cataclysm"},
+  {title:"Ten-Day Passenger Transit", employer:"Undisclosed", tier:"Trained", hazard:2, expenses:300, desc:"A ten-day passenger transit through the void, quiet work, discreet pay. No further details until you're aboard.", source:"Shadow of a Doubt"}
+];
+
+let board = [];
+let log = [];
+let currentFilter = 'all';
+let boardKey = 'jobboard-current-v2';
+let logKey = 'jobboard-log-v2';
+
+function calcPay(job){
+  const base = {Trained:500, Expert:1000, Master:2000}[job.tier];
+  return base * job.hazard + job.expenses;
+}
+
+function loadState(){
+  try{
+    const b = localStorage.getItem(boardKey);
+    board = b ? JSON.parse(b) : null;
+  }catch(e){ board = null; }
+  try{
+    const l = localStorage.getItem(logKey);
+    log = l ? JSON.parse(l) : [];
+  }catch(e){ log = []; }
+  // Self-heal: if a saved board exists but predates the Full Module pool (no module-type jobs present), top it up.
+  if(board && !board.some(j=>j.type==='module')){
+    const topUp = [...MODULE_JOBS].sort(()=>Math.random()-0.5).slice(0,2).map((j,i)=>({...j, type:'module', id: Date.now()+'-heal-'+i+'-'+Math.random().toString(36).slice(2,7), status:'open'}));
+    board = [...board, ...topUp];
+  }
+  if(!board){ board = drawBoard(); }
+  saveBoard();
+  render();
+}
+
+function saveBoard(){
+  try{ localStorage.setItem(boardKey, JSON.stringify(board)); }catch(e){}
+}
+function saveLog(){
+  try{ localStorage.setItem(logKey, JSON.stringify(log)); }catch(e){}
+}
+
+function drawBoard(){
+  const quickShuffled = [...JOB_POOL].sort(()=>Math.random()-0.5).slice(0,3).map(j=>({...j, type:'quick'}));
+  const moduleShuffled = [...MODULE_JOBS].sort(()=>Math.random()-0.5).slice(0,2).map(j=>({...j, type:'module'}));
+  return [...quickShuffled, ...moduleShuffled].map((j,i)=>({...j, id: Date.now()+'-'+i+'-'+Math.random().toString(36).slice(2,7), status:'open'}));
+}
+
+function render(){
+  const boardEl = document.getElementById('board');
+  const emptyNote = document.getElementById('emptyNote');
+  boardEl.innerHTML = '';
+  let openJobs = board.filter(j=>j.status!=='removed');
+  if(currentFilter!=='all') openJobs = openJobs.filter(j=>j.type===currentFilter);
+  document.getElementById('boardCount').textContent = board.filter(j=>j.status==='open').length + ' open';
+  emptyNote.style.display = openJobs.length===0 ? 'block' : 'none';
+
+  openJobs.forEach(job=>{
+    const pay = calcPay(job);
+    const isModule = job.type==='module';
+    const card = document.createElement('div');
+    card.className = 'job-card' + (job.status==='taken' ? ' taken' : '') + (isModule ? ' module' : '');
+    card.innerHTML = `
+      ${isModule ? `<span class="module-badge">Full Module</span>` : ''}
+      <div class="job-top">
+        <p class="job-title">${job.title}</p>
+        <span class="job-pay">${pay.toLocaleString()}cr</span>
+      </div>
+      <p class="job-employer">${job.employer} · ${job.tier} Tier · Hazard ×${job.hazard}</p>
+      <p class="job-desc">${job.desc}</p>
+      ${isModule ? `<p class="job-source">Leads into: ${job.source}</p>` : ''}
+      <p class="job-math">Salary ${({Trained:500,Expert:1000,Master:2000})[job.tier]}cr × ${job.hazard} + Expenses ${job.expenses}cr</p>
+      <div class="job-actions">
+        ${job.status==='open' ? `<button class="btn-primary" data-action="take" data-id="${job.id}">Mark Taken</button>` : `<button class="btn-secondary" data-action="complete" data-id="${job.id}">Mark Done</button>`}
+        <button class="btn-secondary" data-action="remove" data-id="${job.id}">Remove</button>
+      </div>
+    `;
+    boardEl.appendChild(card);
+  });
+
+  const logEl = document.getElementById('jobLog');
+  const logEmpty = document.getElementById('logEmpty');
+  logEl.innerHTML = '';
+  document.getElementById('logCount').textContent = log.length + ' entries';
+  logEmpty.style.display = log.length===0 ? 'block' : 'none';
+  [...log].reverse().forEach(entry=>{
+    const li = document.createElement('li');
+    li.innerHTML = `<span><b>${entry.title}</b> — ${entry.employer}${entry.source ? ' ('+entry.source+')' : ''}</span><span class="log-status ${entry.status==='done'?'status-done':'status-taken'}">${entry.status}</span>`;
+    logEl.appendChild(li);
+  });
+
+  boardEl.querySelectorAll('button').forEach(btn=>{
+    btn.addEventListener('click', handleAction);
+  });
+}
+
+function handleAction(e){
+  const action = e.target.dataset.action;
+  const id = e.target.dataset.id;
+  const job = board.find(j=>j.id===id);
+  if(!job) return;
+
+  if(action==='take'){
+    job.status = 'taken';
+    log.push({title:job.title, employer:job.employer, status:'taken', source:job.source});
+  } else if(action==='complete'){
+    job.status = 'removed';
+    const logEntry = log.find(l=>l.title===job.title && l.status==='taken');
+    if(logEntry) logEntry.status = 'done';
+  } else if(action==='remove'){
+    job.status = 'removed';
+  }
+  saveBoard();
+  saveLog();
+  render();
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    render();
+  });
+});
+
+document.getElementById('refreshBtn').addEventListener('click', ()=>{
+  const openCount = board.filter(j=>j.status==='open').length;
+  const newJobs = drawBoard();
+  board = [...board.filter(j=>j.status!=='removed'), ...newJobs];
+  saveBoard();
+  render();
+});
+
+document.getElementById('resetBtn').addEventListener('click', (e)=>{
+  const btn = e.target;
+  if(!btn.dataset.armed){
+    btn.dataset.armed = 'true';
+    const original = btn.textContent;
+    btn.textContent = 'Click Again to Confirm';
+    btn.style.background = 'var(--pink)';
+    btn.style.color = 'var(--black)';
+    btn.style.borderColor = 'var(--pink)';
+    clearTimeout(btn._armTimer);
+    btn._armTimer = setTimeout(()=>{
+      delete btn.dataset.armed;
+      btn.textContent = original;
+      btn.style.background = '';
+      btn.style.color = '';
+      btn.style.borderColor = '';
+    }, 3000);
+    return;
+  }
+  clearTimeout(btn._armTimer);
+  delete btn.dataset.armed;
+  btn.textContent = 'Clear Board (New Campaign)';
+  btn.style.background = '';
+  btn.style.color = '';
+  btn.style.borderColor = '';
+  board = drawBoard();
+  log = [];
+  saveBoard();
+  saveLog();
+  render();
+});
+
+loadState();
+</script>
+
+</body>
+</html>
