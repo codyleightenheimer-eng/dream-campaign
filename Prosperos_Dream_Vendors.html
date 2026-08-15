@@ -100,7 +100,7 @@
 
 <section>
   <p class="kicker">Directory</p>
-  <h2>Twelve Shops, Twelve Ways to Lose Money</h2>
+  <h2>Endless Ways to Lose Money</h2>
   <div class="shop-grid">
     <div class="shop-card">
       <p class="shop-name">Ephemera4Cheap</p>
@@ -163,6 +163,26 @@
       <p class="shop-keeper">Highly illegal Synthetic Sleeving Facility &amp; Slickbay</p>
       <p class="shop-desc">The Dream's slang term for its resleeving and Slickbay venue. Hundreds of Slickbay pods host virtual worlds for education, escape, and pleasure. A separate wing grows sleeves from scratch — vat-grown synthetic bodies your memories can be uploaded into.</p>
     </div>
+    <div class="shop-card">
+      <p class="shop-name">Vitaly's Surplus</p>
+      <p class="shop-keeper">Vitaly Kozlenko — Ex-Tempest Co. Quartermaster</p>
+      <p class="shop-desc">A converted cargo container in the Old Drydock District, TEMPEST CO. stencil still faintly visible underneath. Sells proper military-grade hardware — no bartering, no discounts, no questions about where it came from either.</p>
+    </div>
+    <div class="shop-card">
+      <p class="shop-name">Two-Ledger</p>
+      <p class="shop-keeper">Unaffiliated Fixer — No Fixed Location</p>
+      <p class="shop-desc">No storefront. Dead drops and coded meetups across Doptown and the Choke, arranged through a contact chain that always starts with someone you already know. Sells the scrappy, improvised, and deeply illegal end of the market.</p>
+    </div>
+    <div class="shop-card">
+      <p class="shop-name">The Chandlery</p>
+      <p class="shop-keeper">Birdie Okonkwo — Dry Dock District</p>
+      <p class="shop-desc">Rope, filters, scanners, comms, drones, stimpaks, and every other unglamorous tool that keeps a crew alive between the interesting parts. Birdie's been running this counter since before most captains on the Dream were born, and she'll tell you so whether you ask or not.</p>
+    </div>
+    <div class="shop-card">
+      <p class="shop-name">The Dry Dock</p>
+      <p class="shop-keeper">Loshe, Dockmaster — Ship Repair, Fuel &amp; Travel</p>
+      <p class="shop-desc">Hundreds of small ports stacked and craned into the station's outer ring. Loshe personally oversees every ship that comes through — repairs, refueling, docking, and passage off the Dream, all handled at one counter.</p>
+    </div>
   </div>
 </section>
 
@@ -184,6 +204,10 @@
     <button class="tab-btn" data-tab="xlb">Xiao! Long! Bao!</button>
     <button class="tab-btn" data-tab="trust">Prospero's Trust</button>
     <button class="tab-btn" data-tab="icebox">The Ice Box</button>
+    <button class="tab-btn" data-tab="vitaly">Vitaly's Surplus</button>
+    <button class="tab-btn" data-tab="twoledger">Two-Ledger</button>
+    <button class="tab-btn" data-tab="chandlery">The Chandlery</button>
+    <button class="tab-btn" data-tab="drydock">The Dry Dock</button>
   </div>
 
   <div class="tab-panel active" id="panel-ephemera">
@@ -261,6 +285,13 @@
       <p class="item-desc">Dulls a Marrowhound's sense of smell — no more frenzying at fresh blood, but [-] on all other Loyalty Saves.</p>
     </div>
     <div class="note-box"><b>Pricing shifts:</b> two or more crew with Corewise pay +100% market price. A crew collectively holding Rimwise, Wilderness Survival, and Exobiology pay −50%.</div>
+    <p style="margin-top:16px;"><strong>Ordinary companions (PSG pg.11.1) — for those who want something less likely to eat them:</strong></p>
+    <table class="catalog">
+      <tr><th>Pet</th><th>Cost</th><th>Wounds</th><th>Instinct</th><th>Special</th></tr>
+      <tr><td>Organic Pet</td><td>200kcr</td><td>1(10)</td><td>2d10+40</td><td>1 Trained Skill. [+] on Rest Saves. 1 Stress whenever pet takes Damage. Panic Check if killed.</td></tr>
+      <tr><td>Synthetic Pet</td><td>15kcr</td><td>2(15)</td><td>2d10+30</td><td>2 Trained Skills or 1 Expert Skill. +5 to Rest Saves. Sanity Save or 1 Stress whenever pet takes Damage. 1 Stress if destroyed.</td></tr>
+    </table>
+    <p class="section-sub" style="margin-top:8px;">Larger or rarer pets cost 2d10× the base price. Failure to protect a pet comes at a significant emotional cost — Minimum Stress increases by 1 if an Organic Pet dies.</p>
   </div>
 
   <div class="tab-panel" id="panel-chopshop">
@@ -311,6 +342,17 @@
       <tr><td>Whiplash Injector</td><td>4mcr</td><td>1</td><td>Single use. Automatically restores 1 Wound upon death. Reduces Body Save by 1d10 [-] after use.</td></tr>
     </table>
     <p class="section-sub" style="margin-top:8px;">Weapon slots: handguns 1, rifles 2, larger than a rifle 3+. Weapon cost runs 10× the item's normal price.</p>
+    <p style="margin-top:16px;"><strong>Long-term medical treatments (PSG pg.34–35):</strong></p>
+    <table class="catalog">
+      <tr><th>Treatment</th><th>Cost</th><th>Description</th></tr>
+      <tr><td>Artificial Wellness Counselor</td><td>150cr</td><td>1hr session (max 1/week) restores 1 Sanity Save. 1% chance of a random Condition.</td></tr>
+      <tr><td>Cognitive Defragmentation</td><td>100kcr</td><td>24hr surgical treatment removes 1 Condition. 1% chance of total amnesia; [-] on Intellect Checks, Sanity Saves, and Fear Saves for 4 weeks.</td></tr>
+      <tr><td>Deep Tissue Nanogel Massage</td><td>24kcr</td><td>1hr session (max 1/week) reduces Minimum Stress by 1. [-] on all actions for 24 hours.</td></tr>
+      <tr><td>Immersive Slicksim Therapy</td><td>1kcr</td><td>4hr virtual treatment restores 1d10 Combat or 1d10 Fear Save. 1% chance stuck in immersion 1d10 days, lose 1d5 Sanity Save.</td></tr>
+      <tr><td>Medpod</td><td>6kcr</td><td>Week-long treatment restores 1 Wound. Does not restore lost limbs/digits.</td></tr>
+      <tr><td>Pseudoflesh Injection</td><td>18kcr</td><td>8hr surgical treatment restores 2d10 Speed, 2d10 Strength, 2d10 Body Save, or all Wounds. [-] on all rolls for 2 weeks, plus 4 weeks convalescent recovery.</td></tr>
+      <tr><td>Psychosurgery</td><td>28kcr</td><td>8hr surgical treatment restores Intellect, Sanity Save, or Fear Save to maximum, or reduces Minimum Stress to 2. [-] on all rolls for 4 weeks.</td></tr>
+    </table>
     <p style="margin-top:16px;"><strong>Jobs the Babushka is currently offering:</strong></p>
     <table class="catalog">
       <tr><th>Job</th><th>Pay</th></tr>
@@ -353,6 +395,41 @@
       <tr><td>Socketsnake</td><td>750cr</td><td>An inert bundle of cables with adaptors. Once connected, any further input causes it to thrash wildly, dealing 2d10 DMG to the user.</td></tr>
       <tr><td>Mommybird</td><td>75kcr</td><td>Heavy black cylinder packed with capacitors. When connected, siphons power in, then discharges it all back into the device — takes 60 seconds.</td></tr>
     </table>
+    <p style="margin-top:16px;"><strong>Decks:</strong></p>
+    <table class="catalog">
+      <tr><th>Deck</th><th>Cost</th><th>Software Slots</th><th>Special</th></tr>
+      <tr><td>KOMPAN-88 Lomo PX "Burndeck"</td><td>450cr</td><td>1</td><td>All Nodes at +1 Response.</td></tr>
+      <tr><td>Fedorova-Turner 'Onika' Workstation</td><td>1.5kcr</td><td>2</td><td>—</td></tr>
+      <tr><td>Bao-Neumann Orion ZX "Superdeck"</td><td>3.5kcr</td><td>5</td><td>—</td></tr>
+      <tr><td>Sato Bliss</td><td>12kcr</td><td>3</td><td>Treats "Hardened" Nodes as "Secure."</td></tr>
+      <tr><td>Sinclair 2</td><td>50kcr</td><td>3</td><td>Treats Hacking as a Master Skill.</td></tr>
+    </table>
+    <p style="margin-top:14px;"><strong>Wristcomms:</strong></p>
+    <table class="catalog">
+      <tr><th>Wristcomm</th><th>Cost</th><th>Special</th></tr>
+      <tr><td>DVK 'Micro-80X' Printable Timepiece</td><td>25cr</td><td>Able to hack doors/airlocks only.</td></tr>
+      <tr><td>Macrogram 'MX Tattler'</td><td>1.5kcr</td><td>1 Software Slot.</td></tr>
+      <tr><td>König-Seidel 'Series 6'</td><td>22kcr</td><td>2 Software Slots.</td></tr>
+    </table>
+    <p style="margin-top:14px;"><strong>Gear:</strong></p>
+    <table class="catalog">
+      <tr><th>Item</th><th>Cost</th><th>Description</th></tr>
+      <tr><td>Brickboy</td><td>300cr</td><td>Portable dongle which fries hardware on a triggering event (door opened, PDA receives a message, user logs into terminal).</td></tr>
+      <tr><td>Farraday Bag</td><td>75cr</td><td>Small bag that blocks contents from all signals.</td></tr>
+      <tr><td>Node Detector</td><td>750cr</td><td>Detects all Nodes within a 50m radius. Scout upgrade (detects Node SEC/RES): +500cr.</td></tr>
+      <tr><td>Snatcher</td><td>150cr</td><td>Copies an entire databank while deleting the original. Takes 1d10 rounds.</td></tr>
+      <tr><td>Swiper System</td><td>200cr</td><td>Printer that duplicates any swiped keycard. Blank keycards (10-pack): 50cr. Credstick upgrade (steal Cr): +2kcr. Remote upgrade (use up to 20m): +4kcr.</td></tr>
+    </table>
+    <p style="margin-top:14px;"><strong>Single-use software:</strong></p>
+    <table class="catalog">
+      <tr><th>Software</th><th>Cost</th><th>Effect</th></tr>
+      <tr><td>CoyBoy</td><td>2kcr</td><td>Reduces Response of Node by 1d5.</td></tr>
+      <tr><td>Icebreaker</td><td>500cr</td><td>Converts Secure Node into Unsecure Node. IB++ upgrade (Hardened → Unsecure): +2kcr.</td></tr>
+      <tr><td>Keylogger</td><td>1kcr</td><td>Records all keystrokes/inputs/button presses on a Node. Installation: 1d5 rounds.</td></tr>
+      <tr><td>Maze</td><td>500cr</td><td>Ignores one NetSec Response roll.</td></tr>
+      <tr><td>Ripper2</td><td>1kcr</td><td>Brute force password cracker. Takes 3d10 rounds.</td></tr>
+      <tr><td>Xmap</td><td>2kcr</td><td>Retrieves a map of all Nodes on a Network.</td></tr>
+    </table>
     <p style="margin-top:16px;"><strong>Angus always pays for:</strong> good information, rumors, and data that can't be obtained through purely digital means — 3d10kcr per tip, more for anything tied to an active job.</p>
   </div>
 
@@ -368,6 +445,30 @@
       <tr><td>Pseudoflesh Muffin</td><td>10cr</td><td>100% artificial, extra protein. 5% chance of becoming hostile.</td></tr>
       <tr><td>Respiratory Reserve System</td><td>50kcr</td><td>Cyberware, 1 slot. Reserve O2 tank in the lungs, holds 5 hours of air. Refillable via O2 tank or 24 hours of disuse.</td></tr>
       <tr><td>Spit Weapon System</td><td>6kcr</td><td>Cyberware, 1 slot. Fires a chemical agent at close range. 1d10 DMG, [-] to Body Saves.</td></tr>
+    </table>
+    <p style="margin-top:16px;"><strong>Long-term medical treatments (PSG pg.34–35):</strong></p>
+    <table class="catalog">
+      <tr><th>Treatment</th><th>Cost</th><th>Description</th></tr>
+      <tr><td>Artificial Wellness Counselor</td><td>150cr</td><td>1hr session (max 1/week) restores 1 Sanity Save. 1% chance of a random Condition.</td></tr>
+      <tr><td>Cognitive Defragmentation</td><td>100kcr</td><td>24hr surgical treatment removes 1 Condition. 1% chance of total amnesia; [-] on Intellect Checks, Sanity Saves, and Fear Saves for 4 weeks.</td></tr>
+      <tr><td>Deep Tissue Nanogel Massage</td><td>24kcr</td><td>1hr session (max 1/week) reduces Minimum Stress by 1. [-] on all actions for 24 hours.</td></tr>
+      <tr><td>Immersive Slicksim Therapy</td><td>1kcr</td><td>4hr virtual treatment restores 1d10 Combat or 1d10 Fear Save. 1% chance stuck in immersion 1d10 days, lose 1d5 Sanity Save.</td></tr>
+      <tr><td>Medpod</td><td>6kcr</td><td>Week-long treatment restores 1 Wound. Does not restore lost limbs/digits.</td></tr>
+      <tr><td>Pseudoflesh Injection</td><td>18kcr</td><td>8hr surgical treatment restores 2d10 Speed, 2d10 Strength, 2d10 Body Save, or all Wounds. [-] on all rolls for 2 weeks, plus 4 weeks convalescent recovery.</td></tr>
+      <tr><td>Psychosurgery</td><td>28kcr</td><td>8hr surgical treatment restores Intellect, Sanity Save, or Fear Save to maximum, or reduces Minimum Stress to 2. [-] on all rolls for 4 weeks.</td></tr>
+    </table>
+    <p style="margin-top:16px;"><strong>Medical gear, over the counter:</strong></p>
+    <table class="catalog">
+      <tr><th>Item</th><th>Cost</th><th>Description</th></tr>
+      <tr><td>First Aid Kit</td><td>75cr</td><td>Dressings and treatments for bleeding, cuts, minor injuries.</td></tr>
+      <tr><td>Automed (×5)</td><td>1.5kcr</td><td>Nanotech pills granting Advantage to Body Saves against disease/poison and rest-based healing.</td></tr>
+      <tr><td>Bioscanner</td><td>3kcr</td><td>Long Range. Scans for signs of life — location only, not identity.</td></tr>
+      <tr><td>Cybernetic Diagnostic Scanner</td><td>2kcr</td><td>Diagnoses physical/mental issues in androids and cyborgs. Often distrusted by androids.</td></tr>
+      <tr><td>Foldable Stretcher</td><td>150cr</td><td>Fits in a rucksack, unfolds to ~2m.</td></tr>
+      <tr><td>Medscanner</td><td>8kcr</td><td>Scans living/dead bodies for disease/abnormalities. May require lab follow-up.</td></tr>
+      <tr><td>Radiation Pills (×5)</td><td>200cr</td><td>1d5 DMG, reduces Radiation Level by 1 for 2d10 minutes.</td></tr>
+      <tr><td>Sample Collection Kit</td><td>50cr</td><td>Vitals, DNA samples, and other field data on xenoflora/fauna.</td></tr>
+      <tr><td>Stimpak</td><td>1kcr ea.</td><td>Cures cryosickness, -1 Stress, +1d10 Health, [+] all rolls for 1d10 min. Overdose risk on repeated use.</td></tr>
     </table>
     <p style="margin-top:16px;"><strong>Clinic staff you might meet:</strong> doc (Bratva, co-founder), Essie Barrington (Teamster, co-founder, tattoo artist), ChatAGT (Bratva, gender services), SPLINE/BX47 (Solarian, slickware specialist), A. Mouse MD (Tempest Co., combat medic), The Hat Witch (Bratva, tarot readings), User Null (CANYONHEAVY, tech support), and a dozen more rotating through the roster.</p>
     <div class="note-box"><b>The Clinicians take on missions</b> to keep the lights on — 2d100 days of O2 tax relief per completed task. Ten standing requests rotate through the board, from a coffee run to tracking down a possible Reaping victim to defending the clinic outright when things go bad.</div>
@@ -430,6 +531,283 @@
       <tr><td>Slickbay (1hr)</td><td>5cr/hr</td><td>Enough time to install a Slick.</td></tr>
     </table>
     <div class="note-box"><b>The Runway:</b> a minimalist, surgically-lit space where sleeves are paraded and inspected before purchase. Appointment only — ask Angus or the Babushka for an invite.</div>
+  </div>
+
+  <div class="tab-panel" id="panel-vitaly">
+    <p>Vitaly quotes a price once. Push back and he doubles it "for wasting my time." Everything here is proper military-grade hardware — some through legitimate surplus channels, the rest through old Tempest contacts who owe him favors.</p>
+    <p style="margin-top:14px;"><strong>Weapons:</strong></p>
+    <table class="catalog">
+      <tr><th>Weapon</th><th>Cost</th><th>Range</th><th>Damage</th><th>Shots</th><th>Wound</th><th>Special</th></tr>
+      <tr><td>Frontier Rifle</td><td>500cr</td><td>Long</td><td>2d10+2 DMG</td><td>1</td><td>Gunshot</td><td>Attached bayonet: Adjacent, 1d10 DMG, Bleeding.</td></tr>
+      <tr><td>Flechette Thrower</td><td>1kcr</td><td>Long</td><td>2d10 DMG</td><td>12</td><td>Bleeding</td><td>Quiet. Counts non-cover AP as double.</td></tr>
+      <tr><td>Hand Cannon</td><td>1.8kcr</td><td>Close</td><td>2d10+3 DMG</td><td>7</td><td>Gunshot</td><td>—</td></tr>
+      <tr><td>Riot Gun</td><td>250cr</td><td>Close</td><td>1d5 DMG</td><td>6</td><td>Blunt Force</td><td>Rubber shot or rock salt. High pain, low lethality.</td></tr>
+      <tr><td>Phase Rifle</td><td>2.8kcr</td><td>Long</td><td>2d10 DMG</td><td>4</td><td>Gunshot</td><td>Low Power: -1d10 DMG, +4 Shots. Overcharge: +2d10 DMG, -2 Shots.</td></tr>
+      <tr><td>Precision Rifle</td><td>2.9kcr</td><td>Extreme</td><td>4d10 DMG</td><td>1</td><td>Gunshot</td><td>[-] on Combat Check at Close and Adjacent Range.</td></tr>
+      <tr><td>Self-Guided Rifle</td><td>7kcr</td><td>Long</td><td>4d10 DMG (AA)</td><td>4</td><td>Gunshot</td><td>Requires Smart-Link. Follow-up shots on same target gain [+].</td></tr>
+      <tr><td>Grenade Launcher</td><td>3.5kcr</td><td>Long</td><td>Varies</td><td>4</td><td>Varies</td><td>Grenades sold separately (Beanbag, Flashbang, Frag, Incendiary, Tear Gas, Toxic Gas).</td></tr>
+      <tr><td>Plasma Launcher</td><td>5.4kcr</td><td>Long</td><td>4d10 DMG [+] (AA)</td><td>1</td><td>Fire &amp; Explosives [+]</td><td>Overheats on crit success/fail. Overload on a 99: Body Save or 4d10 DMG.</td></tr>
+      <tr><td>Rail Cannon</td><td>14kcr</td><td>Extreme</td><td>6d10 DMG (AA)</td><td>3</td><td>Gunshot [+]</td><td>Two-handed. Very Heavy. [-] at Close/Adjacent Range.</td></tr>
+      <tr><td>Rocket Launcher (Dumb)</td><td>8kcr</td><td>Long</td><td>Varies</td><td>1</td><td>Varies</td><td>Rockets sold separately. Very Heavy. Requires two people to reload.</td></tr>
+      <tr><td>Rocket Launcher (Smart)</td><td>30kcr</td><td>Extreme</td><td>Varies</td><td>1</td><td>Varies</td><td>Requires two operators with Explosives + Computers Training.</td></tr>
+      <tr><td>Rotary Cannon</td><td>20kcr</td><td>Long</td><td>5d10 DMG (AA)</td><td>6</td><td>Gunshot ×3</td><td>Very Heavy. Requires heavy stand. Roll Gunshot Wounds table three times on a Wound.</td></tr>
+      <tr><td>Saber</td><td>120cr</td><td>Adjacent</td><td>1d10+3 DMG</td><td>N/A</td><td>Bleeding [+]</td><td>Melee.</td></tr>
+      <tr><td>Combat Shotgun</td><td>1.4kcr</td><td>Close</td><td>4d10 DMG</td><td>4</td><td>Gunshot</td><td>1d10 DMG at Long Range or greater.</td></tr>
+      <tr><td>General-Purpose Machine Gun</td><td>4.5kcr</td><td>Long</td><td>4d10 DMG</td><td>5</td><td>Gunshot [+]</td><td>Two-handed, heavy; barrel maneuvers around corners.</td></tr>
+      <tr><td>Pulse Rifle</td><td>2.4kcr</td><td>Long</td><td>3d10 DMG</td><td>5</td><td>Gunshot</td><td>—</td></tr>
+      <tr><td>Smart Rifle</td><td>5kcr</td><td>Extreme</td><td>4d10 DMG (AA)</td><td>3</td><td>Gunshot [+]</td><td>[-] on Combat Check at Close Range.</td></tr>
+      <tr><td>SMG</td><td>1kcr</td><td>Long</td><td>2d10 DMG</td><td>5</td><td>Gunshot</td><td>Can be fired one-handed.</td></tr>
+      <tr><td>Flamethrower</td><td>4kcr</td><td>Close</td><td>2d10 DMG</td><td>4</td><td>Fire/Explosives [+]</td><td>Body Save [-] or set on fire (2d10/round).</td></tr>
+      <tr><td>Flare Gun</td><td>25cr</td><td>Long</td><td>1d5 DMG</td><td>2</td><td>Fire/Explosives [-]</td><td>High-intensity flare, visible day/night at Long Range.</td></tr>
+      <tr><td>Foam Gun</td><td>500cr</td><td>Close</td><td>1 DMG</td><td>3</td><td>Blunt Force</td><td>Body Save or stuck; Strength Check [-] to escape.</td></tr>
+      <tr><td>Frag Grenade</td><td>400cr ea.</td><td>Close</td><td>3d10 DMG</td><td>1</td><td>Fire/Explosives</td><td>Damages all Adjacent on hit.</td></tr>
+      <tr><td>Boarding Axe</td><td>150cr</td><td>Adjacent</td><td>2d10 DMG</td><td>—</td><td>Gore [+]</td><td>Melee.</td></tr>
+      <tr><td>Varmint Rifle</td><td>450cr</td><td>Long</td><td>1d10 DMG</td><td>5</td><td>Gunshot</td><td>[-] when fired at Close Range.</td></tr>
+      <tr><td>Pump Action Shotgun ("Metro-Sweeper")</td><td>600cr</td><td>Close</td><td>3d10 DMG</td><td>3</td><td>Gunshot</td><td>1d10 DMG at Long Range or greater.</td></tr>
+      <tr><td>Grenade Launcher ("EX-40/53")</td><td>3.5kcr (500cr/reload)</td><td>Long</td><td>3d10 DMG</td><td>3</td><td>Fire/Explosive</td><td>Explodes on impact, damages all Adjacent.</td></tr>
+      <tr><td>Heavy Machine Gun ("M2-HMG")</td><td>3kcr</td><td>Long</td><td>4d10 DMG</td><td>5</td><td>Gunshot [+]</td><td>Extremely heavy, 1 round setup required. Comes with tripod.</td></tr>
+      <tr><td>Dual-barrel Airburst Rifle ("Cobra-22")</td><td>7.5kcr (500cr/reload)</td><td>Long</td><td>2d10+1 or 3d10+1</td><td>5</td><td>Gunshot or Explosive</td><td>Can fire specialized grenade rounds.</td></tr>
+    </table>
+    <p style="margin-top:14px;"><strong>Hardsuits &amp; Void-Rated Armor:</strong></p>
+    <table class="catalog">
+      <tr><th>Hardsuit</th><th>Cost</th><th>AP</th><th>O2</th><th>Speed</th><th>Special</th></tr>
+      <tr><td>Standard Crew Attire</td><td>100cr</td><td>1</td><td>None</td><td>Normal</td><td>Basic clothing.</td></tr>
+      <tr><td>Vaccsuit</td><td>10kcr</td><td>3</td><td>12hrs</td><td>[-]</td><td>Short-range comms, headlamp, radiation shielding; decompresses in 1d5 rounds if punctured.</td></tr>
+      <tr><td>Hazard Suit</td><td>—</td><td>5</td><td>—</td><td>—</td><td>Air filter, extreme heat/cold protection, hydration reclamation, comms, headlamp, radiation shielding.</td></tr>
+      <tr><td>Standard Battle Dress</td><td>2kcr</td><td>7</td><td>None</td><td>Normal</td><td>Short-range comms.</td></tr>
+      <tr><td>Advanced Battle Dress</td><td>4kcr / 12kcr</td><td>5 / 10</td><td>1hr</td><td>Normal / [-]</td><td>Higher tier adds comms, body cam, headlamp, HUD, exoskeletal weave, radiation shielding, Damage Reduction: 3.</td></tr>
+      <tr><td>Bio Suit</td><td>700cr</td><td>1</td><td>4hrs</td><td>Normal</td><td>Includes air filter and headlamp. Biohazard/disease protection.</td></tr>
+      <tr><td>Counterpressure Suit</td><td>3kcr</td><td>2</td><td>12hrs</td><td>Normal</td><td>Self-sealing. Air filter, radiation shielding, thermal protection, short-range comms, headlamp.</td></tr>
+      <tr><td>Fire Suit</td><td>2kcr</td><td>3</td><td>1hr</td><td>Normal</td><td>Heavy-duty reflective silver suit. Significant fire/heat/smoke protection.</td></tr>
+      <tr><td>Mining Rig</td><td>50kcr</td><td>10</td><td>12hrs</td><td>[-]</td><td>Powered exo-suit for asteroid mining.</td></tr>
+      <tr><td>Riot Shield</td><td>2kcr</td><td>8</td><td>None</td><td>[-]</td><td>Must be carried in one hand. AP only from front. As weapon: Adjacent, 1d10 DMG (Blunt Force).</td></tr>
+      <tr><td>Shock Assault Exo-Armor</td><td>2.5mcr</td><td>15</td><td>2hrs</td><td>[+]</td><td>Elite Colonial Marine gear. Mag-boots, jetpack, comms, headlamp, radiation shielding. [+] Strength Checks. Built-in Smart Rifle w/ Smart-link, Rocket Launcher (2 HE/1 KE), stimpak injector (×3). Damage Reduction: 10.</td></tr>
+      <tr><td>Carapace Survival Suit</td><td>2.4kcr</td><td>14</td><td>24hrs</td><td>Normal</td><td>Requires invasive fusion surgery (no Stress relief possible while worn). [+] on Wounds Table rolls. Fluid reclamation.</td></tr>
+    </table>
+    <p style="margin-top:14px;"><strong>Equipment:</strong></p>
+    <table class="catalog">
+      <tr><th>Item</th><th>Cost</th><th>Description</th></tr>
+      <tr><td>Extended Barrel</td><td>25% as weapon</td><td>+2 DMG.</td></tr>
+      <tr><td>Extended Capacity</td><td>25% as weapon</td><td>+1 Shot before reload.</td></tr>
+      <tr><td>Smart Sight</td><td>—</td><td>Requires Smart-Link. [+] to first shot with weapon each encounter.</td></tr>
+      <tr><td>Targeting Computer</td><td>25% as weapon</td><td>[+] to first shot with weapon each encounter.</td></tr>
+      <tr><td>Thermal Projector</td><td>2.5kcr</td><td>Reveals heat signatures within 30m, including in dark.</td></tr>
+      <tr><td>Bayonet</td><td>150cr</td><td>Adds Melee: Adjacent, 1d10 DMG, Bleeding.</td></tr>
+      <tr><td>Tactical Sling/Holster</td><td>100cr</td><td>Quick-access weapon carry, keeps hands free.</td></tr>
+      <tr><td>Combat Drone</td><td>15kcr</td><td>Remote drone, hardpoint for a weapon up to a Pulse Rifle or 4 grenades. 4hr battery.</td></tr>
+      <tr><td>Servo-Limb</td><td>100kcr</td><td>Artificial limb replacement. Absorbs up to 5 DMG per use before requiring repair (1d10kcr).</td></tr>
+      <tr><td>Universal Translator</td><td>12kcr</td><td>Translates most human languages; unreliable on alien/rare dialects.</td></tr>
+      <tr><td>Traversal Grav-Suit</td><td>20kcr</td><td>Reduces personal gravity by 0.5G for higher/longer jumps.</td></tr>
+      <tr><td>Auto-Belay Harness</td><td>300cr</td><td>Allows descent/ascent up to 100m vertically.</td></tr>
+      <tr><td>Grapple</td><td>600cr</td><td>Grapple hook, 20m paracord.</td></tr>
+      <tr><td>Gravity Chute</td><td>50cr</td><td>Slows atmospheric fall. Body Save [+] on landing or sprain an ankle.</td></tr>
+      <tr><td>Smart-link Add-On</td><td>10kcr</td><td>Remote viewing/recording/operation of a ranged weapon, +5 DMG.</td></tr>
+      <tr><td>The Meal Vat</td><td>10kcr</td><td>Processes any biomaterial into Survival Gruel™. Fear Save or 1d10 Stress per week eating only Gruel.</td></tr>
+      <tr><td>SuspendaShelter</td><td>500cr</td><td>Plastic spherical sleeping shelter, adaptive camouflage, auto-deploys from a portable tube. 300kg tether limit.</td></tr>
+      <tr><td>Instant Lumber Pod</td><td>800cr (pack of 6)</td><td>Time-compressed sapling, grows to 10m in a minute. Pack includes a complimentary VibeAxe (2d10 DMG).</td></tr>
+      <tr><td>Echo Hood</td><td>300cr</td><td>Obscures vision entirely, projects a 3D sound-map instead. Auto-mapping. Gunfire is blinding.</td></tr>
+      <tr><td>Filter Mask</td><td>30cr</td><td>Emergency toxic-air filtration, 10 minutes before useless.</td></tr>
+      <tr><td>Echolocator</td><td>1.5kcr</td><td>Long Range; maps adjacent rooms' basic geometry via sound delay, no content detail.</td></tr>
+      <tr><td>Canary Sensor</td><td>4kcr</td><td>Close Range; detects toxic air and gives a detailed readout.</td></tr>
+      <tr><td>Supply Drone</td><td>20kcr</td><td>Battery-powered autonomous ground drone, all-terrain, 2 hours use, ports up to 150kg.</td></tr>
+      <tr><td>Geiger Counter</td><td>20cr</td><td>Detects radiation levels.</td></tr>
+      <tr><td>Body Cam</td><td>50cr</td><td>Records first-person video footage.</td></tr>
+      <tr><td>Personal Locator</td><td>200cr</td><td>Allows crewmembers at a control center to track the wearer's location.</td></tr>
+      <tr><td>Heavy Weapon Mount</td><td>2kcr</td><td>Drone/vehicle modification — mounts a heavy weapon.</td></tr>
+      <tr><td>Armor Plating (AP5)</td><td>5kcr</td><td>Drone/vehicle modification — adds AP5 to the vehicle/drone.</td></tr>
+    </table>
+    <p style="margin-top:16px;"><strong>Ammunition:</strong></p>
+    <table class="catalog">
+      <tr><th>Type</th><th>Cost/Shot</th><th>Applicable Weapons</th></tr>
+      <tr><td>Conventional Ammo</td><td>10cr</td><td>Frontier Rifle, Hand Cannon, SMG</td></tr>
+      <tr><td>Flechettes</td><td>2cr</td><td>Flechette Thrower</td></tr>
+      <tr><td>Heavy Ammo</td><td>100cr</td><td>Rotary Cannon, Rail Cannon</td></tr>
+      <tr><td>High-Caliber Ammo</td><td>30cr</td><td>General-Purpose Machine Gun, Precision Rifle</td></tr>
+      <tr><td>Plasma Charges</td><td>35cr</td><td>Plasma Launcher</td></tr>
+      <tr><td>Pulse/Phase Ammo</td><td>30cr (Phase Ammo gains ×2 per purchase)</td><td>Phase Rifle, Pulse Rifle</td></tr>
+      <tr><td>Shotgun Shells</td><td>8cr</td><td>Combat Shotgun</td></tr>
+      <tr><td>Smart Ammo</td><td>40cr</td><td>Self-Guided Rifle, Smart Rifle</td></tr>
+      <tr><td>Non-Lethal Ammo</td><td>5cr</td><td>Foam Gun, Flare Gun, Riot Gun</td></tr>
+    </table>
+  </div>
+
+  <div class="tab-panel" id="panel-twoledger">
+    <p>Never the same number twice. Never confirms where anything comes from. Every deal ends the same way: this conversation never happened.</p>
+    <p style="margin-top:14px;"><strong>Weapons:</strong></p>
+    <table class="catalog">
+      <tr><th>Weapon</th><th>Cost</th><th>Range</th><th>Damage</th><th>Shots</th><th>Wound</th><th>Special</th></tr>
+      <tr><td>Disposable Gun</td><td>100cr</td><td>Close</td><td>1d10 DMG</td><td>5</td><td>Gunshot [-]</td><td>Cannot be reloaded. Critical Fail: explodes on user for 2d10 DMG.</td></tr>
+      <tr><td>Pipe Shotgun</td><td>100cr</td><td>Close</td><td>2d10 DMG</td><td>1</td><td>Gunshot [-]</td><td>Crafted from scrap. [-] on Industrial Equip. Critical Fail Table.</td></tr>
+      <tr><td>Sawn-Off</td><td>800cr</td><td>Close</td><td>2d10 DMG</td><td>2</td><td>Gunshot</td><td>Fire both barrels at Close/Adjacent for 4d10 DMG.</td></tr>
+      <tr><td>Pneumatic Blunderbuss</td><td>800cr</td><td>Close</td><td>0d10-3d10 DMG</td><td>1</td><td>Varies</td><td>Uses scavenged items as ammo. Warden sets DMG by suitability.</td></tr>
+      <tr><td>Chem Sprayer</td><td>2kcr</td><td>Close</td><td>2d10 DMG</td><td>3</td><td>Fire &amp; Explosives [+]</td><td>Destroys armor on hit even if all DMG blocked. Eats through bulkheads in 1d10 min.</td></tr>
+      <tr><td>Cryogen Gun</td><td>700cr</td><td>Close</td><td>1d10 DMG</td><td>6</td><td>Fire &amp; Explosives [-]</td><td>On hit, target is Singed ([-] next action).</td></tr>
+      <tr><td>EMP Disruptor</td><td>3kcr</td><td>Long</td><td>4d10 DMG (androids/robots/drones only)</td><td>2</td><td>N/A</td><td>Scrambles electronics 1d10 min.</td></tr>
+      <tr><td>Radiation Gun</td><td>4kcr</td><td>Long</td><td>2d10 DMG</td><td>∞</td><td>Fire &amp; Explosives</td><td>Inflicts LEVEL 3 radiation. User also suffers LEVEL 2 radiation while firing.</td></tr>
+      <tr><td>Voltage Arc Blaster</td><td>5kcr</td><td>Long</td><td>3d10 DMG</td><td>5</td><td>Fire &amp; Explosives</td><td>Ignores AP, can't destroy armor. Stuns target 1 round. [+] DMG vs. androids/wet targets.</td></tr>
+      <tr><td>Ultrasonic Amplifier</td><td>6kcr</td><td>Long</td><td>N/A</td><td>∞</td><td>N/A</td><td>1d10 Stress, then Sanity Save [-] or Panic Check.</td></tr>
+      <tr><td>Stun Gun</td><td>450cr</td><td>Close</td><td>1d5 DMG</td><td>1</td><td>Fire &amp; Explosives [-]</td><td>Body Save or stunned 1 round.</td></tr>
+      <tr><td>Net Launcher</td><td>400cr</td><td>Close</td><td>1d10 DMG</td><td>1</td><td>Blunt Force</td><td>Target entangled. New nets 20cr each.</td></tr>
+      <tr><td>Mining Drill</td><td>3kcr</td><td>Adjacent</td><td>2d100 DMG (AA)</td><td>N/A</td><td>Gore &amp; Massive [+]</td><td>Melee. Very Heavy. Strength Check [+] before attacking or Combat Check [-].</td></tr>
+      <tr><td>Explosive Lance</td><td>1.4kcr</td><td>Adjacent</td><td>4d10 DMG</td><td>1</td><td>Fire &amp; Explosives [+]</td><td>Melee. Must reload after a hit; unloaded deals 1d10 DMG instead.</td></tr>
+      <tr><td>Energy Halberd</td><td>3kcr</td><td>Adjacent</td><td>4d10 DMG (AA)</td><td>N/A</td><td>Bleeding [+], Blunt Force [+]</td><td>Melee. Heavy. Holds charge for 10 attacks.</td></tr>
+      <tr><td>Boarding Pike</td><td>100cr</td><td>Adjacent</td><td>1d10+2 DMG</td><td>N/A</td><td>Bleeding</td><td>Can be thrown at Close, or Long with [-].</td></tr>
+      <tr><td>Concussion Gun</td><td>2kcr</td><td>Close</td><td>3d10 DMG</td><td>5</td><td>Blunt Force [+]</td><td>1d5 DMG at Long Range. Adjacent/Close target (up to 200kg) pushed 2d10m away.</td></tr>
+      <tr><td>Revolver</td><td>750cr</td><td>Close</td><td>1d10+1 DMG</td><td>6</td><td>Gunshot</td><td>—</td></tr>
+      <tr><td>Vibechete</td><td>1kcr</td><td>Adjacent</td><td>3d10 DMG (AA)</td><td>—</td><td>Bleeding + Gore</td><td>Roll on BOTH Bleeding and Gore columns.</td></tr>
+      <tr><td>Stun Baton</td><td>150cr</td><td>Adjacent</td><td>1d5 DMG</td><td>—</td><td>Blunt Force</td><td>Body Save or stunned 1 round.</td></tr>
+      <tr><td>Tranq Pistol</td><td>250cr</td><td>Close</td><td>1d5 DMG</td><td>6</td><td>Blunt Force</td><td>If DMG dealt: Body Save or unconscious 1d10 rounds.</td></tr>
+      <tr><td>Crowbar</td><td>25cr</td><td>Adjacent</td><td>1d5 DMG</td><td>—</td><td>Blunt Force [+]</td><td>[+] on Strength Checks to open jammed airlocks.</td></tr>
+      <tr><td>Hand Welder</td><td>250cr</td><td>Adjacent</td><td>1d10 DMG</td><td>—</td><td>Bleeding</td><td>Cuts through airlock doors.</td></tr>
+      <tr><td>Laser Cutter</td><td>1.2kcr</td><td>Long</td><td>1d100 DMG</td><td>6</td><td>Bleeding [+] or Gore [+]</td><td>Two-handed, heavy; 1 round between shots.</td></tr>
+      <tr><td>Nail Gun</td><td>150cr</td><td>Close</td><td>1d5 DMG</td><td>32</td><td>Bleeding</td><td>—</td></tr>
+      <tr><td>Rigging Gun</td><td>350cr</td><td>Close</td><td>1d10 DMG (+2d10 on removal)</td><td>1</td><td>Bleeding [+]</td><td>100m microfilament; Body Save or entangled.</td></tr>
+      <tr><td>Scalpel</td><td>50cr</td><td>Adjacent</td><td>1d5 DMG</td><td>—</td><td>Bleeding [+]</td><td>—</td></tr>
+      <tr><td>Bolt Gun ("The Emancipator")</td><td>25cr</td><td>Adjacent</td><td>[-] 1d10 DMG</td><td>1</td><td>[-] Gunshot</td><td>Destroyed after use — most primitive rebel-crafted firearm.</td></tr>
+      <tr><td>Pocket Pistol ("K&amp;H A11 DAR")</td><td>200cr</td><td>Adjacent</td><td>1d10 DMG</td><td>3</td><td>Gunshot</td><td>Easily concealable.</td></tr>
+      <tr><td>Holdout SMG ("Murk-57")</td><td>500cr</td><td>Close</td><td>2d10-1 DMG</td><td>4</td><td>Gunshot</td><td>Can be fired one-handed.</td></tr>
+      <tr><td>Molotov Cocktail</td><td>200cr</td><td>Close</td><td>2d10 DMG</td><td>1</td><td>Fire/Explosive</td><td>Body Save or set on fire (1d10 DMG/round).</td></tr>
+      <tr><td>Seeker Grenade</td><td>600cr</td><td>Close</td><td>3d10 DMG</td><td>1</td><td>Fire/Explosive</td><td>Rudimentary drone tech guides it toward the nearest target 30 seconds after priming.</td></tr>
+    </table>
+    <p style="margin-top:14px;"><strong>Hardsuits &amp; Void-Rated Armor:</strong></p>
+    <table class="catalog">
+      <tr><th>Hardsuit</th><th>Cost</th><th>AP</th><th>O2</th><th>Speed</th><th>Special</th></tr>
+      <tr><td>Plastimail</td><td>200cr</td><td>None</td><td>—</td><td>Normal</td><td>Easily 3D-printed chain-link armor.</td></tr>
+      <tr><td>Penal Bridle</td><td>1kcr</td><td>3</td><td>None</td><td>—</td><td>Padded jumpsuit, headpiece, and collar worn by labor convicts. Includes a remote explosive collar (range 200m). Beyond 100m, 50% chance of not activating if triggered — inside 100m, it's guaranteed. No Death Save.</td></tr>
+    </table>
+    <p style="margin-top:14px;"><strong>Equipment:</strong></p>
+    <table class="catalog">
+      <tr><th>Item</th><th>Cost</th><th>Description</th></tr>
+      <tr><td>Dazzler</td><td>120cr</td><td>Single-use flash blinder. 45° arc, 2 rounds. Burns out night-vision optics.</td></tr>
+      <tr><td>Suppressor</td><td>200cr</td><td>Reduces (doesn't eliminate) weapon fire volume.</td></tr>
+      <tr><td>Underslung Flamethrower</td><td>2kcr, 50% as weapon</td><td>Stats as Flamethrower, 1 Shot capacity.</td></tr>
+      <tr><td>Bliss Pill</td><td>200cr</td><td>Reduces Stress by 1d10, [-] Intellect/Combat Checks for 2d10hrs. Hallucinogenic trip, GM rolls secretly for enjoyability. Repeated use erodes sense of reality.</td></tr>
+      <tr><td>Hyper-Speed Vial</td><td>100cr</td><td>1d5 Stress, then [+] Speed/Intellect for 1d5hrs. Hyper-addictive — one dose requires a Body Save [-] or need a dose daily; withdrawal causes psychosis.</td></tr>
+      <tr><td>Hash Joint</td><td>10cr</td><td>[-] Intellect Checks and Fear Saves for 1d5hrs. Reduces Stress by 1, once/day.</td></tr>
+      <tr><td>Adrenaline Stim</td><td>1.5kcr</td><td>[+] Speed/Strength, ignore Conditions/Panic for 1d10 min, then 1d5 Stress and Body Save [-] or Panic Check.</td></tr>
+      <tr><td>Injector (Poison)</td><td>3kcr</td><td>Body Save: pass = 3d10 DMG, fail = 4d10 DMG or Death Save on a Wound.</td></tr>
+      <tr><td>Injector (Sedative)</td><td>50cr</td><td>Body Save determines unconsciousness duration (1d5hrs pass / 1d10hrs fail).</td></tr>
+      <tr><td>Shock Collar</td><td>—</td><td>1d5 DMG, 1 Stress, stunned 1 round on activation. Range 50m.</td></tr>
+      <tr><td>Malware Disk (Adware)</td><td>500cr</td><td>Slows terminal/databank system efficiency within 1d10 min; can scramble all data in 1d10hrs.</td></tr>
+      <tr><td>Malware Disk (Logger)</td><td>1kcr</td><td>Records terminal keystrokes. Must retrieve to access data.</td></tr>
+      <tr><td>Hack-O-Matic</td><td>2.5kcr</td><td>Grants Hacking Skill benefits + [+] for a single check, then useless.</td></tr>
+      <tr><td>Handcuffs</td><td>150cr</td><td>Strength Check to apply if target resists. Zip cuffs: 15cr.</td></tr>
+      <tr><td>Yosemite SAM</td><td>75kcr</td><td>Hand-portable anti-aircraft missile turret (sub-orbital range), 10 pods, auto-targets with no friendly recognition. Not remotely legal to own.</td></tr>
+      <tr><td>Moleman Power Drill</td><td>300cr</td><td>Digs 50cm channels through solid rock at 10m/min. On hit as a weapon: attaches, 1d10 DMG/round.</td></tr>
+      <tr><td>MindForce Injector</td><td>400cr (×5)</td><td>Highly addictive caffeine hyperdose. +1d10 Intellect/Speed, [-] Panic Checks for 1d5hrs. Fingerprint-scan gated, price ×5 every purchase.</td></tr>
+      <tr><td>Homesteader's Kit</td><td>600kcr</td><td>Paper deed, coordinates, basic building supplies. 20% chance the plot's already occupied. Recurring 5-year payments required or the company repossesses and resells.</td></tr>
+      <tr><td>Thermite Charge</td><td>800cr</td><td>Burns a person-sized hole through almost anything in 1d10 minutes; activates 1 round after planting.</td></tr>
+      <tr><td>Hidden Compartment</td><td>1kcr</td><td>Drone/vehicle modification — conceals cargo from routine inspection.</td></tr>
+    </table>
+    <p style="margin-top:16px;"><strong>Ammunition:</strong></p>
+    <table class="catalog">
+      <tr><th>Type</th><th>Cost/Shot</th><th>Applicable Weapons</th></tr>
+      <tr><td>Conventional Ammo</td><td>10cr</td><td>Revolver</td></tr>
+      <tr><td>Chem/Cyro Tubes</td><td>20cr</td><td>Chem Sprayer, Cryogen Gun (Cryo Tubes gain ×3 per purchase)</td></tr>
+      <tr><td>Harpoons/Nails/Rivets</td><td>10cr</td><td>Nail Gun, Rigging Gun (Nails gain ×32 per purchase)</td></tr>
+      <tr><td>Shotgun Shells</td><td>8cr</td><td>Pipe Shotgun, Sawn-Off</td></tr>
+      <tr><td>Sonic Charges</td><td>20cr</td><td>Concussion Gun</td></tr>
+      <tr><td>Non-Lethal Ammo</td><td>5cr</td><td>Stun Gun, Tranq Pistol</td></tr>
+    </table>
+  </div>
+
+  <div class="tab-panel" id="panel-chandlery">
+    <p>Birdie insists every piece of gear on her shelves has a personality, and will happily tell you which drones are "moody" and which oxygen tanks she trusts with her life. Everything's at standard list price, always in stock, and she's never once shorted a customer in sixty-some years of running this counter.</p>
+    <p style="margin-top:14px;"><strong>Equipment (PSG pg.10–11):</strong></p>
+    <table class="catalog">
+      <tr><th>Item</th><th>Cost</th><th>Description</th></tr>
+      <tr><td>Assorted Tools</td><td>20cr</td><td>Wrenches, spanners, screwdrivers, etc. Can be used as weapons in a pinch (1d5 DMG).</td></tr>
+      <tr><td>Automed (×5)</td><td>1.5kcr</td><td>Nanotech pills granting Advantage to Body Saves against disease/poison and rest-based healing.</td></tr>
+      <tr><td>Battery (High Power)</td><td>500cr</td><td>Powers laser cutters, salvage drones, etc. Recharges in 1hr (power) or 6hrs (solar). Waterproofing: +500cr.</td></tr>
+      <tr><td>Binoculars</td><td>150cr</td><td>20x magnification. Night vision: +300cr. Thermal vision: +1kcr.</td></tr>
+      <tr><td>Bioscanner</td><td>3kcr</td><td>Long Range. Scans for signs of life — location only, not identity.</td></tr>
+      <tr><td>Body Cam</td><td>50cr</td><td>Streams video to a control center. Night vision: +300cr. Thermal vision: +1kcr.</td></tr>
+      <tr><td>Chemlight (×5)</td><td>5cr</td><td>Disposable glowsticks, 1m radius dim illumination.</td></tr>
+      <tr><td>Crowbar</td><td>25cr</td><td>[+] on Strength Checks to open jammed airlocks, lift heavy objects.</td></tr>
+      <tr><td>Cybernetic Diagnostic Scanner</td><td>2kcr</td><td>Diagnoses physical/mental issues in androids and cyborgs. Often distrusted by androids.</td></tr>
+      <tr><td>Electronic Tool Set</td><td>100cr</td><td>Full set for detailed electronics repair or construction.</td></tr>
+      <tr><td>Emergency Beacon</td><td>2kcr</td><td>Flare + repeating beep + all-channel distress call. Blockable by a radio jammer.</td></tr>
+      <tr><td>Exoloader</td><td>100kcr</td><td>Open-air exoskeleton, heavy lifting up to 5000kg. Loader claws deal 1 Wound. Battery: 48hrs.</td></tr>
+      <tr><td>Explosives &amp; Detonator</td><td>500cr</td><td>Blows open an airlock. Body Save or Wound (Explosive) for all Close. Detonator range: Long (blockable by jammer).</td></tr>
+      <tr><td>First Aid Kit</td><td>75cr</td><td>Dressings and treatments for bleeding, cuts, minor injuries.</td></tr>
+      <tr><td>Flashlight</td><td>30cr</td><td>Handheld or shoulder-mounted, illuminates 10m.</td></tr>
+      <tr><td>Foldable Stretcher</td><td>150cr</td><td>Fits in a rucksack, unfolds to ~2m.</td></tr>
+      <tr><td>Geiger Counter</td><td>20cr</td><td>Detects and displays radiation levels.</td></tr>
+      <tr><td>Heads-Up Display (HUD)</td><td>100cr</td><td>See through unit members' body cams, connect to smart-link weapons.</td></tr>
+      <tr><td>Infrared Goggles</td><td>1.5kcr</td><td>Heat signatures, sometimes hours old. Night vision: +300cr.</td></tr>
+      <tr><td>Jetpack</td><td>75kcr</td><td>Fly up to 100m high, 100km/hr, 2hrs on a fuel tank. Refuel: 200cr. Deals 1d100 [+] DMG if destroyed.</td></tr>
+      <tr><td>Lockpick Set</td><td>40cr</td><td>Advanced tools for hacking basic airlock/electronic door systems.</td></tr>
+      <tr><td>Long-range Comms</td><td>1kcr</td><td>Rucksack-sized, surface-to-ship communication.</td></tr>
+      <tr><td>Mag-boots</td><td>350cr</td><td>Magnetic grip for exterior ship/asteroid walking.</td></tr>
+      <tr><td>Medscanner</td><td>8kcr</td><td>Scans living/dead bodies for disease/abnormalities. May require lab follow-up.</td></tr>
+      <tr><td>MoHab Unit</td><td>1kcr</td><td>Tent, canteen, stove, rucksack, compass, sleeping bag.</td></tr>
+      <tr><td>MRE (×7)</td><td>70cr</td><td>Self-contained field rations, one day's sustenance each.</td></tr>
+      <tr><td>Mylar Blanket</td><td>10cr</td><td>Heat-reflective, for thermal regulation.</td></tr>
+      <tr><td>Oxygen Tank</td><td>50cr</td><td>12hrs O2 normal use, 4hrs stressful. Explosive.</td></tr>
+      <tr><td>Paracord (50m)</td><td>10cr</td><td>General purpose lightweight nylon rope.</td></tr>
+      <tr><td>Patch Kit (×3)</td><td>200cr</td><td>Repairs punctured vaccsuits, restoring space readiness (patched AP: 1).</td></tr>
+      <tr><td>Personal Locator</td><td>200cr</td><td>Allows control-center tracking of the wearer.</td></tr>
+      <tr><td>Portable Computer Terminal</td><td>1.5kcr</td><td>Hacks pre-existing computers/networks, standard computer tasks.</td></tr>
+      <tr><td>Radiation Pills (×5)</td><td>200cr</td><td>1d5 DMG, reduces Radiation Level by 1 for 2d10 minutes.</td></tr>
+      <tr><td>Radio Jammer</td><td>4kcr</td><td>Renders radio signals within 100km incomprehensible.</td></tr>
+      <tr><td>Rebreather</td><td>500cr</td><td>Filters toxic air / underwater breathing, 20 min at a time.</td></tr>
+      <tr><td>Rucksack</td><td>50cr</td><td>Large, durable, waterproof backpack.</td></tr>
+      <tr><td>Salvage Drone</td><td>10kcr</td><td>Flies 450m high, 3km range, 2hrs runtime. Carries 20-30kg. Equips up to 2 scanner/tool modules.</td></tr>
+      <tr><td>Sample Collection Kit</td><td>50cr</td><td>Vitals, DNA samples, and other field data on xenoflora/fauna.</td></tr>
+      <tr><td>Short-range Comms</td><td>100cr</td><td>Ship-to-ship and surface-to-surface within a dozen kilometers.</td></tr>
+      <tr><td>Stimpak</td><td>1kcr ea.</td><td>Cures cryosickness, -1 Stress, +1d10 Health, [+] all rolls for 1d10 min. Overdose risk on repeated use.</td></tr>
+      <tr><td>Water Filtration Device</td><td>50cr</td><td>Pumps 4L filtered water/hour from brackish sources.</td></tr>
+    </table>
+  </div>
+
+  <div class="tab-panel" id="panel-drydock">
+    <p>Loshe runs a tight operation — fast and hard, if not always cheap or reliable. This is Prospero's Dream, after all.</p>
+    <p style="margin-top:14px;"><strong>Repairs &amp; docking (A Pound of Flesh, pg.10):</strong></p>
+    <table class="catalog">
+      <tr><th>Service</th><th>Cost</th></tr>
+      <tr><td>Docking Fee</td><td>10kcr/week</td></tr>
+      <tr><td>Impounded Vehicle Fine</td><td>Ship Class × 1kcr/day impounded</td></tr>
+      <tr><td>Minor Repairs</td><td>Standard rate (per Shipbreaker's Toolkit)</td></tr>
+      <tr><td>Major Repairs</td><td>2× standard rate</td></tr>
+      <tr><td>Upgrades</td><td>2× standard rate</td></tr>
+      <tr><td>Refueling</td><td>1d5× the Shipbreaker's Toolkit fuel rate, rerolled monthly</td></tr>
+    </table>
+    <p class="section-sub" style="margin-top:8px;">All work requires a 50% down payment. Turnaround takes 1d5× the normal estimate. There's a 10% chance some cargo goes missing during the job — nobody at the Dry Dock will admit to knowing how.</p>
+    <p style="margin-top:14px;"><strong>Passage off the Dream (Shipbreaker's Toolkit, pg.2):</strong></p>
+    <table class="catalog">
+      <tr><th>Service</th><th>Cost</th></tr>
+      <tr><td>Shuttle — Passenger Seating</td><td>250cr</td></tr>
+      <tr><td>Shuttle — Cargo Space</td><td>+1kcr</td></tr>
+      <tr><td>Passenger Liner — Steerage (cryopod only)</td><td>1kcr</td></tr>
+      <tr><td>Passenger Liner — Second Class (4-bunk cabin, cryopod)</td><td>2.5kcr</td></tr>
+      <tr><td>Passenger Liner — First Class (private cabin, cryopod)</td><td>10kcr</td></tr>
+      <tr><td>Passenger Liner — Cargo Space</td><td>+5kcr</td></tr>
+      <tr><td>Passenger Liner — Hangar Space</td><td>+250kcr</td></tr>
+      <tr><td>Executive Transport — First Class (private suite, cryopod)</td><td>20kcr</td></tr>
+      <tr><td>Executive Transport — Charter Vessel</td><td>1mcr</td></tr>
+      <tr><td>Jumpliner — Steerage (cryopod only)</td><td>2kcr</td></tr>
+      <tr><td>Jumpliner — Second Class (private cabin, cryopod)</td><td>5kcr</td></tr>
+      <tr><td>Jumpliner — First Class (private suite, cryopod)</td><td>20kcr</td></tr>
+      <tr><td>Jumpliner — Cargo Space</td><td>+20kcr</td></tr>
+      <tr><td>Jumpliner — Hangar Space</td><td>+500kcr</td></tr>
+      <tr><td>Jumpliner — Jump-2 Ticket</td><td>+10kcr</td></tr>
+      <tr><td>Jumpliner — Jump-3 Ticket</td><td>+30kcr</td></tr>
+      <tr><td>Interstellar Executive Transport — First Class</td><td>40kcr</td></tr>
+      <tr><td>Interstellar Executive Transport — Charter Vessel</td><td>2mcr</td></tr>
+      <tr><td>Vessel Tow (Class-II or lower, max 1 vessel)</td><td>+500kcr</td></tr>
+    </table>
+    <p class="section-sub" style="margin-top:8px;">Interplanetary fares double for a distant planet, quadruple to the edge of the system.</p>
+    <p style="margin-top:14px;"><strong>Fuel &amp; warp cores:</strong></p>
+    <table class="catalog">
+      <tr><th>Fuel Class</th><th>Cost/Unit</th></tr>
+      <tr><td>Class-I Fuel</td><td>1kcr</td></tr>
+      <tr><td>Class-II Fuel</td><td>2kcr</td></tr>
+      <tr><td>Class-III Fuel</td><td>5kcr</td></tr>
+      <tr><td>Class-IV Fuel</td><td>50kcr</td></tr>
+      <tr><td>Class-V Fuel</td><td>100kcr</td></tr>
+      <tr><td>Warp Core</td><td>1mcr</td></tr>
+    </table>
+    <div class="note-box"><b>Worth knowing before you sign anything:</b> station conditions affect these prices directly. During a Teamsters strike, no ships enter or leave port and fuel/repairs run 5× normal. When strikebreakers are called in, some ships get through at 2× normal. Ask Loshe what's currently happening at the dock before committing to a repair job — he always knows.</div>
   </div>
 </section>
 
