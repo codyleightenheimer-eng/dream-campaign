@@ -99,12 +99,6 @@
     letter-spacing:-0.01em;
     margin:0 0 8px;
   }
-  .time{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:12px;
-    color:var(--faint);
-    margin:0 0 20px;
-  }
   p{font-size:15px;color:var(--dim);margin:0 0 14px;}
   p.lead{font-size:16px;color:var(--white);}
   strong{color:var(--white);font-weight:700;}
@@ -244,9 +238,10 @@
   <div class="progress">
     <a href="#step1">1. Frame</a>
     <a href="#step2">2. Table</a>
-    <a href="#step3">3. Safety</a>
-    <a href="#step4">4. Crew</a>
-    <a href="#step5">5. Logistics</a>
+    <a href="#step3">3. House Rules</a>
+    <a href="#step4">4. Safety</a>
+    <a href="#step5">5. Crew</a>
+    <a href="#step6">6. Logistics</a>
   </div>
 </header>
 
@@ -255,7 +250,6 @@
 <section id="step1">
   <p class="step-num">Step 1</p>
   <h2>Pick the Campaign Frame</h2>
-  <p class="time">Suggested time: 15 minutes</p>
   <p class="lead">Prospero's Dream can run a lot of different ways. Decide together which shape fits this table before anyone builds a character — it changes what a good character concept even looks like.</p>
   <table class="frame-table">
     <tr><th>Frame</th><th>What it plays like</th></tr>
@@ -273,7 +267,6 @@
 <section id="step2">
   <p class="step-num">Step 2</p>
   <h2>Table Expectations</h2>
-  <p class="time">Suggested time: 15 minutes</p>
   <p>Settle these before the first dice hit the table. None of them are wrong answers — they just need to be shared answers.</p>
   <div class="task">
     <div class="task-mark"></div>
@@ -299,8 +292,38 @@
 
 <section id="step3">
   <p class="step-num">Step 3</p>
+  <h2>House Rules</h2>
+  <p class="lead">Mothership's default rules are already tuned, but this campaign runs long — built on returning to the same vendors, the same factions, the same relationships over dozens of sessions. A few house rules from the Warden's Operations Manual (pg.52.1) are locked in specifically to protect that long-term investment without softening the horror.</p>
+  <div class="task">
+    <div class="task-mark"></div>
+    <div class="task-body"><b>Ablative Wounds</b><p>Every character gains 1 extra Wound that, when lost, doesn't force a roll on the Wound table. Regains after 30 minutes of rest. Takes the worst edge off a single unlucky hit.</p></div>
+  </div>
+  <div class="task">
+    <div class="task-mark"></div>
+    <div class="task-body"><b>Impenetrable Wounds</b><p>Excess damage doesn't carry over once a Wound is triggered. Death still happens — it happens because things actually went wrong, not because of stacked bad rolls on top of an already-triggered Wound.</p></div>
+  </div>
+  <div class="task">
+    <div class="task-mark"></div>
+    <div class="task-body"><b>High Score Breaker</b><p>If a character beats the player's prior high score before dying, the next character gets 20 points to split between Stats and Saves. Losing a character here means losing real relationships and standing — this softens that loss without erasing the consequence.</p></div>
+  </div>
+  <div class="task">
+    <div class="task-mark"></div>
+    <div class="task-body"><b>Rapid Skill Learning</b><p>A Trained Skill takes 3 sessions to learn, Expert takes 5, Master takes 10 — much faster than the default pace. Keeps growth visible session-to-session over a genuinely long campaign.</p></div>
+  </div>
+  <div class="task">
+    <div class="task-mark"></div>
+    <div class="task-body"><b>Opt-In Stress</b><p>Players volunteer to gain Stress and make Panic Checks when they feel it's narratively appropriate, rather than every trigger being mandatory. Shifts some tension-pacing control to the table.</p></div>
+  </div>
+  <div class="task">
+    <div class="task-mark"></div>
+    <div class="task-body"><b>Player Facing Rolls</b><p>Players make all the rolls. In a violent encounter, a missed attack roll against an enemy can instead mean the player's character gets hit. Keeps the Warden's hands clean and puts the tension in the players' dice.</p></div>
+  </div>
+  <p style="margin-top:16px;">Write these into the Campaign Notebook as a standing House Rules page. Revisit and adjust as the table gets more comfortable — per the WOM's own advice, these aren't set in stone.</p>
+</section>
+
+<section id="step4">
+  <p class="step-num">Step 4</p>
   <h2>Safety Tools</h2>
-  <p class="time">Suggested time: 10 minutes</p>
   <p class="lead">This is a horror game with body horror, corporate exploitation, violence, and psychological content built into the setting. Set up the tools now, while nothing's on the line yet.</p>
   <div class="pink-block">
     <p class="step-num">Pick one and confirm everyone knows how to use it</p>
@@ -311,10 +334,9 @@
   <p style="margin-top:16px;">Whatever you pick, say out loud that it's a standing policy for the whole campaign — not just tonight. Revisit it if the campaign frame shifts toward something heavier later.</p>
 </section>
 
-<section id="step4">
-  <p class="step-num">Step 4</p>
+<section id="step5">
+  <p class="step-num">Step 5</p>
   <h2>Build the Crew</h2>
-  <p class="time">Suggested time: 60–90 minutes</p>
   <p class="lead">Characters get built together, at the table, so the crew starts connected instead of four strangers who happen to share a ship.</p>
   <div class="task">
     <div class="task-mark"></div>
@@ -332,16 +354,11 @@
     <div class="task-mark"></div>
     <div class="task-body"><b>Decide why the Dream, specifically</b><p>Everyone should have a one-line reason their character is arriving at Prospero's Dream now — running from something, chasing something, or just following the work. This feeds directly into the cold open of session 1.</p></div>
   </div>
-  <div class="prompt-box">
-    <span class="label">Warden note</span>
-    <p>Write down every "why the Dream" answer — these become the seeds for Angus's first job offers and for which of A Pound of Flesh's three storylines the table naturally gravitates toward. See <em>Prosperos_Dream_Session_1.html</em>.</p>
-  </div>
 </section>
 
-<section id="step5">
-  <p class="step-num">Step 5</p>
+<section id="step6">
+  <p class="step-num">Step 6</p>
   <h2>Final Logistics</h2>
-  <p class="time">Suggested time: 10 minutes</p>
   <ul class="checklist-final">
     <li>Confirm everyone has (or knows where to find) the core rules reference — Panic Table, Wounds Table, basic Stat Check procedure.</li>
     <li>Confirm the note-taking plan — who's tracking Debt, NPC names, and open threads between sessions.</li>
