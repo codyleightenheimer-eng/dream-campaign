@@ -82,7 +82,7 @@
   <div class="rules-note"><b>Once per session:</b> each listed Stress Vent can only be used once per session to actually remove Stress — the number in front of it is how many Stress points it relieves. Playing the same vent again later in the same session is fine roleplay, but it won't relieve Stress a second time that session.</div>
   <div class="rules-note" style="margin-top:10px;"><b>Starting classes:</b> every character starts as a Core class (Marine, Android, Scientist, Teamster) or the Suit. Every other class on this page becomes available only after a character dies, or when a player chooses to retire a character.</div>
   <div class="filter-row">
-    <button class="filter-btn active" data-filter="all">All 15</button>
+    <button class="filter-btn active" data-filter="all">All 12</button>
     <button class="filter-btn" data-filter="core">Core (PSG)</button>
     <button class="filter-btn" data-filter="standalone">Standalone</button>
     <button class="filter-btn" data-filter="rimward">Rimward</button>
@@ -162,23 +162,12 @@
   </div>
 
   <div class="class-card" data-cat="standalone">
-    <div class="card-top"><p class="class-name">Mobster</p><span class="class-tag standalone">Standalone</span></div>
-    <p class="class-source">Exit, Pursued by a Dream</p>
-    <p class="class-flavor">Prospero's Dream-flavored criminal — built around faction loyalty and street-level muscle work.</p>
-    <p class="class-field"><b>Stress Vents</b></p>
-    <ul class="vent-list">
-      <li data-tier="1">Talk about family, loyalty, or "the code."</li>
-      <li data-tier="1">Threaten someone who's crossed a line.</li>
-      <li data-tier="1">Do a favor to build leverage, not out of kindness.</li>
-      <li data-tier="2">Refuse to abandon a debt or a grudge.</li>
-      <li data-tier="3">Escalate a personal beef into everyone's problem.</li>
-    </ul>
-  </div>
-
-  <div class="class-card" data-cat="standalone">
     <div class="card-top"><p class="class-name">Smuggler</p><span class="class-tag standalone">Standalone</span></div>
     <p class="class-source">The Smuggler's Guide to 1365</p>
     <p class="class-flavor">Built for illicit cargo runs and evading Port Security — pairs with the Fence and Smuggling Contract Generators.</p>
+    <div class="stat-line">+15 Speed · +5 to 1 Stat · +20 Body Save</div>
+    <p class="class-field"><b>Skills</b>Jury-Rigging, Rimwise. Bonus: 1 Trained Skill and 1 Expert Skill.</p>
+    <p class="class-field"><b>Trauma Response</b>Once per session, you may produce a mundane item worth 100cr or less from your gear to gain Advantage on a relevant Check.</p>
     <p class="class-field"><b>Stress Vents</b></p>
     <ul class="vent-list">
       <li data-tier="1">Lie reflexively, even when the truth would be easier.</li>
@@ -225,7 +214,11 @@
   <div class="class-card" data-cat="standalone">
     <div class="card-top"><p class="class-name">Slices</p><span class="class-tag standalone">Standalone</span></div>
     <p class="class-source">Death Pays All Debts</p>
-    <p class="class-flavor">Edited mind-scan indentured labor — a body carrying someone else's memory, tied to the Bratva's economy.</p>
+    <p class="class-flavor">Edited mind-scan indentured labor — a body carrying someone else's memory, tied to the Bratva's economy. Players may find themselves turned into a Slice, or choose to start as one on the Dream.</p>
+    <div class="stat-line">-10 Combat · +30 Strength, Speed, or Intellect (choose two) · -10 Sanity</div>
+    <p class="class-field"><b>Skills</b>The highest Skill (and any prerequisites) from your previous character, OR 1 Trained and 1 Expert Skill.</p>
+    <p class="class-field"><b>Trauma Response</b>While your Stress is 10 or higher, gain a random Trained Skill. You lose this Skill if your Stress falls under 10.</p>
+    <p class="class-field"><b>Special</b>If you gain a Wound or reach 15+ Stress, regain one memory from your previous life (once per day).</p>
     <p class="class-field"><b>Stress Vents</b></p>
     <ul class="vent-list">
       <li data-tier="1">Question which memories are actually yours.</li>
@@ -237,38 +230,12 @@
   </div>
 
   <div class="class-card" data-cat="standalone">
-    <div class="card-top"><p class="class-name">Labor Body</p><span class="class-tag standalone">Standalone</span></div>
-    <p class="class-source">Owe My Soul to the Company Store</p>
-    <p class="class-flavor">A cloned worker's mind loaded into an industrial-grade body. The Concern's official line: not a person.</p>
-    <p class="class-field"><b>Stress Vents</b></p>
-    <ul class="vent-list">
-      <li data-tier="1">Recite your designation instead of your name.</li>
-      <li data-tier="1">Downplay an injury like it doesn't count.</li>
-      <li data-tier="1">Follow a work order past the point it's safe.</li>
-      <li data-tier="2">Refuse comfort or help because "that's not for us."</li>
-      <li data-tier="3">Put your body between the crew and danger like it's expected of you.</li>
-    </ul>
-  </div>
-
-  <div class="class-card" data-cat="standalone">
-    <div class="card-top"><p class="class-name">Secret Agent</p><span class="class-tag standalone">Standalone</span></div>
-    <p class="class-source">Agent (T52-EXEMPT)</p>
-    <p class="class-flavor">Another class as cover, a Secret Objective, and Codeword-triggered Covert Actions — until you're blown.</p>
-    <p class="class-field"><b>Stress Vents</b></p>
-    <ul class="vent-list">
-      <li data-tier="1">Deflect a personal question with a half-truth.</li>
-      <li data-tier="1">Check your cover story is still holding.</li>
-      <li data-tier="1">Withhold something useful to protect your real objective.</li>
-      <li data-tier="2">Break cover in a way that isn't fully necessary.</li>
-      <li data-tier="3">Burn a source, a contact, or an ally to stay hidden.</li>
-    </ul>
-  </div>
-
-  <div class="class-card" data-cat="standalone">
     <div class="card-top"><p class="class-name">Lawyer</p><span class="class-tag standalone">Standalone</span></div>
     <p class="class-source">Breach of Contract</p>
-    <p class="class-flavor">Built around Trial Phases, contract negotiation, and Arbitration — the party's answer to a lawsuit.</p>
-    <div class="stat-line">C:35 · Suitcase Gun 3d10 DMG · I:70 · W:4(15)</div>
+    <p class="class-flavor">Former Company emissaries brought low by vice and treachery — well-connected yet broken and dishonored, offering legal expertise and unprecedented insight into corporate machinations.</p>
+    <div class="stat-line">+10 Intellect · +5 Strength · +20 Body Save · +10 Sanity Save</div>
+    <p class="class-field"><b>Skills</b>Linguistics, Rimwise, Jury-Rigging, Law. Bonus: 1 Trained Skill. Law is a new Master Skill (+20) — the construction, negotiation, and interpretation of a contractual agreement.</p>
+    <p class="class-field"><b>Trauma Response</b>Your Minimum Stress is 10. Any Stress you take over 20 instead increases a Save by that amount.</p>
     <p class="class-field"><b>Stress Vents</b></p>
     <ul class="vent-list">
       <li data-tier="1">Cite precedent, clause, or contract language.</li>
