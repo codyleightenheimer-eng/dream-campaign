@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class Guide — Prospero's Dream</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0a0a0a; --panel:#131313; --panel-raised:#181818; --white:#f5f5f2;
+    --dim:#9a9a94; --faint:#5c5c58; --line:#282826; --pink:#ff2d78; --green:#4ade80; --amber:#e6b34d;
+  }
+  *{box-sizing:border-box;} html,body{margin:0;padding:0;}
+  body{background:var(--black);color:var(--white);font-family:'Archivo',sans-serif;line-height:1.5;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px 90px;}
+  .home-link{
+    position:fixed; top:16px; left:16px;
+    background:var(--black); color:var(--pink);
+    border:1px solid var(--pink);
+    padding:8px 14px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px; font-weight:600;
+    text-decoration:none; text-transform:uppercase; letter-spacing:0.04em;
+    z-index:1000;
+    transition:background 0.15s,color 0.15s;
+  }
+  .home-link:hover{background:var(--pink);color:var(--black);}
+
+  header{padding:48px 24px 32px;border-bottom:6px solid var(--pink);text-align:center;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.2em;color:var(--pink);text-transform:uppercase;margin:0 0 14px;}
+  h1{font-family:'Archivo Black',sans-serif;font-weight:400;font-size:clamp(30px,6vw,50px);text-transform:uppercase;letter-spacing:-0.01em;margin:0;}
+  .tagline{font-size:14px;color:var(--dim);max-width:520px;margin:14px auto 0;}
+
+  .filter-row{display:flex;justify-content:center;gap:8px;margin-top:22px;flex-wrap:wrap;}
+  .rules-note{background:var(--panel);border:1px solid var(--line);padding:14px 18px;font-size:12.5px;color:var(--dim);max-width:600px;margin:22px auto 0;text-align:left;}
+  .rules-note b{color:var(--white);}
+  .filter-btn{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;
+    padding:8px 14px;border:1px solid var(--line);background:var(--panel);color:var(--dim);cursor:pointer;
+    transition:background 0.15s,color 0.15s;
+  }
+  .filter-btn:hover{border-color:var(--dim);color:var(--white);}
+  .filter-btn.active{background:var(--pink);color:var(--black);border-color:var(--pink);}
+
+  section{padding:8px 0;}
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2px;background:var(--line);margin-top:24px;}
+  .class-card{background:var(--panel);border-left:4px solid var(--pink);padding:20px 22px;display:flex;flex-direction:column;gap:9px;}
+  .class-card.core{border-left-color:var(--green);}
+  .class-card.rimward{border-left-color:var(--amber);}
+
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+  .class-name{font-family:'Archivo',sans-serif;font-weight:700;font-size:18px;color:var(--white);margin:0;}
+  .class-tag{font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;padding:3px 8px;white-space:nowrap;flex-shrink:0;}
+  .class-tag.core{background:var(--green);color:var(--black);}
+  .class-tag.standalone{background:var(--pink);color:var(--black);}
+  .class-tag.rimward{background:var(--amber);color:var(--black);}
+
+  .class-source{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--faint);text-transform:uppercase;letter-spacing:0.03em;}
+  .start-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--green);}
+  .class-flavor{font-size:13.5px;color:var(--dim);font-style:italic;margin:0;border-left:2px solid var(--line);padding-left:12px;}
+
+  .class-field{font-size:13px;color:var(--dim);margin:0;}
+  .class-field b{color:var(--white);font-weight:700;display:block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:3px;}
+  .stat-line{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--pink);background:var(--black);padding:8px 10px;margin-top:2px;}
+
+  .vent-list{list-style:none;margin:2px 0 0;padding:0;font-size:12.5px;color:var(--dim);}
+  .vent-list li{padding:3px 0 3px 20px;position:relative;}
+  .vent-list li::before{content:attr(data-tier);position:absolute;left:0;top:3px;font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:700;color:var(--pink);}
+
+  footer{text-align:center;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--faint);padding:40px 24px 0;}
+</style>
+</head>
+<body>
+<a href="index.html" class="home-link">&larr; Hub</a>
+
+<header>
+  <p class="eyebrow">Character Creation Reference</p>
+  <h1>Class Guide</h1>
+  <p class="tagline">Every class available for this campaign — stat modifiers, Trauma Response, and Stress Vents for playing each one at the table.</p>
+  <div class="rules-note"><b>Once per session:</b> each listed Stress Vent can only be used once per session to actually remove Stress — the number in front of it is how many Stress points it relieves. Playing the same vent again later in the same session is fine roleplay, but it won't relieve Stress a second time that session.</div>
+  <div class="rules-note" style="margin-top:10px;"><b>Starting classes:</b> every character starts as a Core class (Marine, Android, Scientist, Teamster) or the Suit. Every other class on this page becomes available only after a character dies, or when a player chooses to retire a character.</div>
+  <div class="filter-row">
+    <button class="filter-btn active" data-filter="all">All 15</button>
+    <button class="filter-btn" data-filter="core">Core (PSG)</button>
+    <button class="filter-btn" data-filter="standalone">Standalone</button>
+    <button class="filter-btn" data-filter="rimward">Rimward</button>
+  </div>
+</header>
+
+<div class="wrap">
+<section>
+<div class="card-grid" id="cardGrid">
+
+  <div class="class-card core" data-cat="core">
+    <div class="card-top"><p class="class-name">Marine</p><span class="class-tag core">Core</span></div>
+    <p class="class-source">Player's Survival Guide</p>
+    <p class="start-badge">&#10003; Starting Class</p>
+    <p class="class-flavor">Handy in a fight, but whenever they Panic it may cause problems for the rest of the crew.</p>
+    <div class="stat-line">+10 Combat · +10 Body Save · +20 Fear Save · +1 Max Wounds</div>
+    <p class="class-field"><b>Trauma Response</b>Whenever you Panic, every Close friendly player must make a Fear Save.</p>
+    <p class="class-field"><b>Stress Vents</b></p>
+    <ul class="vent-list">
+      <li data-tier="1">Bark orders or discipline someone out of turn.</li>
+      <li data-tier="1">Check and recheck your weapon obsessively.</li>
+      <li data-tier="1">Pick a fight over something trivial.</li>
+      <li data-tier="2">Refuse to retreat even when it's the smart move.</li>
+      <li data-tier="3">Put yourself between danger and the crew, whether they asked for it or not.</li>
+    </ul>
+  </div>
+
+  <div class="class-card core" data-cat="core">
+    <div class="card-top"><p class="class-name">Android</p><span class="class-tag core">Core</span></div>
+    <p class="class-source">Player's Survival Guide</p>
+    <p class="start-badge">&#10003; Starting Class</p>
+    <p class="class-flavor">A terrifying and exciting addition to any crew — tends to unnerve other crewmembers with cold inhumanity.</p>
+    <div class="stat-line">+20 Intellect · -10 to 1 Stat · +60 Fear Save · +1 Max Wounds</div>
+    <p class="class-field"><b>Trauma Response</b>Fear Saves made by Close friendly players are at Disadvantage.</p>
+    <p class="class-field"><b>Stress Vents</b></p>
+    <ul class="vent-list">
+      <li data-tier="1">Remind someone to focus on the mission.</li>
+      <li data-tier="1">Criticise someone for breaking a law, contract, or policy.</li>
+      <li data-tier="1">Do something freakish and inhuman.</li>
+      <li data-tier="2">Refuse to do something helpful because it goes against your programming.</li>
+      <li data-tier="3">Put someone else in danger through your dedication to the mission.</li>
+    </ul>
+  </div>
+
+  <div class="class-card core" data-cat="core">
+    <div class="card-top"><p class="class-name">Scientist</p><span class="class-tag core">Core</span></div>
+    <p class="class-source">Player's Survival Guide</p>
+    <p class="start-badge">&#10003; Starting Class</p>
+    <p class="class-flavor">Doctors, researchers, or anyone who wants to slice open creatures (or infected crewmembers) with a scalpel.</p>
+    <div class="stat-line">+10 Intellect · +5 to 1 Stat · +30 Sanity Save</div>
+    <p class="class-field"><b>Trauma Response</b>Whenever you fail a Sanity Save, all Close friendly players gain 1 Stress.</p>
+    <p class="class-field"><b>Stress Vents</b></p>
+    <ul class="vent-list">
+      <li data-tier="1">Explain something related to your expertise.</li>
+      <li data-tier="1">Document or take a sample of something horrific.</li>
+      <li data-tier="1">Cry for help.</li>
+      <li data-tier="2">Show that the horror has taught you something new.</li>
+      <li data-tier="3">Endanger yourself or others with your curiosity.</li>
+    </ul>
+  </div>
+
+  <div class="class-card core" data-cat="core">
+    <div class="card-top"><p class="class-name">Teamster</p><span class="class-tag core">Core</span></div>
+    <p class="class-source">Player's Survival Guide</p>
+    <p class="start-badge">&#10003; Starting Class</p>
+    <p class="class-flavor">Rough and tumble blue-collar space workers, mechanics, engineers, miners, and pilots.</p>
+    <div class="stat-line">+5 to all Stats · +10 to all Saves</div>
+    <p class="class-field"><b>Trauma Response</b>Once per session, you may take Advantage on a Panic Check.</p>
+    <p class="class-field"><b>Stress Vents</b></p>
+    <ul class="vent-list">
+      <li data-tier="1">Complain loudly about hazard pay or working conditions.</li>
+      <li data-tier="1">Fixate on the cargo manifest or the state of the ship.</li>
+      <li data-tier="1">Cut corners to save time or money.</li>
+      <li data-tier="2">Refuse a task that isn't technically "in the contract."</li>
+      <li data-tier="3">Put the payday ahead of someone's safety.</li>
+    </ul>
+  </div>
+
+  <div class="class-card" data-cat="standalone">
+    <div class="card-top"><p class="class-name">Mobster</p><span class="class-tag standalone">Standalone</span></div>
+    <p class="class-source">Exit, Pursued by a Dream</p>
+    <p class="class-flavor">Prospero's Dream-flavored criminal — built around faction loyalty and street-level muscle work.</p>
+    <p class="class-field"><b>Stress Vents</b></p>
+    <ul class="vent-list">
+      <li data-tier="1">Talk about family, loyalty, or "the code."</li>
+      <li data-tier="1">Threaten someone who's crossed a line.</li>
+      <li data-tier="1">Do a favor to build leverage, not out of kindness.</li>
+      <li data-tier="2">Refuse to abandon a debt or a grudge.</li>
+      <li data-tier="3">Escalate a personal beef into everyone's problem.</li>
+    </ul>
+  </div>
+
+  <div class="class-card" data-cat="standalone">
+    <div class="card-top"><p class="class-name">Smuggler</p><span class="class-tag standalone">Standalone</span></div>
+    <p class="class-source">The Smuggler's Guide to 1365</p>
+    <p class="class-flavor">Built for illicit cargo runs and evading Port Security — pairs with the Fence and Smuggling Contract Generators.</p>
+    <p class="class-field"><b>Stress Vents</b></p>
+    <ul class="vent-list">
+      <li data-tier="1">Lie reflexively, even when the truth would be easier.</li>
+      <li data-tier="1">Case the room for exits and blind spots.</li>
+      <li data-tier="1">Lowball or haggle over something that doesn't need it.</li>
+      <li data-tier="2">Refuse to hand over cargo, no matter the cost.</li>
+      <li data-tier="3">Cut and run, leaving someone behind to cover your exit.</li>
+    </ul>
+  </div>
+
+  <div class="class-card" data-cat="standalone">
+    <div class="card-top"><p class="class-name">Convict</p><span class="class-tag standalone">Standalone</span></div>
+    <p class="class-source">Convict Class (Waco Matrixo)</p>
+    <p class="class-flavor">Escaped or released, with a prison-specific Loadout and a paired Facility/Crime generator.</p>
+    <div class="stat-line">+20 Speed · +30 Sanity · -5 to 1 Save</div>
+    <p class="class-field"><b>Trauma Response</b>Panic Checks made by nearby friendly players are at Disadvantage.</p>
+    <p class="class-field"><b>Stress Vents</b></p>
+    <ul class="vent-list">
+      <li data-tier="1">Flinch at authority, badges, or being given orders.</li>
+      <li data-tier="1">Case an exit like you're already planning the next escape.</li>
+      <li data-tier="1">Hoard supplies "just in case."</li>
+      <li data-tier="2">Snap at anyone who treats you like you're still inside.</li>
+      <li data-tier="3">Turn on the crew the second it feels like a cell closing in.</li>
+    </ul>
+  </div>
+
+  <div class="class-card" data-cat="standalone">
+    <div class="card-top"><p class="class-name">The Suit</p><span class="class-tag standalone">Standalone</span></div>
+    <p class="class-source">The Suit (Joshua Kramer)</p>
+    <p class="start-badge">&#10003; Starting Class</p>
+    <p class="class-flavor">Corporate flair, corporate money, corporate priorities — a walking stress source for the rest of the crew.</p>
+    <div class="stat-line">+20 Intellect/Speed split · -10 Combat · +2d10×100 starting credits</div>
+    <p class="class-field"><b>Trauma Response</b>While traveling with a Suit, all other party members have +1 Minimum Stress.</p>
+    <p class="class-field"><b>Stress Vents</b></p>
+    <ul class="vent-list">
+      <li data-tier="1">Cite a policy, clause, or corporate procedure.</li>
+      <li data-tier="1">Correct someone's terminology mid-crisis.</li>
+      <li data-tier="1">Try to monetize the situation.</li>
+      <li data-tier="2">Refuse to act without sign-off from someone who isn't there.</li>
+      <li data-tier="3">Sacrifice someone else's interests to protect the account.</li>
+    </ul>
+  </div>
+
+  <div class="class-card" data-cat="standalone">
+    <div class="card-top"><p class="class-name">Slices</p><span class="class-tag standalone">Standalone</span></div>
+    <p class="class-source">Death Pays All Debts</p>
+    <p class="class-flavor">Edited mind-scan indentured labor — a body carrying someone else's memory, tied to the Bratva's economy.</p>
+    <p class="class-field"><b>Stress Vents</b></p>
+    <ul class="vent-list">
+      <li data-tier="1">Question which memories are actually yours.</li>
+      <li data-tier="1">Recite something you "know" but can't place why.</li>
+      <li data-tier="1">Flinch at anything resembling an edit, a scan, or a wipe.</li>
+      <li data-tier="2">Follow an impulse that isn't quite yours to follow.</li>
+      <li data-tier="3">Let a stranger's borrowed memory make the call instead of you.</li>
+    </ul>
+  </div>
+
+  <div class="class-card" data-cat="standalone">
+    <div class="card-top"><p class="class-name">Labor Body</p><span class="class-tag standalone">Standalone</span></div>
+    <p class="class-source">Owe My Soul to the Company Store</p>
+    <p class="class-flavor">A cloned worker's mind loaded into an industrial-grade body. The Concern's official line: not a person.</p>
+    <p class="class-field"><b>Stress Vents</b></p>
+    <ul class="vent-list">
+      <li data-tier="1">Recite your designation instead of your name.</li>
+      <li data-tier="1">Downplay an injury like it doesn't count.</li>
+      <li data-tier="1">Follow a work order past the point it's safe.</li>
+      <li data-tier="2">Refuse comfort or help because "that's not for us."</li>
+      <li data-tier="3">Put your body between the crew and danger like it's expected of you.</li>
+    </ul>
+  </div>
+
+  <div class="class-card" data-cat="standalone">
+    <div class="card-top"><p class="class-name">Secret Agent</p><span class="class-tag standalone">Standalone</span></div>
+    <p class="class-source">Agent (T52-EXEMPT)</p>
+    <p class="class-flavor">Another class as cover, a Secret Objective, and Codeword-triggered Covert Actions — until you're blown.</p>
+    <p class="class-field"><b>Stress Vents</b></p>
+    <ul class="vent-list">
+      <li data-tier="1">Deflect a personal question with a half-truth.</li>
+      <li data-tier="1">Check your cover story is still holding.</li>
+      <li data-tier="1">Withhold something useful to protect your real objective.</li>
+      <li data-tier="2">Break cover in a way that isn't fully necessary.</li>
+      <li data-tier="3">Burn a source, a contact, or an ally to stay hidden.</li>
+    </ul>
+  </div>
+
+  <div class="class-card" data-cat="standalone">
+    <div class="card-top"><p class="class-name">Lawyer</p><span class="class-tag standalone">Standalone</span></div>
+    <p class="class-source">Breach of Contract</p>
+    <p class="class-flavor">Built around Trial Phases, contract negotiation, and Arbitration — the party's answer to a lawsuit.</p>
+    <div class="stat-line">C:35 · Suitcase Gun 3d10 DMG · I:70 · W:4(15)</div>
+    <p class="class-field"><b>Stress Vents</b></p>
+    <ul class="vent-list">
+      <li data-tier="1">Cite precedent, clause, or contract language.</li>
+      <li data-tier="1">Demand something get put in writing.</li>
+      <li data-tier="1">Point out who's liable.</li>
+      <li data-tier="2">Refuse to act without something in writing first.</li>
+      <li data-tier="3">Let a technicality cost someone something real.</li>
+    </ul>
+  </div>
+
+  <div class="class-card rimward" data-cat="rimward">
+    <div class="card-top"><p class="class-name">Criminal</p><span class="class-tag rimward">Rimward</span></div>
+    <p class="class-source">Rimward Classes (Elliot Norwood)</p>
+    <p class="class-flavor">Rim-frontier criminal enterprise operator.</p>
+    <div class="stat-line">+5 Strength OR +5 Speed · +10 Combat Body Save</div>
+    <p class="class-field"><b>Trauma Response</b>When you must make a Fear Save, you may make another nearby friendly player make it instead of you.</p>
+    <p class="class-field"><b>Stress Vents</b></p>
+    <ul class="vent-list">
+      <li data-tier="1">Case the room like a mark or a score.</li>
+      <li data-tier="1">Talk your way around a direct question.</li>
+      <li data-tier="1">Push a rule or a boundary just to see what happens.</li>
+      <li data-tier="2">Push your own Fear Save onto someone standing nearby.</li>
+      <li data-tier="3">Cut a deal that sells out someone on your own crew.</li>
+    </ul>
+  </div>
+
+
+  <div class="class-card rimward" data-cat="rimward">
+    <div class="card-top"><p class="class-name">Ranger</p><span class="class-tag rimward">Rimward</span></div>
+    <p class="class-source">Rimward Classes (Elliot Norwood)</p>
+    <p class="class-flavor">First responders sent to new worlds, distress calls, and dying colonies. Built to survive anything.</p>
+    <div class="stat-line">+10 Speed · +5 Intellect · +5 Body Save · +5 Fear Save</div>
+    <p class="class-field"><b>Trauma Response</b>Once per session when you Panic, you can choose to take 2 Stress instead.</p>
+    <p class="class-field"><b>Stress Vents</b></p>
+    <ul class="vent-list">
+      <li data-tier="1">Read the room like a hostile environment.</li>
+      <li data-tier="1">Stockpile supplies past the point of reason.</li>
+      <li data-tier="1">Take charge of a survival decision nobody asked you to make.</li>
+      <li data-tier="2">Push the crew somewhere dangerous because you're sure you can handle it.</li>
+      <li data-tier="3">Leave someone behind because the group's odds are better without them.</li>
+    </ul>
+  </div>
+
+  <div class="class-card rimward" data-cat="rimward">
+    <div class="card-top"><p class="class-name">Retiree</p><span class="class-tag rimward">Rimward</span></div>
+    <p class="class-source">Rimward Classes (Elliot Norwood)</p>
+    <p class="class-flavor">Survived all the way to retirement, then left the retirement facility. Respect your elders.</p>
+    <div class="stat-line">+10 Strength/Combat, +15 Fear, -15 Body — OR +10 Intellect, skills, -15 Speed, -15 Body</div>
+    <p class="class-field"><b>Trauma Response</b>When you Panic, you must make a Body Save or have a heart attack (Unconscious, death in 1d10 rounds if untreated).</p>
+    <p class="class-field"><b>Stress Vents</b></p>
+    <ul class="vent-list">
+      <li data-tier="1">Reminisce at length about "back in my day."</li>
+      <li data-tier="1">Refuse help like you don't need it.</li>
+      <li data-tier="1">Complain about how things are done now.</li>
+      <li data-tier="2">Push your body past what it can safely take.</li>
+      <li data-tier="3">Have a genuine medical crisis at the worst possible moment.</li>
+    </ul>
+  </div>
+
+</div>
+</section>
+</div>
+
+<footer>Prospero's Dream campaign — Class Guide. The number in front of each Stress Vent is how many Stress points it relieves, once per session per vent.</footer>
+
+<script>
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.class-card').forEach(card=>{
+      card.style.display = (filter === 'all' || card.dataset.cat === filter) ? 'flex' : 'none';
+    });
+  });
+});
+</script>
+
+</body>
+</html>
